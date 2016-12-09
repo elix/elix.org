@@ -1,0 +1,21 @@
+*.sublime-*
+/node_modules/
+*.env
+.idea
+.c9
+
+# All timestamped static file directories will start with 2 (until the year 3000)
+public/2*
+public/temp
+
+# Built files.
+/timestamp.txt
+/version.txt
+
+# Ignore log files
+/logs
+
+/nginx/cache
+
+# Ignore generated /nginx/config/nginx.conf for running Nginx in dev mode
+/nginx/config/nginx.conf
