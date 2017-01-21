@@ -1,0 +1,80 @@
+daemon off;
+# Heroku dynos have at least 4 cores.
+worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
+
+events {
+  use epoll;
+  accept_mutex on;
+  worker_connections 1024;
+}
+
+http {
+  gzip on;
+  gzip_comp_level 2;
+  gzip_min_length 512;
+  gzip_vary on;
+  gzip_proxied any;
+  gzip_types text/plain application/xml text/css text/js text/xml application/x-javascript text/javascript application/json application/xml+rss image/svg+xml;
+
+  server_tokens off;
+
+  log_format l2met 'measure#nginx.service=$request_time request_id=$http_x_request_id';
+  access_log logs/nginx/access.log l2met;
+  error_log logs/nginx/error.log;
+
+  include mime.types;
+  default_type application/octet-stream;
+  sendfile on;
+
+  # Must read the body in 5 seconds.
+  client_body_timeout 5;
+
+  upstream app_server {
+    server unix:/tmp/nginx.socket fail_timeout=0;
+  }
+
+  #
+  # For Heroku deployments, our SSL strategy is different than our local dev strategy.
+  # Under Heroku, the ssl endpoint extention is what handles HTTPS requests (and
+  # at this time doesn't support HTTP/2). So our NGINX configuration handles
+  # regular HTTP requests forwarded by the Heroku ssl endpoint. Under our
+  # development configuration, NGINX manages SSL as well as HTTP/2.
+  #
+
+  server {
+    listen <%= ENV["PORT"] %>;
+    server_name _;
+    add_header Strict-Transport-Security "max-age=3600; includeSubDomains;";
+    keepalive_timeout 5;
+
+    # If the request forwarded from the Heroku ssl endpoint is not https,
+    # then redirect to https.
+    if ($http_x_forwarded_proto != 'https') {
+      rewrite ^ https://$host$request_uri? permanent;
+    }
+
+    #
+    # Whitespace here permits easier line-by-line blink comparison with the
+    # local development version of this file.
+    #
+    #
+
+    # Forward dynamic paths to Express.
+    location ~* /(feeds|sitemap.xml) {
+      proxy_pass http://localhost:<%= ENV["ELIX_EXPRESS_PORT"] %>;
+      proxy_redirect off;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    include common.routes;
+
+    # Forward unhandled routes to Express.
+    location / {
+      proxy_pass http://localhost:<%= ENV["ELIX_EXPRESS_PORT"] %>;
+      proxy_redirect off;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+  }
+}

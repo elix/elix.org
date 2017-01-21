@@ -1,0 +1,9 @@
+#
+# Common route configuration used by both Heroku-deployed Nginx configurations
+# as well as local dev machine deployments.
+#
+
+# Redirect attempts to reference directories: /foo/ redirects to /foo.
+location ~* (.+)/$ {
+  return 301 $scheme://$http_host$1;
+}

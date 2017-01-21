@@ -1,0 +1,549 @@
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #333;
+  color: #333;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  margin: 0;
+  min-height: 100%;
+}
+
+@font-face{
+  font-family:"Ubuntu";
+  font-style: normal;
+  font-weight: normal;
+  src: url("resources/fonts/ubuntu-r-webfont.eot");
+  src: url("resources/fonts/ubuntu-r-webfont.eot#iefix") format("embedded-opentype"),
+       url("resources/fonts/ubuntu-r-webfont.woff2") format("woff2"),
+       url("resources/fonts/ubuntu-r-webfont.woff") format("woff"),
+       url("resources/fonts/ubuntu-r-webfont.ttf") format("truetype"),
+       url("resources/fonts/ubuntu-r-webfont.svg#ubuntubold") format("svg");
+}
+
+/* Not currently used */
+@font-face{
+  font-family:"Ubuntu";
+  font-style: italic;;
+  font-weight: normal;
+  src: url("resources/fonts/ubuntu-ri-webfont.eot");
+  src: url("resources/fonts/ubuntu-ri-webfont.eot#iefix") format("embedded-opentype"),
+       url("resources/fonts/ubuntu-ri-webfont.woff2") format("woff2"),
+       url("resources/fonts/ubuntu-ri-webfont.woff") format("woff"),
+       url("resources/fonts/ubuntu-ri-webfont.ttf") format("truetype"),
+       url("resources/fonts/ubuntu-ri-webfont.svg#ubuntubold") format("svg");
+}
+
+@font-face{
+  font-family:"Ubuntu";
+  font-style: italic;;
+  font-weight: 300;
+  src: url("resources/fonts/ubuntu-li-webfont.eot");
+  src: url("resources/fonts/ubuntu-li-webfont.eot#iefix") format("embedded-opentype"),
+       url("resources/fonts/ubuntu-li-webfont.woff2") format("woff2"),
+       url("resources/fonts/ubuntu-li-webfont.woff") format("woff"),
+       url("resources/fonts/ubuntu-li-webfont.ttf") format("truetype"),
+       url("resources/fonts/ubuntu-li-webfont.svg#ubuntubold") format("svg");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: normal;
+  src: url("resources/fonts/roboto-regular-webfont.eot");
+  src: url("resources/fonts/roboto-regular-webfont.eot#iefix") format("embedded-opentype"),
+       url("resources/fonts/roboto-regular-webfont.woff2") format("woff2"),
+       url("resources/fonts/roboto-regular-webfont.woff") format("woff"),
+       url("resources/fonts/roboto-regular-webfont.ttf") format("truetype"),
+       url("resources/fonts/roboto-regular-webfont.svg#robotolight") format("svg");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  src: url("resources/fonts/roboto-light-webfont.eot");
+  src: url("resources/fonts/roboto-light-webfont.eot#iefix") format("embedded-opentype"),
+       url("resources/fonts/roboto-light-webfont.woff2") format("woff2"),
+       url("resources/fonts/roboto-light-webfont.woff") format("woff"),
+       url("resources/fonts/roboto-light-webfont.ttf") format("truetype"),
+       url("resources/fonts/roboto-light-webfont.svg#robotolight") format("svg");
+}
+
+h1 {
+  color: red;
+  font-family: "Ubuntu", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 30px;
+  margin: 20px 0;
+}
+
+h2 {
+  color: #194e70;
+  font-family: "Ubuntu", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 2em 0 0 0;
+}
+
+h3 {
+  color: #404b5b;
+  font-family: "Ubuntu", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+a {
+  color: #4d8cb3;
+}
+a:visited {
+  color: #b43b80;
+}
+
+pre {
+  overflow: auto;
+  width: auto;
+}
+
+.image {
+  margin: 2em 0;
+  text-align: center;
+}
+.image a {
+  border: none;
+}
+.image img {
+  box-shadow: 0 0 8px 0 gray;
+}
+
+.pullQuote {
+  border-bottom: 1px solid #a7a7a7;
+  border-top: 1px solid #a7a7a7;
+  color: red;
+  font-family: "Ubuntu", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 1.5em 0;
+  padding: 1.25em;
+  text-align: center;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+
+/*
+ * Main page surface
+ */
+
+.pageMain {
+  background: #fdfdfd;
+  box-shadow: 0px 0px 10px 2px black;
+  box-sizing: border-box;
+  -webkit-flex: 1;
+  flex: 1;
+  margin-bottom: 60px;
+  max-width: 100%;
+  padding: 0 15px 15px 15px;
+  width: 980px;
+}
+
+/*
+ * Hack for IE 11, which refuses to give .pageMain any height.
+ * From http://stackoverflow.com/questions/18907131/detecting-ie11-using-css-capability-feature-detection
+ * This prevents a short page from filling the viewport on a tall display,
+ * but since that just affects IE 11, that's acceptable.
+ */
+_:-ms-fullscreen,
+.pageMain {
+  flex: inherit;
+}
+
+.bleed {
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+/* Desktop */
+@media screen and (min-width: 800px) {
+
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  .desktopOnly {
+    display: inherit;
+  }
+
+  .pageMain {
+    -webkit-align-self: center;
+    align-self: center;
+    padding: 0 60px 30px 60px;
+  }
+
+  .bleed {
+    margin-left: -60px;
+    margin-right: -60px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .pullQuote {
+    font-size: 24px;
+  }
+}
+
+
+/*
+ * Header
+ */
+
+#header {
+  box-sizing: border-box;
+  color: white;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5em;
+  padding: 15px;
+}
+
+/* BUG: Safari ignores this block for some reason */
+#linkHome {
+  color: inherit;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+#headerLogo {
+  display: inline-block;
+  /* We have to hard-code both height and width for stupid IE 11. */
+  height: 35px;
+  width: 304px;
+  max-width: 100%;
+}
+
+#headerSpace {
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+#headerLinks {
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.areaLink {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.areaLink:hover {
+  border-color: red;
+}
+.areaLink:active,
+.areaLink.current {
+  color: red;
+}
+.areaLink:visited {
+  color: white;
+}
+
+.areaLink span {
+  display: inline-block;
+  line-height: 1.8;
+  padding: 0 6px;
+}
+
+#header .socialLink svg {
+  height: 14px;
+}
+
+#header .socialLink {
+  text-decoration: none;
+  margin-left: 6px;
+  margin-top: 4px;
+  padding: 0 6px;
+}
+
+/* Desktop header */
+@media screen and (min-width: 800px) {
+
+  #header {
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    height: 100px;
+    margin-bottom: 15px;
+    padding: 15px 30px;
+  }
+
+  #headerLogo {
+    margin-top: 20px;
+  }
+
+}
+
+
+/*
+ * Footer
+ */
+#footer {
+  -webkit-align-items: center;
+  align-items: center;
+  background: #4d4d4e;
+  box-shadow: 0px 0px 10px 2px black;
+  color: #dcdcdc;
+  display: -webkit-flex;
+  display: flex;
+  font-size: 11px;
+  padding: 10px 10px;
+}
+
+#footerLogo {
+  height: 54px;
+  opacity: 0.2;
+}
+
+#finePrint {
+  -webkit-flex: 1;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#footer svg {
+  height: 24px;
+}
+
+#footer a {
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#footer .socialLink:not(:first-child) {
+  margin-left: 24px;
+}
+
+/* Desktop footer */
+@media screen and (min-width: 800px) {
+
+  #footer {
+    padding: 10px 30px;
+  }
+
+}
+
+
+/*
+ * Intro
+ */
+
+
+.intro {
+  box-sizing: border-box;
+  color: white;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  position: relative;
+  text-shadow: 0 0 2em #333;
+}
+
+.intro > * {
+  position: relative;
+}
+
+.introBackground {
+  background-color: black;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.intro h1 {
+  font-size: 36px;
+  line-height: 1.25;
+  margin: 40px 0;
+}
+
+.intro a {
+  color: #f4801f;
+  text-decoration: none;
+}
+
+.introImage {
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+}
+
+/* Desktop intro */
+@media screen and (min-width: 800px) {
+
+  .intro {
+    font-size: 18px;
+    min-height: 185px;
+    padding-bottom: 35px;
+    padding-top: 35px;
+  }
+
+}
+
+
+/*
+ * Blog
+ */
+.byline {
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.1em;
+  margin: 15px 0;
+}
+
+.blogPostAuthorImage {
+  box-shadow: -2px 0px 6px 0px gray;
+  height: 35px;
+  margin-right: 15px;
+  width: 35px;
+}
+
+.author {
+  text-transform: uppercase;
+}
+
+.timestamp {
+  color: #194e70;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.postSummary {
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.postSummary + .postSummary {
+  border-top: 1px solid #444;
+  margin-top: 2em;
+  padding-top: 2em;
+}
+
+.postSummary .title {
+  font-size: larger;
+}
+.postSummary:hover .title {
+  text-decoration: underline;
+}
+
+.titleAndExcerpt {
+  -webkit-flex: 1;
+  flex: 1;
+  margin-top: 6px;
+}
+
+.excerpt {
+  color: #333;
+  margin-top: 6px;
+}
+
+/* Desktop blog */
+@media screen and (min-width: 800px) {
+
+  .byline {
+    margin: 28px 0;
+  }
+
+  .postSummary {
+    -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .postSummary .timestamp {
+    width: 200px;
+  }
+
+  .titleAndExcerpt {
+    margin-top: 0;
+  }
+
+}
+
+
+/*
+ * Tweet button
+ */
+
+.tweetButton {
+  -webkit-align-items: center;
+  align-items: center;
+  background-color: #1b95e0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #fff !important;
+  cursor: pointer;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  font-weight: 500;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.tweetButton svg {
+  height: 16px;
+  margin-right: 5px;
+}

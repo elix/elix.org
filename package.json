@@ -1,0 +1,26 @@
+{
+  "name": "elix.org",
+  "version": "1.0.0",
+  "description": "Elix.org website",
+  "repository": "git@github.com:elix/elixweb",
+  "author": "The Elix Project Core Team <info@component.kitchen>",
+  "license": "MIT",
+  "main": "webWorker.js",
+  "dependencies": {
+    "bunyan": "^1.8.5",
+    "compression": "^1.6.2",
+    "express": "^4.14.0",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0"
+  },
+  "scripts": {
+    "postinstall": "grunt build"
+  },
+  "engines": {
+    "node": "6.9.1",
+    "npm": "3.10.8",
+    "yarn": "0.19.1"
+  }
+}

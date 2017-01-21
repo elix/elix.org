@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Make a home for temp files
+mkdir -p /tmp/nginx
+
+#Evaluate config to get $PORT
+erb nginx/config/nginx.conf.erb > nginx/config/nginx.conf
+
+#Start log redirection.
+(
+	#Initialize log directory.
+	mkdir -p logs
+	touch logs/access.log logs/error.log
+	echo 'buildpack=nginx at=logs-initialized'
+)
+
+#Start NGINX
+(
+	#We expect nginx to run in foreground.
+	#We also expect a socket to be at /tmp/nginx.socket.
+	echo 'buildpack=nginx at=nginx-start'
+	nginx/bin/nginx -p . -c nginx/config/nginx.conf
+)
+
+echo "buildpack=nginx at=exit process=$exit_process"
+exit 1

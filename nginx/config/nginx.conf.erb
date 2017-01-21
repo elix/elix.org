@@ -1,0 +1,82 @@
+daemon off;
+
+worker_processes 1;
+
+events {
+  # use epoll;
+  accept_mutex on;
+  worker_connections 1024;
+}
+
+http {
+  client_body_temp_path     /tmp/nginx/client_body_temp;
+  fastcgi_temp_path         /tmp/nginx/fastcgi_temp;
+  proxy_temp_path           /tmp/nginx/proxy_temp;
+  scgi_temp_path            /tmp/nginx/scgi_temp;
+  uwsgi_temp_path           /tmp/nginx/uwsgi_temp;
+
+  gzip on;
+  gzip_comp_level 2;
+  gzip_min_length 512;
+  gzip_vary on;
+  gzip_proxied any;
+  gzip_types text/plain application/xml text/css text/js text/xml application/x-javascript text/javascript application/json application/xml+rss image/svg+xml;
+
+  server_tokens off;
+
+  log_format l2met 'measure#nginx.service=$request_time request_id=$http_x_request_id';
+  access_log logs/access.log l2met;
+  error_log logs/error.log;
+
+  include mime.types;
+  default_type application/octet-stream;
+  sendfile on;
+
+  # Must read the body in 5 seconds.
+  client_body_timeout 5;
+
+  upstream app_server {
+    server unix:/tmp/nginx.socket fail_timeout=0;
+  }
+
+#
+#  HTTP/2+SSL with auto-redirect from http --> https
+#
+
+  # Route http calls on port 8080 to https port
+  server {
+    listen <%= ENV["ELIX_DEV_NGINX_PORT"] %>;
+    return 301 https://$host:<%= ENV["ELIX_DEV_NGINX_SSL_PORT"] %>$request_uri;
+  }
+
+  # HTTP/2 + SSL
+  server {
+    listen <%= ENV["ELIX_DEV_NGINX_SSL_PORT"] %> default_server ssl http2;
+    server_name _;
+    # Note: Because of the way we customize on HTTP/SSL ports with our environment variables,
+    # we cannot add the Strict-Transport-Security header in developer environments.
+    # add_header Strict-Transport-Security "max-age=3600; includeSubDomains;";
+    keepalive_timeout 5;
+
+    ssl_certificate /etc/ssl/certs/server.crt;
+    ssl_certificate_key /etc/ssl/private/server.key;
+
+    # Forward dynamic paths to Express.
+    location ~* /(feeds|sitemap.xml) {
+      proxy_pass http://localhost:<%= ENV["ELIX_EXPRESS_PORT"] %>;
+      proxy_redirect off;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    include ../../config/common.routes;
+
+    # Forward unhandled routes to Express.
+    location / {
+      proxy_pass http://localhost:<%= ENV["ELIX_EXPRESS_PORT"] %>;
+      proxy_redirect off;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+  }
+}
