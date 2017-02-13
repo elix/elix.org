@@ -9,14 +9,16 @@
   "dependencies": {
     "bunyan": "^1.8.5",
     "compression": "^1.6.2",
+    "del": "^2.2.2",
     "express": "^4.14.0",
-    "grunt": "^1.0.1",
-    "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-copy": "^1.0.0"
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.8",
+    "jshint": "^2.9.4"
   },
   "scripts": {
-    "postinstall": "grunt build"
+    "postinstall": "gulp build"
   },
   "engines": {
     "node": "6.9.1",
