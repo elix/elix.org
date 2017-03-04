@@ -13,6 +13,7 @@ const genversionTask = require('./gulp/tasks/genversion');
 const startnginxTask = require('./gulp/tasks/nginx').startnginxTask;
 const stopnginxTask = require('./gulp/tasks/nginx').stopnginxTask;
 const webserverTask = require('./gulp/tasks/webserver');
+const buildElixTask = require('./gulp/tasks/buildelix');
 
 //
 // Naming convention for tasks:
@@ -39,10 +40,17 @@ gulp.task('gendevstamp-clean', ['clean'], gendevstampTask);
 gulp.task('copysrctimestamp-genversion-gentimestamp-clean', ['genversion-gentimestamp-clean'], copysrcToTimestampTask);
 gulp.task('copysrcdevstamp-genversion-gendevstamp-clean', ['genversion-gendevstamp-clean'], copysrcToDevstampTask);
 
+gulp.task('copysrctimestamp-genversion-gentimestamp-clean-buildelix', ['genversion-gentimestamp-clean-buildelix'], copysrcToTimestampTask);
+gulp.task('genversion-gentimestamp-clean-buildelix', ['gentimestamp-clean-buildelix'], genversionTask);
+gulp.task('gentimestamp-clean-buildelix', ['clean-buildelix'], gentimestampTask);
+gulp.task('clean-buildelix', ['buildelix'], cleanTask);
+gulp.task('buildoninstall', ['copysrctimestamp-genversion-gentimestamp-clean-buildelix']);
+
 // Public
 gulp.task('default', ['help']);
 gulp.task('build', ['copysrctimestamp-genversion-gentimestamp-clean']);
 gulp.task('devbuild', ['copysrcdevstamp-genversion-gendevstamp-clean']);
+gulp.task('buildelix', [], buildElixTask);
 gulp.task('web', [], webserverTask);
 gulp.task('start-nginx', [], startnginxTask);
 gulp.task('stop-nginx', [], stopnginxTask);

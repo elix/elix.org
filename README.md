@@ -101,7 +101,7 @@ some steps are necessary:
     1. heroku buildpacks:set https://github.com/componentkitchen/nginx-buildpack.git --app testelixweb|elixweb
     2. heroku buildpacks:add --index 2 https://github.com/heroku/heroku-buildpack-nodejs.git --app testelixweb|elixweb
 * Set the following Heroku config vars:
-    1. CK_EXPRESS_PORT (5000)
+    1. ELIX_EXPRESS_PORT (5000)
     2. GITHUB_TOKEN
     3. NODE_ENV (production or test)
     4. NODE_MODULES_CACHE (false)
