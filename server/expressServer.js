@@ -75,6 +75,14 @@ module.exports = {
     // Since these routes could also be valid static paths, these declarations
     // have to come before the express.static invocation.
     for (let path in routes) {
+      // BUGBUG - map / to /index.html for now
+      if (path === '/') {
+        app.get(path, (request, response) => {
+          response.redirect('/index.html');
+        });
+        continue;
+      }
+      
       let renderFunction = routes[path];
       app.get(path, (request, response) => {
         // Render the request as content, or a promise for content.
@@ -121,7 +129,8 @@ module.exports = {
           maxage: staticCacheTime,
           redirect: false     // Don't automatically redirect from foo to foo/
         }));
-
+        app.use('/', express.static('node_modules/elix'));
+        
         logger.info('Web server running on port ' + port + ' (e.g., http://localhost:' + port + ')');
         logger.info('Serving pages from ' + clientFolder);
         logger.info('Using timestamp string: ' + app.locals.build);

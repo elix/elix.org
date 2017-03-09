@@ -11,6 +11,7 @@ function helpTask() {
 
     gulp build (build for cache-busting with timestamp in public path)
     gulp devbuild (build with \"' + devStamp + '\" in public path)
+    gulp buildelix (build node_modules/elix)
     gulp clean (clean cache-busting static tree and timestamp.txt file)
     gulp web (start the web server - terminate with ctrl-c)
     gulp start-nginx (start the nginx proxy - terminate with ctrl-c)

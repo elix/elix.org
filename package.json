@@ -10,6 +10,7 @@
     "bunyan": "^1.8.5",
     "compression": "^1.6.2",
     "del": "^2.2.2",
+    "elix": "elix/elix#master",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.4",
@@ -18,11 +19,11 @@
     "jshint": "^2.9.4"
   },
   "scripts": {
-    "postinstall": "gulp build"
+    "postinstall": "gulp buildoninstall"
   },
   "engines": {
     "node": "6.9.1",
     "npm": "3.10.8",
-    "yarn": "0.19.1"
+    "yarn": "0.21.3"
   }
 }
