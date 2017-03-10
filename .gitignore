@@ -1,8 +1,4 @@
-*.sublime-*
 /node_modules/
-*.env
-.idea
-.c9
 
 # All timestamped static file directories will start with 2 (until the year 3000)
 public/2*
