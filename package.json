@@ -10,7 +10,7 @@
     "bunyan": "^1.8.5",
     "compression": "^1.6.2",
     "del": "^2.2.2",
-    "elix": "elix/elix",
+    "elix": "JanMiksovsky/elix#tabs",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.4",
