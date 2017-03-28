@@ -149,7 +149,10 @@ module.exports = {
       });
     });
 
-    return Promise.all(versionPromise, staticPromise);
+    return staticPromise
+    .catch((err) => {
+      logger.error(`Caught exception on staticPromise: ${err}`);
+    });
   }
 };
 
