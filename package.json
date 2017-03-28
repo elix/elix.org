@@ -2,7 +2,7 @@
   "name": "elix.org",
   "version": "1.0.0",
   "description": "Elix.org website",
-  "repository": "git@github.com:elix/elixweb",
+  "repository": "git@github.com:elix/elix.org",
   "author": "The Elix Project Core Team <info@component.kitchen>",
   "license": "MIT",
   "main": "webWorker.js",
