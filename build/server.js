@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -572,7 +572,49 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_preact__);
+ // jshint ignore:line
+// import Header from './Header';
+
+
+/**
+ * Template for a standard page on the site.
+ */
+class PageTemplate extends __WEBPACK_IMPORTED_MODULE_0_preact__["Component"] {
+
+  render(props) {
+    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      "div",
+      { "class": "pageContainer" },
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" }),
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        "article",
+        null,
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          "div",
+          null,
+          props.children
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          "footer",
+          null,
+          "\xA9 2017 Elix project"
+        )
+      ),
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" })
+    );
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = PageTemplate;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_preact__);
  // jshint ignore:line
@@ -596,7 +638,8 @@ class AppShell extends __WEBPACK_IMPORTED_MODULE_0_preact__["Component"] {
           'title',
           null,
           titleBar
-        )
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])('link', { rel: 'stylesheet', href: '/static/main.css' })
       ),
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
         'body',
@@ -604,15 +647,313 @@ class AppShell extends __WEBPACK_IMPORTED_MODULE_0_preact__["Component"] {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
           'div',
           { id: 'root' },
-          'Hello, world.'
+          props.children
         )
       )
     );
   }
 
 }
-/* harmony export (immutable) */ __webpack_exports__["default"] = AppShell;
+/* harmony export (immutable) */ __webpack_exports__["a"] = AppShell;
 
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ErrorPage__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HomePage__ = __webpack_require__(5);
+
+
+
+/**
+ * Map routes to components.
+ */
+/* harmony default export */ __webpack_exports__["a"] = ({
+  '/error': __WEBPACK_IMPORTED_MODULE_0__ErrorPage__["a" /* default */],
+  '/': __WEBPACK_IMPORTED_MODULE_1__HomePage__["a" /* default */]
+});
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_preact__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PageTemplate__ = __webpack_require__(1);
+ // jshint ignore:line
+
+
+/**
+ * Error page.
+ */
+class ErrorPage extends __WEBPACK_IMPORTED_MODULE_1__PageTemplate__["a" /* default */] {
+
+  render(props) {
+    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      __WEBPACK_IMPORTED_MODULE_1__PageTemplate__["a" /* default */],
+      {
+        title: this.title,
+        url: props.url
+      },
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        'p',
+        null,
+        'Sorry, something went wrong. \uD83D\uDE1E'
+      )
+    );
+  }
+
+  get title() {
+    return "Oops";
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = ErrorPage;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_preact__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ComponentCard__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PageTemplate__ = __webpack_require__(1);
+ // jshint ignore:line
+
+
+
+
+/**
+ * The Home page.
+ *
+ * This is a variant of the usual wiki page that shows the latest links
+ * instead of links based on their tags.
+ */
+class HomePage extends __WEBPACK_IMPORTED_MODULE_3__PageTemplate__["a" /* default */] {
+
+  render(props) {
+    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      __WEBPACK_IMPORTED_MODULE_3__PageTemplate__["a" /* default */],
+      {
+        url: props.url
+      },
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        'section',
+        { 'class': 'homeSection0' },
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], null),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'h1',
+          { 'class': 'tagline' },
+          'web community project for',
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])('br', null),
+          'high-quality web components'
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'p',
+          { 'class': 'blurb' },
+          'Elix is a community-driven collection of high-quality web components for common user interface patterns such as lists, menus, dialogs, carousels, and so on. The modular nature of web components let you easily incorporate them into your web apps, and their standard definition ensures good results across all mainstream browsers.'
+        )
+      ),
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        'section',
+        { 'class': 'homeSection1' },
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          __WEBPACK_IMPORTED_MODULE_1__ComponentCard__["a" /* default */],
+          { name: 'LabeledTabs', color: '0' },
+          'The LabeledTabs component.'
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          __WEBPACK_IMPORTED_MODULE_1__ComponentCard__["a" /* default */],
+          { name: 'ListBox', color: '1' },
+          'The ListBox component.'
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          __WEBPACK_IMPORTED_MODULE_1__ComponentCard__["a" /* default */],
+          { name: 'Modes', color: '2' },
+          'The Modes component.'
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          __WEBPACK_IMPORTED_MODULE_1__ComponentCard__["a" /* default */],
+          { name: 'Tabs', color: '3' },
+          'The Tabs component.'
+        )
+      ),
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        'section',
+        { 'class': 'homeSection2' },
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'h1',
+          null,
+          'Overview'
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'p',
+          null,
+          'Most applications make use of common, general-purpose user interface patterns such lists, menus, dialogs, carousels, and so on. Such patterns can be efficiently implemented and packaged as web components. Their modular nature lets you easily incorporate web components into your web application, and their standard definition ensures good results across browsers.'
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'p',
+          null,
+          'This arrangement permits a beneficial economy of scale, as common patterns only have to be implemented once. But that is not to say that it\u2019s easy to develop general-purpose user interface patterns as solid components. To the contrary, implementing even simple patterns with a very high degree of quality can entail substantial complexity.'
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'p',
+          null,
+          'For that reason, the Elix project believes that implementing high-quality, general-purpose components is best done as a community effort. This spreads the cost of creating the components across organizations, and ensures that the resulting components satisfy a broad range of concerns and can be used in many contexts.'
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'p',
+          null,
+          'Elix and its community-driven process are currently in a pilot phase. These components are not ready for production use. The Elix core team will share more about the project road map and our plans for open process as those plans come together.'
+        )
+      ),
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        'section',
+        { 'class': 'homeSection3' },
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'h1',
+          null,
+          'Core Principles'
+        )
+      ),
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        'section',
+        { 'class': 'homeSection4' },
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          'h1',
+          null,
+          'Getting Started'
+        )
+      )
+    );
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = HomePage;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AppShell__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes__ = __webpack_require__(3);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "AppShell", function() { return __WEBPACK_IMPORTED_MODULE_0__AppShell__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return __WEBPACK_IMPORTED_MODULE_1__routes__["a"]; });
+
+
+
+/**
+ * Single export for all components.
+ */
+
+
+/***/ }),
+/* 7 */,
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_preact__);
+ // jshint ignore:line
+
+
+/**
+ * A small card for a project web component.
+ */
+class ComponentCard extends __WEBPACK_IMPORTED_MODULE_0_preact__["Component"] {
+
+  render(props) {
+    const color = props.color || 0;
+    const className = `componentCard cardColor${color}`;
+    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      "div",
+      { "class": className },
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "cardPreview" }),
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        "div",
+        { "class": "cardDetails" },
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          "div",
+          { "class": "cardName" },
+          props.name
+        ),
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+          "div",
+          null,
+          props.children
+        )
+      )
+    );
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = ComponentCard;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_preact__);
+ // jshint ignore:line
+
+
+/**
+ * Top navigation links
+ */
+/* harmony default export */ __webpack_exports__["a"] = (props => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+  "header",
+  null,
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" }),
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("img", { src: "/static/resources/images/elix.png" }),
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+    "div",
+    { "class": "headerLinks" },
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      "a",
+      { id: "linkAbout", href: "/" },
+      "HOME"
+    ),
+    " /\xA0",
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      "a",
+      { id: "linkAbout", href: "/elements" },
+      "ELEMENTS"
+    ),
+    " /\xA0",
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      "a",
+      { id: "linkAbout", href: "/mixins" },
+      "MIXINS"
+    ),
+    " /\xA0",
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      "a",
+      { id: "linkAbout", href: "/gold-standard" },
+      "GOLD STANDARD"
+    ),
+    " /\xA0",
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      "a",
+      { id: "linkAbout", href: "https://github.com/elix/elix" },
+      "GITHUB"
+    ),
+    "\xA0"
+  ),
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" })
+));
 
 /***/ })
 /******/ ]);

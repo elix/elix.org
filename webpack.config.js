@@ -6,7 +6,7 @@ module.exports = {
   devtool: 'source-map',
 
   entry: {
-    server: './shared/AppShell.jsx'
+    server: './shared/shared.js'
   },
 
   // externals: [nodeExternals()],
