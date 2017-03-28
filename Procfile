@@ -1,1 +1,1 @@
-web: bin/start-nginx node webWorker.js
+web: node app.js

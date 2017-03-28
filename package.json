@@ -7,6 +7,10 @@
   "license": "MIT",
   "main": "webWorker.js",
   "dependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-react-jsx": "^6.23.0",
     "bunyan": "^1.8.5",
     "compression": "^1.6.2",
     "del": "^2.2.2",
@@ -16,10 +20,16 @@
     "gulp-jshint": "^2.0.4",
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.8",
-    "jshint": "^2.9.4"
+    "jshint": "^2.9.4",
+    "preact-render-to-string": "^3.6.0",
+    "preact": "^7.2.1",
+    "route-parser": "^0.0.5",
+    "webpack-node-externals": "^1.5.4",
+    "webpack": "^2.3.2"
   },
   "scripts": {
-    "postinstall": "gulp buildoninstall"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "engines": {
     "node": "6.9.1",

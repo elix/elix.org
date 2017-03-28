@@ -1,0 +1,13 @@
+{
+  "curly": true,
+  "esnext": true,
+  "eqnull": true,
+  "globals": {
+    "console": false,
+    "React": false
+  },
+  "node": true,
+  "undef": true,
+  "unused": "vars",
+  "varstmt": true
+}
