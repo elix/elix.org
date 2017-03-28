@@ -55,11 +55,12 @@ h3 {
 
 
 /*
- * Main content
+ * Page template
  */
 
-article {
-  max-width: 930px;
+.sectionContainer {
+  display: flex;
+  padding: 20px 0;
 }
 
 .gutter {
@@ -67,8 +68,8 @@ article {
   min-width: 30px;
 }
 
-.pageContainer {
-  display: flex;
+.sectionContent {
+  max-width: 930px;
 }
 
 
@@ -77,11 +78,21 @@ article {
  */
 
 .homeSection0 {
-  background: white;
+  background: linear-gradient(to bottom, #f6f6f8, #b1bcce);
+  padding-bottom: 100px;
 }
 
 .homeSection1 {
-  background: none;
+  background: #dcdcdc;
+}
+
+.homeSection1 .sectionDivider {
+  /*background: rgba(255,255,255,.5);*/
+  background: #dcdcdc;
+  height: 150px;
+  position: relative;
+  top: -75px;
+  transform: rotate(-5deg);
 }
 
 .homeSection2 {
@@ -113,6 +124,7 @@ article {
   height: 300px;
   margin-bottom: 10px;
   margin-right: 10px;
+  vertical-align: top;
   width: 225px;
 }
 

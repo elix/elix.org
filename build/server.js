@@ -585,24 +585,14 @@ class PageTemplate extends __WEBPACK_IMPORTED_MODULE_0_preact__["Component"] {
 
   render(props) {
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-      "div",
-      { "class": "pageContainer" },
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" }),
+      'article',
+      null,
+      props.children,
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-        "article",
+        'footer',
         null,
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-          "div",
-          null,
-          props.children
-        ),
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-          "footer",
-          null,
-          "\xA9 2017 Elix project"
-        )
-      ),
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" })
+        '\xA9 2017 Elix project'
+      )
     );
   }
 
@@ -723,8 +713,10 @@ class ErrorPage extends __WEBPACK_IMPORTED_MODULE_1__PageTemplate__["a" /* defau
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_preact__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ComponentCard__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PageTemplate__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PageSection__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PageTemplate__ = __webpack_require__(1);
  // jshint ignore:line
+
 
 
 
@@ -735,16 +727,16 @@ class ErrorPage extends __WEBPACK_IMPORTED_MODULE_1__PageTemplate__["a" /* defau
  * This is a variant of the usual wiki page that shows the latest links
  * instead of links based on their tags.
  */
-class HomePage extends __WEBPACK_IMPORTED_MODULE_3__PageTemplate__["a" /* default */] {
+class HomePage extends __WEBPACK_IMPORTED_MODULE_4__PageTemplate__["a" /* default */] {
 
   render(props) {
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-      __WEBPACK_IMPORTED_MODULE_3__PageTemplate__["a" /* default */],
+      __WEBPACK_IMPORTED_MODULE_4__PageTemplate__["a" /* default */],
       {
         url: props.url
       },
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-        'section',
+        __WEBPACK_IMPORTED_MODULE_3__PageSection__["a" /* default */],
         { 'class': 'homeSection0' },
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], null),
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
@@ -761,31 +753,31 @@ class HomePage extends __WEBPACK_IMPORTED_MODULE_3__PageTemplate__["a" /* defaul
         )
       ),
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-        'section',
+        __WEBPACK_IMPORTED_MODULE_3__PageSection__["a" /* default */],
         { 'class': 'homeSection1' },
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
           __WEBPACK_IMPORTED_MODULE_1__ComponentCard__["a" /* default */],
           { name: 'LabeledTabs', color: '0' },
-          'The LabeledTabs component.'
+          'Classic tabs for Settings and other configuration'
         ),
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
           __WEBPACK_IMPORTED_MODULE_1__ComponentCard__["a" /* default */],
           { name: 'ListBox', color: '1' },
-          'The ListBox component.'
+          'Single-selection list box'
         ),
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
           __WEBPACK_IMPORTED_MODULE_1__ComponentCard__["a" /* default */],
           { name: 'Modes', color: '2' },
-          'The Modes component.'
+          'Shows a single panel at a time'
         ),
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
           __WEBPACK_IMPORTED_MODULE_1__ComponentCard__["a" /* default */],
           { name: 'Tabs', color: '3' },
-          'The Tabs component.'
+          'Basic tabs structure for navigation and configuration'
         )
       ),
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-        'section',
+        __WEBPACK_IMPORTED_MODULE_3__PageSection__["a" /* default */],
         { 'class': 'homeSection2' },
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
           'h1',
@@ -814,7 +806,7 @@ class HomePage extends __WEBPACK_IMPORTED_MODULE_3__PageTemplate__["a" /* defaul
         )
       ),
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-        'section',
+        __WEBPACK_IMPORTED_MODULE_3__PageSection__["a" /* default */],
         { 'class': 'homeSection3' },
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
           'h1',
@@ -823,7 +815,7 @@ class HomePage extends __WEBPACK_IMPORTED_MODULE_3__PageTemplate__["a" /* defaul
         )
       ),
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-        'section',
+        __WEBPACK_IMPORTED_MODULE_3__PageSection__["a" /* default */],
         { 'class': 'homeSection4' },
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
           'h1',
@@ -953,6 +945,35 @@ class ComponentCard extends __WEBPACK_IMPORTED_MODULE_0_preact__["Component"] {
     "\xA0"
   ),
   __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" })
+));
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_preact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_preact__);
+ // jshint ignore:line
+
+
+/**
+ * Top navigation links
+ */
+/* harmony default export */ __webpack_exports__["a"] = (props => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+  "section",
+  { "class": props.class },
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+    "div",
+    { "class": "sectionContainer" },
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" }),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      "div",
+      { "class": "sectionContent" },
+      props.children
+    ),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])("div", { "class": "gutter" })
+  )
 ));
 
 /***/ })

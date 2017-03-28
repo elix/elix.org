@@ -9,18 +9,12 @@ export default class PageTemplate extends Component {
 
   render(props) {
     return (
-      <div class="pageContainer">
-        <div class="gutter"></div>
-        <article>
-          <div>
-            {props.children}
-          </div>
-          <footer>
-            © 2017 Elix project
-          </footer>
-        </article>
-        <div class="gutter"></div>
-      </div>
+      <article>
+        {props.children}
+        <footer>
+          © 2017 Elix project
+        </footer>
+      </article>
     );
   }
 

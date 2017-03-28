@@ -1,6 +1,7 @@
 import { h } from 'preact'; // jshint ignore:line
 import ComponentCard from './ComponentCard';
 import Header from './Header';
+import PageSection from './PageSection';
 import PageTemplate from './PageTemplate';
 
 
@@ -17,7 +18,7 @@ export default class HomePage extends PageTemplate {
       <PageTemplate
           url={props.url}
         >
-          <section class="homeSection0">
+          <PageSection class="homeSection0">
             <Header/>
             <h1 class="tagline">
               web community project for<br/>
@@ -30,24 +31,24 @@ export default class HomePage extends PageTemplate {
               easily incorporate them into your web apps, and their standard
               definition ensures good results across all mainstream browsers.
             </p>
-          </section>
+          </PageSection>
 
-          <section class="homeSection1">
+          <PageSection class="homeSection1">
             <ComponentCard name="LabeledTabs" color="0">
-              The LabeledTabs component.
+              Classic tabs for Settings and other configuration
             </ComponentCard>
             <ComponentCard name="ListBox" color="1">
-              The ListBox component.
+              Single-selection list box
             </ComponentCard>
             <ComponentCard name="Modes" color="2">
-              The Modes component.
+              Shows a single panel at a time
             </ComponentCard>
             <ComponentCard name="Tabs" color="3">
-              The Tabs component.
+              Basic tabs structure for navigation and configuration
             </ComponentCard>
-          </section>
+          </PageSection>
 
-          <section class="homeSection2">
+          <PageSection class="homeSection2">
           <h1>Overview</h1>
             <p>
               Most applications make use of common, general-purpose user interface
@@ -78,15 +79,15 @@ export default class HomePage extends PageTemplate {
               core team will share more about the project road map and our plans
               for open process as those plans come together.
             </p>
-          </section>
+          </PageSection>
 
-          <section class="homeSection3">
+          <PageSection class="homeSection3">
             <h1>Core Principles</h1>
-          </section>
+          </PageSection>
 
-          <section class="homeSection4">
+          <PageSection class="homeSection4">
             <h1>Getting Started</h1>
-          </section>
+          </PageSection>
 
       </PageTemplate>
     );
