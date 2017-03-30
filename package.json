@@ -31,7 +31,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "postinstall": "webpack",
+    "postinstall": "gulp buildoninstall; webpack",
     "watch": "webpack --watch"
   },
   "engines": {
