@@ -16,6 +16,7 @@ export default class AppShell extends Component {
           <meta charset="utf-8"/>
           <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
           <title>{titleBar}</title>
+          <link rel="shortcut icon" href="/static/resources/images/favicon.png"/>
           <link rel="stylesheet" href="/static/main.css"/>
         </head>
         <body>
