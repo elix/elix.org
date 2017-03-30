@@ -19,21 +19,21 @@ body {
 
 h1 {
   color: #72413c;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 30px;
   margin: 20px 0;
 }
 
 h2 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-size: 24px;
   font-weight: normal;
   margin: 2em 0 0 0;
 }
 
 h3 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-weight: normal;
 }
@@ -42,6 +42,10 @@ h3 {
 /*
  * Header
  */
+
+.headerLinks {
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
+}
 
 .headerLinks a {
   color: black;
@@ -124,6 +128,7 @@ h3 {
   height: 300px;
   margin-bottom: 10px;
   margin-right: 10px;
+  text-decoration: none;
   vertical-align: top;
   width: 220px;
 }
@@ -145,6 +150,7 @@ h3 {
 }
 
 .cardName {
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-size: 18px;
 }
 
