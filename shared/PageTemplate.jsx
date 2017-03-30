@@ -1,5 +1,6 @@
 import { Component, h } from 'preact'; // jshint ignore:line
 // import Header from './Header';
+import PageSection from './PageSection';
 
 
 /**
@@ -12,7 +13,9 @@ export default class PageTemplate extends Component {
       <article>
         {props.children}
         <footer>
-          © 2017 Elix project
+          <PageSection>
+            © 2017 Elix project
+          </PageSection>
         </footer>
       </article>
     );

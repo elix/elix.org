@@ -130,8 +130,7 @@ h3 {
 
 .componentCard:hover {
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 
 .cardPreview {

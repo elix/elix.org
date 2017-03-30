@@ -5,6 +5,7 @@ public/2*
 public/temp
 
 # Built files.
+/build/
 /timestamp.txt
 /version.txt
 
