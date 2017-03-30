@@ -11,10 +11,8 @@ const renderReactRoute = require('./renderReactRoute');
 
 
 // Tell Express to serve up static content.
-const staticPath = path.join(__dirname, '../public/src');
-app.use('/static', express.static(staticPath, {
-  // maxAge: CACHE_MAX_AGE_SECONDS * 1000 // Convert to milliseconds
-}));
+app.use('/static', express.static(path.join(__dirname, '../public/src')));
+app.use('/markdown', express.static(path.join(__dirname, '../node_modules/elix/elements/docs')));
 
 
 //
@@ -36,7 +34,6 @@ app.get('*', (request, response, next) => {
   renderPromise.then(html => {
     if (html) {
       response.set({
-        // 'Cache-Control': CACHE_CONTROL_VALUE,
         'Content-Type': 'text/html'
       });
       response.send(html);

@@ -28,6 +28,8 @@ export default class ComponentPage extends PageTemplate {
         <PageSection class="homeSection0">
           <Header/>
           <h1>{componentName}</h1>
+        </PageSection>
+        <PageSection class="homeSection1">
           <div dangerouslySetInnerHTML={{ __html: props.documentation }}/>
         </PageSection>
       </PageTemplate>

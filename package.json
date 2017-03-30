@@ -21,11 +21,13 @@
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.8",
     "jshint": "^2.9.4",
-    "preact-render-to-string": "^3.6.0",
+    "marked": "^0.3.6",
+    "node-fetch": "^1.6.3",
     "preact": "^7.2.1",
+    "preact-render-to-string": "^3.6.0",
     "route-parser": "^0.0.5",
-    "webpack-node-externals": "^1.5.4",
-    "webpack": "^2.3.2"
+    "webpack": "^2.3.2",
+    "webpack-node-externals": "^1.5.4"
   },
   "scripts": {
     "build": "webpack",
