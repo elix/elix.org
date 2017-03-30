@@ -1,18 +1,18 @@
 import { h } from 'preact'; // jshint ignore:line
-import componentDocumentation from './componentDocumentation';
+import getDocumentation from './getDocumentation';
 import Header from './Header';
 import PageSection from './PageSection';
 import PageTemplate from './PageTemplate';
 
 
 /**
- * Error page.
+ * Documentation for an element or mixin.
  */
-export default class ComponentPage extends PageTemplate {
+export default class DocumentationPage extends PageTemplate {
 
   get asyncProperties() {
     const path = this.props.request.path;
-    const documentationPromise = componentDocumentation(path);
+    const documentationPromise = getDocumentation(path);
     return documentationPromise.then(documentation => {
       return { documentation };
     });

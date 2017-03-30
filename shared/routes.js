@@ -1,4 +1,4 @@
-import ComponentPage from './ComponentPage';
+import DocumentationPage from './DocumentationPage';
 import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
 
@@ -7,8 +7,8 @@ import HomePage from './HomePage';
  * Map routes to components.
  */
 export default {
-  '/elements/:name': ComponentPage,
+  '/elements/:name': DocumentationPage,
   '/error': ErrorPage,
-  '/mixins/:name': ComponentPage,
+  '/mixins/:name': DocumentationPage,
   '/': HomePage
 };
