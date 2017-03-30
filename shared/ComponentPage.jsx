@@ -11,8 +11,8 @@ import PageTemplate from './PageTemplate';
 export default class ComponentPage extends PageTemplate {
 
   get asyncProperties() {
-    const componentName = this.props.request.params.name;
-    const documentationPromise = componentDocumentation(componentName);
+    const path = this.props.request.path;
+    const documentationPromise = componentDocumentation(path);
     return documentationPromise.then(documentation => {
       return { documentation };
     });

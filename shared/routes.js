@@ -9,5 +9,6 @@ import HomePage from './HomePage';
 export default {
   '/elements/:name': ComponentPage,
   '/error': ErrorPage,
+  '/mixins/:name': ComponentPage,
   '/': HomePage
 };
