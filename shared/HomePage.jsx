@@ -18,6 +18,7 @@ export default class HomePage extends PageTemplate {
       <PageTemplate
           url={props.url}
         >
+          <img class="pageBackground" src="/static/resources/images/homeTexture.png"/>
           <PageSection class="homeSection0">
             <Header/>
             <h1 class="tagline">

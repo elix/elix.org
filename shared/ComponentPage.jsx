@@ -25,11 +25,11 @@ export default class ComponentPage extends PageTemplate {
           title={componentName}
           url={props.url}
         >
-        <PageSection class="homeSection0">
+        <PageSection class="section0">
           <Header/>
           <h1>{componentName}</h1>
         </PageSection>
-        <PageSection class="homeSection1">
+        <PageSection class="section1">
           <div dangerouslySetInnerHTML={{ __html: props.documentation }}/>
         </PageSection>
       </PageTemplate>

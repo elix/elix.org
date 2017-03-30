@@ -14,7 +14,7 @@ export default class PageTemplate extends Component {
         {props.children}
         <footer>
           <PageSection>
-            © 2017 Elix project
+            ©2017 Elix project
           </PageSection>
         </footer>
       </article>

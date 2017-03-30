@@ -12,7 +12,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 18px;
   margin: 0;
   min-height: 100%;
 }
@@ -21,7 +21,7 @@ h1 {
   color: #72413c;
   font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 48px;
   margin: 20px 0;
 }
 
@@ -36,6 +36,14 @@ h3 {
   font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-weight: normal;
+}
+
+p {
+  line-height: 1.4em;
+}
+
+code {
+  font-family: "Consolas", "Menlo", "Courier New", "Courier", monospace;
 }
 
 
@@ -82,21 +90,16 @@ h3 {
  * Home page
  */
 
+.pageBackground {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
 .homeSection0 {
-  background: linear-gradient(to bottom, #f6f6f8, #b1bcce);
 }
 
 .homeSection1 {
-  background: #dcdcdc;
-}
-
-.homeSection1 .sectionDivider {
-  /*background: rgba(255,255,255,.5);*/
-  background: #dcdcdc;
-  height: 150px;
-  position: relative;
-  top: -75px;
-  transform: rotate(-5deg);
 }
 
 .homeSection2 {
@@ -152,6 +155,7 @@ h3 {
 .cardName {
   font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-size: 18px;
+  margin-bottom: 4px;
 }
 
 .cardColor0 {
@@ -168,4 +172,16 @@ h3 {
 
 .cardColor3 {
   background: #7586a4;
+}
+
+/*
+ * Standard pages
+ */
+
+.section0 {
+  background: linear-gradient(to bottom, #f6f6f8, #b1bcce);
+}
+
+.section1 {
+  background: #dcdcdc;
 }
