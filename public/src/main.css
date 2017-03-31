@@ -74,7 +74,32 @@ code {
  * Page template
  */
 
-.sectionContainer {
+.sideNavigation nav {
+  background: white;
+}
+
+.sideNavigation:hover nav {
+  position: absolute;
+}
+
+.sideNavigation li {
+  font-size: 14px;
+  list-style-type: none;
+  margin: 4px 0;
+}
+.sideNavigation li.current {
+  list-style-type: disc;
+}
+
+.sideNavigation a {
+  color: black;
+  text-decoration: none;
+}
+.sideNavigation a:hover {
+  text-decoration: underline;
+}
+
+.pageContainer {
   display: flex;
   padding: 20px 0;
 }
@@ -84,7 +109,7 @@ code {
   min-width: 30px;
 }
 
-.sectionContent {
+article {
   max-width: 930px;
   width: 100%;
 }

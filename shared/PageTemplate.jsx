@@ -11,15 +11,18 @@ export default class PageTemplate extends Component {
 
   render(props) {
     return (
-      <article>
-        <PageSection class="section0">
-          <Header/>
-          <h1>{props.title}</h1>
-        </PageSection>
-        <div class="sideNavigation">{props.navigationLinks}</div>
-        {props.children}
-        <Footer/>
-      </article>
+      <div>
+        <Header/>
+        <div class="pageContainer">
+          <div class="gutter sideNavigation">{props.sideNavigation}></div>
+          <article>
+            <h1>{props.title}</h1>
+            {props.children}
+            <Footer/>
+          </article>
+          <div class="gutter"/>
+        </div>
+      </div>
     );
   }
 

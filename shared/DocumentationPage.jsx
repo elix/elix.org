@@ -13,7 +13,14 @@ export default class DocumentationPage extends PageTemplate {
   get asyncProperties() {
 
     // HACK until we can have all JSON docs live in the same flat folder.
-    const elements = ['LabeledTabs', 'ListBox', 'Modes', 'Tabs'];
+    const elements = [
+      'LabeledTabButton',
+      'LabeledTabs',
+      'ListBox',
+      'Modes',
+      'Tabs',
+      'TabStrip'
+    ];
     const name = this.props.request.params.name;
     const type = elements.includes(name) ? 'elements' : 'mixins';
 
@@ -28,15 +35,16 @@ export default class DocumentationPage extends PageTemplate {
 
   render(props) {
     const componentName = props.request.params.name;
+    const sideNavigation = (<DocumentationNavigation current={componentName}/>);
 
     return (
       <PageTemplate
           title={componentName}
-          navigationLinks={<DocumentationNavigation/>}
+          sideNavigation={sideNavigation}
         >
-        <PageSection class="section1 documentation">
+        <section class="section1 documentation">
           <div dangerouslySetInnerHTML={{ __html: props.documentation }}/>
-        </PageSection>
+        </section>
       </PageTemplate>
     );
   }

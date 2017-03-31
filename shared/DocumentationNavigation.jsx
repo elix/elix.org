@@ -10,9 +10,11 @@ export default class DocumentationNavigation extends Component {
 
     const elements = [
       'LabeledTabs',
+      'LabeledTabButton',
       'ListBox',
       'Modes',
-      'Tabs'
+      'Tabs',
+      'TabStrip'
     ];
 
     const mixins = [
@@ -42,22 +44,25 @@ export default class DocumentationNavigation extends Component {
     ];
 
     return (
-      <div>
-        <div>Components</div>
-        {linkList(elements)}
+      <nav>
+        <div>Elements</div>
+        {linkList(elements, props.current)}
         <div>Mixins</div>
-        {linkList(mixins)}
-      </div>
+        {linkList(mixins, props.current)}
+      </nav>
     );
   }
 
 }
 
 
-function linkList(items) {
+function linkList(items, current) {
   const itemLinks = items.map(item => {
+    const className = item === current ? 'current' : '';
     return (
-      <a href={`/documentation/${item}`}>{item}</a>
+      <li class={className}>
+        <a href={`/documentation/${item}`}>{item}</a>
+      </li>
     );
   });
   return (
