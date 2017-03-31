@@ -5,7 +5,7 @@ import { h } from 'preact'; // jshint ignore:line
  * Top navigation links
  */
 export default (props) => (
-  <header>
+  <nav>
     <div class="gutter"></div>
     <img src="/static/resources/images/elix.png"/>
     <div class="headerLinks">
@@ -15,5 +15,5 @@ export default (props) => (
       <a id="linkAbout" href="https://github.com/elix/elix">GITHUB</a>
     </div>
     <div class="gutter"></div>
-  </header>
+  </nav>
 );

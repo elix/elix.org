@@ -1,6 +1,5 @@
 import { h } from 'preact'; // jshint ignore:line
 import getDocumentation from './getDocumentation';
-import Header from './Header';
 import PageSection from './PageSection';
 import PageTemplate from './PageTemplate';
 
@@ -21,16 +20,15 @@ export default class DocumentationPage extends PageTemplate {
 
   render(props) {
     const componentName = props.request.params.name;
+
+    const sideNavigation = <p>Side nav goes here</p>;
+
     return (
       <PageTemplate
           title={componentName}
-          url={props.url}
+          sideNavigation={sideNavigation}
         >
-        <PageSection class="section0">
-          <Header/>
-          <h1>{componentName}</h1>
-        </PageSection>
-        <PageSection class="section1">
+        <PageSection class="section1 documentation">
           <div dangerouslySetInnerHTML={{ __html: props.documentation }}/>
         </PageSection>
       </PageTemplate>
