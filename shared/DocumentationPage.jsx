@@ -12,7 +12,8 @@ export default class DocumentationPage extends PageTemplate {
 
   get asyncProperties() {
     const path = this.props.request.path;
-    const documentationPromise = getDocumentation(path);
+    const url = `${this.props.baseUrl}/markdown${path}.md`;
+    const documentationPromise = getDocumentation(url);
     return documentationPromise.then(documentation => {
       return { documentation };
     });

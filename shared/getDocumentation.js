@@ -11,9 +11,8 @@ marked.setOptions({
  * Return a promise for the HTML for the markdown docs for the component with
  * the given name.
  */
-export default function(path) {
-  const markdownPath = `http://localhost:5000/markdown${path}.md`;
-  return fetch(markdownPath)
+export default function(url) {
+  return fetch(url)
   .then(response => {
     return response.text();
   })

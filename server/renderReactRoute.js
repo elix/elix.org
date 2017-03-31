@@ -26,7 +26,7 @@ function renderReactRoute(request) {
   // component. This includes the request object. Also, our pages generally want
   // to have the URL (and, occasionally, base URL) available in fully qualified
   // form.
-  const baseUrl = `https://${request.hostname}`;
+  const baseUrl = `${request.protocol}://${request.get('host')}`;
   const initialProps = {
     baseUrl: baseUrl,
     url: `${baseUrl}${request.url}`,
