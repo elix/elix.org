@@ -7,8 +7,7 @@ import HomePage from './HomePage';
  * Map routes to components.
  */
 export default {
-  '/elements/:name': DocumentationPage,
+  '/documentation/:name': DocumentationPage,
   '/error': ErrorPage,
-  '/mixins/:name': DocumentationPage,
   '/': HomePage
 };

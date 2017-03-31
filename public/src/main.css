@@ -51,6 +51,10 @@ code {
  * Header
  */
 
+.logoLink img {
+  border: none;
+}
+
 .headerLinks {
   font-family: "Century Gothic", Helvetica, Arial, sans-serif;
 }

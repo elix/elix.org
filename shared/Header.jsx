@@ -7,7 +7,9 @@ import { h } from 'preact'; // jshint ignore:line
 export default (props) => (
   <nav>
     <div class="gutter"></div>
-    <img src="/static/resources/images/elix.png"/>
+    <a class="logoLink" href="/">
+      <img src="/static/resources/images/elix.png"/>
+    </a>
     <div class="headerLinks">
       <a id="linkAbout" href="/">HOME</a> &nbsp; / &nbsp;&nbsp;
       <a id="linkAbout" href="/documentation">DOCUMENTATION</a> &nbsp; / &nbsp;&nbsp;

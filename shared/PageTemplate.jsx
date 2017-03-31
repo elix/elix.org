@@ -16,7 +16,7 @@ export default class PageTemplate extends Component {
           <Header/>
           <h1>{props.title}</h1>
         </PageSection>
-        <div class="sideNavigation">{props.sideNavigation}</div>
+        <div class="sideNavigation">{props.navigationLinks}</div>
         {props.children}
         <Footer/>
       </article>
