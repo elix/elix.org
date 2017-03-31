@@ -8,7 +8,7 @@ export default class AppShell extends Component {
     const titleBar =
       props.titleBar ||
       (props.title && `${props.title} - Elix`) ||
-      'Elix';
+      'Elix - Quality Web Components';
 
     return (
       <html lang="en">
