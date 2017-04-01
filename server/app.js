@@ -20,7 +20,7 @@ app.use('/markdown/mixins', express.static(path.join(__dirname, '../node_modules
 //
 app.get('*', (request, response, next) => {
   if (request.headers['x-forwarded-proto'] != 'https') {
-    response.redirect(`https://${request.hostname}${request.url}`);
+    response.redirect(301, `https://${request.hostname}${request.url}`);
   }
   else {
     next(); // Continue to other routes if we're not redirecting
