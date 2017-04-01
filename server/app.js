@@ -15,6 +15,17 @@ app.use('/static', express.static(path.join(__dirname, '../public/src')));
 app.use('/markdown/elements', express.static(path.join(__dirname, '../node_modules/elix/elements/docs')));
 app.use('/markdown/mixins', express.static(path.join(__dirname, '../node_modules/elix/mixins/docs')));
 
+//
+// Redirect http to https under Heroku
+//
+app.get('*', (request, response, next) => {
+  if (request.headers['x-forwarded-proto'] != 'https') {
+    response.redirect(`https://${request.hostname}${request.url}`);
+  }
+  else {
+    next(); // Continue to other routes if we're not redirecting
+  }
+});
 
 //
 // General route handler for pages that can be rendered by React components.
