@@ -21,7 +21,7 @@ h1 {
   font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 48px;
-  margin: 20px 0;
+  margin: 1.5em 0 0.5em 0;
 }
 
 h2 {
@@ -216,6 +216,9 @@ header {
 
 .cardPreview {
   background: white;
+  border: 1px solid;
+  border-left-color: #ccc;
+  border-right-color: #ccc;
   height: 165px;
   margin-top: 7px;
 }
