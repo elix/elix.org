@@ -45,9 +45,9 @@ export default class DocumentationNavigation extends Component {
 
     return (
       <nav>
-        <div>Elements</div>
+        <div class="navHeader">ELEMENTS</div>
         {linkList(elements, props.current)}
-        <div>Mixins</div>
+        <div class="navHeader">MIXINS</div>
         {linkList(mixins, props.current)}
       </nav>
     );

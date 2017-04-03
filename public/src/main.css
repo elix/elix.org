@@ -48,46 +48,29 @@ code {
 
 
 /*
- * Header
- */
-
-.logoLink img {
-  border: none;
-}
-
-.headerLinks {
-  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
-}
-
-.headerLinks a {
-  color: black;
-  text-decoration: none;
-}
-
-.headerLinks a:focus,
-.headerLinks a:hover {
-  text-decoration: underline;
-}
-
-
-/*
  * Page template
  */
 
 .sideNavigation nav {
   background: white;
+  font-size: 13px;
+  padding: 8px 24px;
 }
 
 .sideNavigation:hover nav {
   position: absolute;
 }
 
+.sideNavigation ul {
+  padding: 0;
+}
+
 .sideNavigation li {
-  font-size: 14px;
   list-style-type: none;
-  margin: 4px 0;
+  margin: 10px 0;
 }
 .sideNavigation li.current {
+  font-style: italic;
   list-style-type: disc;
 }
 
@@ -99,7 +82,16 @@ code {
   text-decoration: underline;
 }
 
-.pageContainer {
+.navHeader {
+  color: #7586a4;
+  font-weight: bold;
+  margin-top: 4px;
+}
+.navHeader:not(:first-child) {
+  margin-top: 2em;
+}
+
+.contentContainer {
   display: flex;
   padding: 20px 0;
 }
@@ -109,9 +101,40 @@ code {
   min-width: 30px;
 }
 
+header,
 article {
   max-width: 930px;
   width: 100%;
+}
+
+
+/*
+ * Header
+ */
+
+header {
+  display: flex;
+}
+
+.logoLink img {
+  border: none;
+}
+
+.headerLinks {
+  flex: 1;
+  font-family: "Century Gothic", Helvetica, Arial, sans-serif;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.headerLinks a {
+  color: black;
+  text-decoration: none;
+}
+
+.headerLinks a:focus,
+.headerLinks a:hover {
+  text-decoration: underline;
 }
 
 
@@ -231,4 +254,12 @@ article {
 .documentation h3 {
   border-top: 7px solid #7586a4;
   margin-top: 1em;
+}
+
+
+/*
+ * Desktop
+ */
+
+@media (min-width: 800px) {
 }
