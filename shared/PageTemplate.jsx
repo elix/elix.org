@@ -16,7 +16,6 @@ export default class PageTemplate extends Component {
           <div class="gutter sideNavigation">
             <h1>&nbsp;</h1>
             <div class="navigationContainer">
-              <div class="sideGradient"/>
               {props.sideNavigation}
             </div>
           </div>
