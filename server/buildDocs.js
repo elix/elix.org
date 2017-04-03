@@ -6,7 +6,9 @@ const jsDocParse = require('jsdoc-parse');
 const dmd = require('dmd');
 const Readable = require('stream').Readable;
 
+const outputMarkdown = false;  // true: markdown, false: json
 const outputPath = 'build/docs/';
+const outputExtension = outputMarkdown ? '.md' : '.json';
 
 //
 // Build the global docsList array for use in building the package's README.md documentation
@@ -24,7 +26,7 @@ function buildDocsList(dirName) {
       const fileRoot = file.replace('.js', '');
       return {
         src: `${dirName}/${file}`,
-        dest: `${outputPath}${fileRoot}.md`
+        dest: `${outputPath}${fileRoot}${outputExtension}`
       };
     });
 }
@@ -51,19 +53,41 @@ function buildMarkdownDoc(docItem) {
       item.order = index;
     });
 
-    // Convert the JSON to Markdown
-    return parseJSONToMarkdown(json);
+    if (outputMarkdown) {
+      // Convert the JSON to Markdown
+      return parseJSONToMarkdown(json);
+    }
+    else {
+      return json;
+    }
   })
-  .then(function(string) {
-    // Write to the output markdown file
-    return new Promise(function(resolve, reject) {
-      fs.writeFile(docItem.dest, string, 'utf-8', function (err) {
-        if (err) {
-          return reject(err);
-        }
-        resolve();
+  .then(function(obj) {
+    if (outputMarkdown) {
+      let string = obj;
+
+      // Write the markdown to the output file
+      return new Promise(function(resolve, reject) {
+        fs.writeFile(docItem.dest, string, 'utf-8', function (err) {
+          if (err) {
+            return reject(err);
+          }
+          resolve();
+        });
       });
-    });
+    }
+    else {
+      // Write the json to the output file
+      let json = obj;
+    
+      return new Promise(function(resolve, reject) {
+        fs.writeFile(docItem.dest, JSON.stringify(json, null, 2), 'utf-8', function (err) {
+          if (err) {
+            return reject(err);
+          }
+          resolve();
+        });
+      });
+    }
   });
 }
 
