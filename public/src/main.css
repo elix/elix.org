@@ -93,7 +93,6 @@ code {
 
 .contentContainer {
   display: flex;
-  padding: 20px 0;
 }
 
 .gutter {
@@ -112,12 +111,24 @@ article {
  * Header
  */
 
+.headerBackground {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
 header {
   display: flex;
+  font-size: 15px;
+  padding: 20px 0;
 }
 
 .logoLink img {
+  height: 55px;
   border: none;
+}
+.pageContainer[data-path="/"] .logoLink img {
+  height: auto;
 }
 
 .headerLinks {
@@ -141,12 +152,6 @@ header {
 /*
  * Home page
  */
-
-.pageBackground {
-  position: absolute;
-  width: 100%;
-  z-index: -1;
-}
 
 .homeSection0 {
 }

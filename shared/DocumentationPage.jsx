@@ -1,7 +1,6 @@
 import { h } from 'preact'; // jshint ignore:line
 import getDocumentation from './getDocumentation';
 import DocumentationNavigation from './DocumentationNavigation';
-import PageSection from './PageSection';
 import PageTemplate from './PageTemplate';
 
 
@@ -39,9 +38,10 @@ export default class DocumentationPage extends PageTemplate {
 
     return (
       <PageTemplate
-          title={componentName}
+          request={props.request}
           sideNavigation={sideNavigation}
         >
+        <h1>{componentName}</h1>
         <section class="section1 documentation">
           <div dangerouslySetInnerHTML={{ __html: props.documentation }}/>
         </section>
