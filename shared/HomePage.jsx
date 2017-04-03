@@ -10,11 +10,23 @@ import PageTemplate from './PageTemplate';
 export default class HomePage extends Component {
 
   render(props) {
+
+    const sideNavigation = (
+      <nav>
+        <ul>
+          <li><a href="#components">Components</a></li>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#core-principles">Core Principles</a></li>
+          <li><a href="#getting-started">Getting Started</a></li>
+        </ul>
+      </nav>
+    );
+
     return (
       <PageTemplate
           headerTexture="/static/resources/images/homeTexture.png"
           request={props.request}
-          sideNavigation="Home links..."
+          sideNavigation={sideNavigation}
         >
         <section class="homeSection0">
           <h1 class="tagline">
@@ -31,6 +43,7 @@ export default class HomePage extends Component {
         </section>
 
         <section class="homeSection1">
+          <a name="components"></a>
           <ComponentCard name="LabeledTabButton" color="0">
             A generic tab button with a text label
           </ComponentCard>
@@ -52,7 +65,9 @@ export default class HomePage extends Component {
         </section>
 
         <section class="homeSection2">
-          <h1>Overview</h1>
+          <a name="overview">
+            <h1>Overview</h1>
+          </a>
           <p>
             Most applications make use of common, general-purpose user interface
             patterns such lists, menus, dialogs, carousels, and so on. Such
@@ -85,11 +100,15 @@ export default class HomePage extends Component {
         </section>
 
         <section class="homeSection3">
-          <h1>Core Principles</h1>
+          <a name="core-principles">
+            <h1>Core Principles</h1>
+          </a>
         </section>
 
         <section class="homeSection4">
-          <h1>Getting Started</h1>
+          <a name="getting-started">
+            <h1>Getting Started</h1>
+          </a>
         </section>
 
       </PageTemplate>

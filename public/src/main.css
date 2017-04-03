@@ -7,7 +7,6 @@ html {
 }
 
 body {
-  background-color: #dcdcdc;
   color: #333;
   display: flex;
   flex-direction: column;
@@ -51,14 +50,29 @@ code {
  * Page template
  */
 
-.sideNavigation nav {
+.navigationContainer {
   background: white;
   font-size: 13px;
+  overflow: hidden;
   padding: 8px 24px;
+  position: relative;
 }
 
-.sideNavigation:hover nav {
+.navigationContainer:hover {
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
   position: absolute;
+}
+
+.sideGradient {
+  position: absolute;
+  right: 0;
+  width: 60px;
+  background: linear-gradient(to right, rgba(255,255,255,0), white 60%);
+  height: 100%;
+  z-index: 1;
+}
+.navigationContainer:hover .sideGradient {
+  display: none;
 }
 
 .sideNavigation ul {
@@ -127,9 +141,6 @@ header {
   height: 55px;
   border: none;
 }
-.pageContainer[data-path="/"] .logoLink img {
-  height: auto;
-}
 
 .headerLinks {
   flex: 1;
@@ -152,6 +163,16 @@ header {
 /*
  * Home page
  */
+.pageContainer[data-path="/"] .logoLink img {
+  height: auto;
+}
+.pageContainer[data-path="/"] .navigationContainer {
+  background: none;
+  box-shadow: none;
+}
+.pageContainer[data-path="/"] .sideGradient {
+  background: none;
+}
 
 .homeSection0 {
 }
