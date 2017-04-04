@@ -63,8 +63,6 @@ code {
   overflow: hidden;
   padding: 8px 24px;
   position: relative;
-  text-fill-color: transparent;
-  -webkit-text-fill-color: transparent;
 }
 
 .navigationContainer:hover {
@@ -73,12 +71,16 @@ code {
   -webkit-background-clip: initial;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
   position: absolute;
-  text-fill-color: initial;
-  -webkit-text-fill-color: initial;
 }
 
-.sideNavigation ul {
+.navigationContainer ul {
   padding: 0;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.navigationContainer:hover ul {
+  text-fill-color: initial;
+  -webkit-text-fill-color: initial;
 }
 
 .sideNavigation li {

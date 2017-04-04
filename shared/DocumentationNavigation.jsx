@@ -14,7 +14,7 @@ export default class DocumentationNavigation extends Component {
       'ListBox',
       'Modes',
       'Tabs',
-      'TabStrip'
+      'TabStrip',
     ];
 
     const mixins = [
@@ -43,12 +43,18 @@ export default class DocumentationNavigation extends Component {
       'symbols'
     ];
 
+    const wrappers = [
+      'TabStripWrapper'
+    ];
+
     return (
       <nav>
         <div class="navHeader">ELEMENTS</div>
         {linkList(elements, props.current)}
         <div class="navHeader">MIXINS</div>
         {linkList(mixins, props.current)}
+        <div class="navHeader">WRAPPERS</div>
+        {linkList(wrappers, props.current)}
       </nav>
     );
   }
