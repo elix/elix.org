@@ -22,13 +22,15 @@ export default class ComponentPage extends Component {
 
   render(props) {
 
-    const componentName = props.request.params.name;
+    const documentation = props.documentation;
+    const componentDocs = documentation[0];
 
     return (
       <DocumentationPage request={props.request}>
-        <h1>{componentName}</h1>
+        <h1>{componentDocs.name}</h1>
+        <p>Extends: {componentDocs.augments}</p>
         <section class="section1 documentation">
-          {JSON.stringify(props.documentation, null, 2)}
+          {JSON.stringify(documentation, null, 2)}
         </section>
       </DocumentationPage>
     );
