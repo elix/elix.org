@@ -86,11 +86,17 @@ code {
 
 .sideNavigation li {
   list-style-type: none;
-  margin: 10px 0;
+  margin: 10px 0 10px 10px;
 }
 .sideNavigation li.current {
   font-style: italic;
-  list-style-type: disc;
+}
+.sideNavigation li.current:before{
+  content: '\25b6';
+  color: #74403b;
+  font-size: smaller;
+  padding-right: 10px;
+  margin-left: -20px;
 }
 
 .sideNavigation a {
@@ -101,14 +107,13 @@ code {
   text-decoration: underline;
 }
 
-a.navHeader {
-  color: #7586a4;
-  display: block;
-  font-weight: bold;
-  margin-top: 4px;
-}
-a.navHeader:not(:first-child) {
+.navHeader:not(:first-child) {
   margin-top: 2em;
+}
+
+.navHeader a {
+  color: #7586a4;
+  font-weight: bold;
 }
 
 .contentContainer {

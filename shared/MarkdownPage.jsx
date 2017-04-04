@@ -18,13 +18,13 @@ export default class MarkdownPage extends Component {
       return response.text();
     })
     .then(markdown => {
-      return { markdown };
+      return { markdown, title };
     });
   }
 
   render(props) {
     return (
-      <DocumentationPage request={props.request}>
+      <DocumentationPage request={props.request} title={props.title}>
         <Markdown markdown={props.markdown}/>
       </DocumentationPage>
     );

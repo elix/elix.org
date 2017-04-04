@@ -9,8 +9,11 @@ import PageTemplate from './PageTemplate';
 export default class DocumentationPage extends Component {
 
   render(props) {
+    // TODO: Move to ComponentPage.
     const componentName = props.request.params.name;
-    const sideNavigation = (<DocumentationNavigation current={componentName}/>);
+    
+    const current = props.title || componentName;
+    const sideNavigation = (<DocumentationNavigation current={current}/>);
 
     return (
       <PageTemplate
