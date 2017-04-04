@@ -19,7 +19,7 @@ app.use('/markdown/mixins', express.static(path.join(__dirname, '../node_modules
 // Redirect http to https under Heroku
 //
 app.get('*', (request, response, next) => {
-  if (request.headers['x-forwarded-proto'] != 'https') {
+  if (request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] != 'https') {
     response.redirect(301, `https://${request.hostname}${request.url}`);
   }
   else {
