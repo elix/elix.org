@@ -14,7 +14,7 @@ export default class Header extends Component {
     return (
       <div class="header contentContainer">
         <img class="headerBackground" src={headerTexture}/>
-        <div class="gutter"></div>
+        <div class="leftGutter"></div>
         <header>
           <a class="logoLink" href="/">
             <img src="/static/images/elix.png"/>
@@ -26,7 +26,7 @@ export default class Header extends Component {
             <a id="linkAbout" href="https://github.com/elix/elix">GITHUB</a>
           </div>
         </header>
-        <div class="gutter"></div>
+        <div class="rightGutter"></div>
       </div>
     );
   }

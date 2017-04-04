@@ -13,7 +13,7 @@ export default class PageTemplate extends Component {
       <div class="pageContainer" data-path={props.request.path}>
         <Header headerTexture={props.headerTexture}/>
         <div class="mainContent contentContainer">
-          <div class="gutter sideNavigation">
+          <div class="leftGutter sideNavigation">
             <h1>&nbsp;</h1>
             <div class="navigationContainer">
               {props.sideNavigation}
@@ -23,7 +23,7 @@ export default class PageTemplate extends Component {
             {props.children}
             <Footer/>
           </article>
-          <div class="gutter"/>
+          <div class="rightGutter"/>
         </div>
       </div>
     );

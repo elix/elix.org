@@ -9,7 +9,9 @@ import MarkdownPage from './MarkdownPage';
  */
 export default {
   '/documentation': MarkdownPage,
+  '/documentation/elements': MarkdownPage,
   '/documentation/mixins': MarkdownPage,
+  '/documentation/wrappers': MarkdownPage,
   '/documentation/:name': ComponentPage,
   '/error': ErrorPage,
   '/': HomePage

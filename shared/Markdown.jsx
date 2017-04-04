@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import { Component, h } from 'preact'; // jshint ignore:line
 import marked from 'marked';
 
 
@@ -7,20 +7,16 @@ marked.setOptions({
 });
 
 
-/**
- * Return a promise for the HTML for the markdown docs for the component with
- * the given name.
- */
-export default function(url) {
-  return fetch(url)
-  .then(response => {
-    return response.text();
-  })
-  .then(markdown => {
-    const html = marked(markdown);
+export default class Markdown extends Component {
+
+  render(props) {
+    const html = marked(props.markdown);
     const adjusted = adjustLinks(html);
-    return adjusted;
-  });
+    return (
+      <div dangerouslySetInnerHTML={{ __html: adjusted }} />
+    );
+  }
+
 }
 
 

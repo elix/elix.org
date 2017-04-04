@@ -71,6 +71,7 @@ code {
   -webkit-background-clip: initial;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
   position: absolute;
+  z-index: 1;
 }
 
 .navigationContainer ul {
@@ -100,12 +101,13 @@ code {
   text-decoration: underline;
 }
 
-.navHeader {
+a.navHeader {
   color: #7586a4;
+  display: block;
   font-weight: bold;
   margin-top: 4px;
 }
-.navHeader:not(:first-child) {
+a.navHeader:not(:first-child) {
   margin-top: 2em;
 }
 
@@ -113,14 +115,21 @@ code {
   display: flex;
 }
 
-.gutter {
+.leftGutter {
   flex: 1;
-  min-width: 30px;
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.rightGutter {
+  flex: 1;
 }
 
 header,
 article {
   max-width: 930px;
+  padding-right: 30px;
+  position: relative;
   width: 100%;
 }
 

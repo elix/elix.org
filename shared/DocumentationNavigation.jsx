@@ -49,11 +49,11 @@ export default class DocumentationNavigation extends Component {
 
     return (
       <nav>
-        <div class="navHeader">ELEMENTS</div>
+        <a class="navHeader" href="elements">ELEMENTS</a>
         {linkList(elements, props.current)}
-        <div class="navHeader">MIXINS</div>
+        <a class="navHeader" href="mixins">MIXINS</a>
         {linkList(mixins, props.current)}
-        <div class="navHeader">WRAPPERS</div>
+        <a class="navHeader" href="wrappers">WRAPPERS</a>
         {linkList(wrappers, props.current)}
       </nav>
     );
