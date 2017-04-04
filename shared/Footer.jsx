@@ -6,6 +6,8 @@ import { h } from 'preact'; // jshint ignore:line
  */
 export default (props) => (
   <footer>
-    ©2017 Elix project
+    <p>
+      ©2017 Elix project
+    </p>
   </footer>
 );
