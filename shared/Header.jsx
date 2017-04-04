@@ -9,7 +9,7 @@ export default class Header extends Component {
   render(props) {
 
     const headerTexture = props.headerTexture ||
-        '/static/resources/images/headerTexture.png';
+        '/static/images/headerTexture.png';
 
     return (
       <div class="header contentContainer">
@@ -17,7 +17,7 @@ export default class Header extends Component {
         <div class="gutter"></div>
         <header>
           <a class="logoLink" href="/">
-            <img src="/static/resources/images/elix.png"/>
+            <img src="/static/images/elix.png"/>
           </a>
           <div class="headerLinks">
             <a id="linkAbout" href="/">HOME</a> &nbsp; / &nbsp;&nbsp;

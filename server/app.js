@@ -11,7 +11,7 @@ const renderReactRoute = require('./renderReactRoute');
 
 
 // Tell Express to serve up static content.
-app.use('/static', express.static(path.join(__dirname, '../public/src')));
+app.use('/static', express.static(path.join(__dirname, '../public')));
 app.use('/json', express.static(path.join(__dirname, '../build/docs')));
 
 //

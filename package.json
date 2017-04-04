@@ -11,7 +11,6 @@
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-react-jsx": "^6.23.0",
-    "bunyan": "^1.8.5",
     "compression": "^1.6.2",
     "del": "^2.2.2",
     "elix": "JanMiksovsky/elix#tabs",

@@ -24,7 +24,7 @@ export default class HomePage extends Component {
 
     return (
       <PageTemplate
-          headerTexture="/static/resources/images/homeTexture.png"
+          headerTexture="/static/images/homeTexture.png"
           request={props.request}
           sideNavigation={sideNavigation}
         >
