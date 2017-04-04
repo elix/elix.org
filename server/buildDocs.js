@@ -11,9 +11,17 @@ const outputPath = 'build/docs/';
 const outputExtension = outputMarkdown ? '.md' : '.json';
 
 //
+// Array of peer directories for use in docsList
+//
+const sourceDirs = ['node_modules/elix/elements', 'node_modules/elix/mixins'];
+
+//
 // Build the global docsList array for use in building the package's README.md documentation
 //
-const docsList = buildDocsList('node_modules/elix/elements').concat(buildDocsList('node_modules/elix/mixins'));
+let docsList;
+sourceDirs.forEach((dir) => {
+  docsList = docsList ? docsList.concat(buildDocsList(dir)) : buildDocsList(dir);
+});
 
 //
 // Build the portion of docsList that represents the individual source files
@@ -152,7 +160,17 @@ function mergeMixinDocs(componentJson) {
   }
 
   const mixins = componentJson[0].mixes.map(mixin => {
-    return 'node_modules/elix/mixins/' + mixin + '.js';
+    const fileName = mixin + '.js';
+
+    for (let i = 0; i < sourceDirs.length; i++) {
+      const dir = sourceDirs[i];
+      const fullPath = `${dir}/${fileName}`;
+      if (fs.existsSync(fullPath)) {
+        return fullPath;
+      }  
+    }
+    
+    return '';
   });
 
   const hostId = componentJson[0].id;
