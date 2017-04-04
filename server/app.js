@@ -18,10 +18,9 @@ app.use('/json', express.static(path.join(__dirname, '../build/docs')));
 // Redirect http to https under Heroku
 //
 app.get('*', (request, response, next) => {
-  if (request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] != 'https') {
+  if (request.headers['x-forwarded-proto'] && request.headers['x-forwarded-proto'] !== 'https') {
     response.redirect(301, `https://${request.hostname}${request.url}`);
-  }
-  else {
+  } else {
     next(); // Continue to other routes if we're not redirecting
   }
 });
