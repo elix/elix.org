@@ -22,7 +22,7 @@ export default class Header extends Component {
           <div class="headerLinks">
             <a id="linkAbout" href="/">HOME</a> &nbsp; / &nbsp;&nbsp;
             <a id="linkAbout" href="/documentation">DOCUMENTATION</a> &nbsp; / &nbsp;&nbsp;
-            <a id="linkAbout" href="/gold-standard">GOLD STANDARD</a> &nbsp; / &nbsp;&nbsp;
+            <a id="linkAbout" href="https://github.com/webcomponents/gold-standard/wiki">GOLD STANDARD</a> &nbsp; / &nbsp;&nbsp;
             <a id="linkAbout" href="https://github.com/elix/elix">GITHUB</a>
           </div>
         </header>
