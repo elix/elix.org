@@ -24,7 +24,6 @@ export default class DocumentationSection extends Component {
 
     return (
       <div>
-        <h1>{title}</h1>
         {apiElements}
       </div>
     );

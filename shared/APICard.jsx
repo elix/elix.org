@@ -1,4 +1,5 @@
 import { Component, h } from 'preact'; // jshint ignore:line
+import Markdown from './Markdown';
 
 
 /**
@@ -12,7 +13,9 @@ export default class APICard extends Component {
     return (
       <div>
         <p>{api.name}</p>
-        <p>{api.description}</p>
+        <p>
+          <Markdown markdown={api.description}/>
+        </p>
       </div>
     );
   }
