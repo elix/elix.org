@@ -9,13 +9,18 @@ export default class APICard extends Component {
 
   render(props) {
     const api = props.api;
+    let definedBy = '';
+    if (api.originalmemberof !== undefined) {
+      definedBy = (
+        <p>Defined by {api.originalmemberof}</p>
+      );
+    }
 
     return (
       <div>
         <p>{api.name}</p>
-        <p>
-          <Markdown markdown={api.description}/>
-        </p>
+        <p><Markdown markdown={api.description}/></p>
+        {definedBy}
       </div>
     );
   }
