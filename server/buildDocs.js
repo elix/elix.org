@@ -7,7 +7,7 @@ const dmd = require('dmd');
 const Readable = require('stream').Readable;
 const marked = require('marked');
 
-const outputPath = 'build/docs/';
+const outputPath = './build/docs/';
 
 //
 // Array of peer directories for use in docsList
