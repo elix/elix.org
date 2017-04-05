@@ -1,4 +1,5 @@
 import { Component, h } from 'preact'; // jshint ignore:line
+import APICard from './APICard';
 
 
 /**
@@ -7,10 +8,25 @@ import { Component, h } from 'preact'; // jshint ignore:line
 export default class DocumentationSection extends Component {
 
   render(props) {
-    const html = props.documentation;
+    const json = props.documentation;
+    const title = json[0].name;
+    let apiElements = [];
+    
+    for (let i = 1; i < json.length; i++) {
+      let api = {};
+      let jsonItem = json[i];
+      
+      api.name = jsonItem.name;
+      api.description = jsonItem.description;
+      
+      apiElements.push(<APICard api={api}></APICard>);
+    }
 
     return (
-      <div dangerouslySetInnerHTML={{__html: html}} />
+      <div>
+        <h1>{title}</h1>
+        {apiElements}
+      </div>
     );
   }
 
