@@ -1,7 +1,6 @@
 import { Component, h } from 'preact'; // jshint ignore:line
 import DocumentationPage from './DocumentationPage';
 import DocumentationSection from './DocumentationSection';
-import fetch from 'node-fetch';
 import Markdown from './Markdown';
 
 
@@ -14,26 +13,27 @@ export default class ComponentPage extends Component {
     const componentName = this.props.request.params.name;
 
     // TODO: Remove when we start to render API documentation ourselves.
-    const htmlUrl = `${this.props.baseUrl}/json/${componentName}.html`;
-    const htmlPromise = fetch(htmlUrl)
+    const htmlPath = `/build/docs/${componentName}.html`;
+    const htmlPromise = this.props.readSiteFile(htmlPath)
     .then(response => {
-      return response.text();
+      return response;
     });
 
     // Get the JSON for the API documentation.
-    const apiUrl = `${this.props.baseUrl}/json/${componentName}.json`;
-    const apiPromise = fetch(apiUrl)
+    const apiPath = `/build/docs/${componentName}.json`;
+    const apiPromise = this.props.readSiteFile(apiPath)
     .then(response => {
-      return response.json();
+      return JSON.parse(response);
     });
 
     // Get the Markdown for the overview documentation.
-    const overviewUrl = `${this.props.baseUrl}/markdown/${componentName}.md`;
-    const overviewPromise = fetch(overviewUrl)
+    const overviewPath = `/markdown/${componentName}.md`;
+    const overviewPromise = this.props.readSiteFile(overviewPath)
     .then(response => {
-      return response.status === 200 ?
-        response.text() :
-        null;
+      return response;
+    })
+    .catch(exception => {
+      return null;
     });
 
     return Promise.all([apiPromise, overviewPromise, htmlPromise])

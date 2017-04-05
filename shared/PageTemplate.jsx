@@ -9,8 +9,9 @@ import Header from './Header';
 export default class PageTemplate extends Component {
 
   render(props) {
+    const path = props.request ? props.request.path : '';
     return (
-      <div class="pageContainer" data-path={props.request.path}>
+      <div class="pageContainer" data-path={path}>
         <Header headerTexture={props.headerTexture}/>
         <div class="mainContent contentContainer">
           <div class="leftGutter sideNavigation">

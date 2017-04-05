@@ -4,6 +4,10 @@ const AppShell = shared.AppShell;
 const routesToComponentsMap = shared.routes;
 const render = require('preact-render-to-string');
 const Route = require('route-parser');
+const fs = require('fs');
+const path = require('path');
+const promisify = require('./promisify');
+const readFileAsync = promisify(fs.readFile);
 
 
 /*
@@ -25,12 +29,14 @@ function renderReactRoute(request) {
   // Construct the properties that will be used to initially instantiated the
   // component. This includes the request object. Also, our pages generally want
   // to have the URL (and, occasionally, base URL) available in fully qualified
-  // form.
+  // form. Finally, give the component a means to load files from the rest of
+  // the site.
   const baseUrl = `${request.protocol}://${request.get('host')}`;
   const initialProps = {
     baseUrl: baseUrl,
-    url: `${baseUrl}${request.url}`,
-    request: request
+    readSiteFile: readLocalFile,
+    request: request,
+    url: `${baseUrl}${request.url}`
   };
 
   // Instantiate the component for the page.
@@ -59,6 +65,13 @@ function renderReactRoute(request) {
   });
 
 }
+
+
+function readLocalFile(relativePath) {
+  const absolutePath = path.join(__dirname, '..', relativePath);
+  return readFileAsync(absolutePath, 'utf-8');
+}
+
 
 /*
  * See if we have a route that matches the given request.

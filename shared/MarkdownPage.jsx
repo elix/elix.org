@@ -1,6 +1,5 @@
 import { Component, h } from 'preact'; // jshint ignore:line
 import DocumentationPage from './DocumentationPage';
-import fetch from 'node-fetch';
 import Markdown from './Markdown';
 
 
@@ -12,11 +11,8 @@ export default class MarkdownPage extends Component {
   get asyncProperties() {
     const parts = this.props.request.path.split('/');
     const title = parts[parts.length - 1] || 'Introduction';
-    const url = `${this.props.baseUrl}/markdown/${title}.md`;
-    return fetch(url)
-    .then(response => {
-      return response.text();
-    })
+    const path = `/markdown/${title}.md`;
+    return this.props.readSiteFile(path)
     .then(markdown => {
       return { markdown, title };
     });
