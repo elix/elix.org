@@ -11,23 +11,17 @@ export default class Markdown extends Component {
 
   render(props) {
     const html = marked(props.markdown);
-    const adjusted = adjustLinks(html);
     return (
-      <div dangerouslySetInnerHTML={{ __html: adjusted }} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     );
   }
 
 }
 
 
-// Map links to other Markdown files in GitHub folders to our URL format.
-function adjustLinks(html) {
-
-  // Map URLs that point from an element doc to a mixin doc, or vice versa.
-  const html1 = html.replace(/href="[^"]+\/(?:mixins|elements)\/docs\/([^"]*)\.md"/g, 'href="/documentation/$1"');
-
-  // Map URLs that point from an element or mixin doc to same kind of doc.
-  const html2 = html1.replace(/(href="[^"]+)\.md(")/g, '$1$2');
-
-  return html2;
-}
+// function expandDemos(html) {
+//   const demoRegex = /<a href="(.+)">(.+)<\/a>/g;
+//   return html.replace(demoRegex, (match, href, text) => {
+//     return `Replace ${href} with ${text}`;
+//   });
+// }

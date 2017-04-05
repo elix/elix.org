@@ -319,6 +319,48 @@ footer {
 
 
 /*
+ * Demos
+ * TODO: Avoid replicating styles from demos.css
+ */
+
+.demoContainer {
+  margin: 2em 0;
+}
+
+.demo {
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.demoCaption {
+  color: #666;
+  font-size: smaller;
+  font-style: italic;
+  margin-top: 0.5em;
+}
+
+.demo,
+.demo button,
+.demo input {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
+
+.demo p,
+.demo li {
+  max-width: 800px;
+}
+
+.demo label {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+/*
  * Desktop
  */
 

@@ -4,10 +4,14 @@ This component presents its assigned children as items in a single-selection
 list box. This is modeled after the list box controls in macOS and Microsoft
 Windows, and the standard `select` element in HTML in its list box mode.
 
+[Typical single-selection list box](/demos/listBox.html)
+
 `ListBox` uses `SingleSelectionMixin` to expose a single selection. The user can
 click an item to select it, or navigate the selection with the keyboard (per
 `KeyboardDirectionMixin`, `KeyboardPagedSelectionMixin`, and
 `KeyboardPrefixSelectionMixin`).
+
+[A horizontal list](/demos/horizontalList.html)
 
 By default, the selected item is shown with standard highlight colors (CSS
 `highlight` color for the background, `highlighttext` for the text). This will

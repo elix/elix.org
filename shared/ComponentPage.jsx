@@ -1,8 +1,14 @@
 import { Component, h } from 'preact'; // jshint ignore:line
 import DocumentationPage from './DocumentationPage';
 import DocumentationSection from './DocumentationSection';
+import expandDemos from './expandDemos';
 import Markdown from './Markdown';
+import marked from 'marked';
 
+
+marked.setOptions({
+  gfm: true   // Use GitHub-flavored markdown.
+});
 
 /**
  * Documentation for an element or mixin.
@@ -30,7 +36,10 @@ export default class ComponentPage extends Component {
     const overviewPath = `/markdown/${componentName}.md`;
     const overviewPromise = this.props.readSiteFile(overviewPath)
     .then(response => {
-      return response;
+      // Convert to HTML.
+      const html = marked(response);
+      // return expandDemos(response, this.props.readSiteFile);
+      return expandDemos(html, this.props.readSiteFile);
     })
     .catch(exception => {
       return null;
@@ -52,12 +61,9 @@ export default class ComponentPage extends Component {
     const apiHeader = api[0];
 
     const overview = props.overview ?
-      // Found an overview Markdown for the component.
-      (
-        <section>
-          <Markdown markdown={props.overview}/>
-        </section>
-      ) :
+      // Found an overview for the component.
+      (<section dangerouslySetInnerHTML={{ __html: props.overview }} />) :
+      
       // No overview for this component, use the jsDoc header docs instead.
       (
         <section>
