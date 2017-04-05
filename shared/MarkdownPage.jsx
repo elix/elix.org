@@ -11,7 +11,7 @@ export default class MarkdownPage extends Component {
 
   get asyncProperties() {
     const parts = this.props.request.path.split('/');
-    const title = parts[parts.length - 1];
+    const title = parts[parts.length - 1] || 'Introduction';
     const url = `${this.props.baseUrl}/markdown/${title}.md`;
     return fetch(url)
     .then(response => {

@@ -51,13 +51,15 @@ export default class DocumentationNavigation extends Component {
       <nav>
         <ul>
 
-          <NavHeader current={props.current} href="elements">ELEMENTS</NavHeader>
+          <DocumentationLink current={props.current} href="/documentation">Overview</DocumentationLink>
+
+          <DocumentationLink current={props.current} isHeader="true" href="/documentation/elements">ELEMENTS</DocumentationLink>
           {linkList(elements, props.current)}
 
-          <NavHeader current={props.current} href="mixins">MIXINS</NavHeader>
+          <DocumentationLink current={props.current} isHeader="true" href="/documentation/mixins">MIXINS</DocumentationLink>
           {linkList(mixins, props.current)}
 
-          <NavHeader current={props.current} href="wrappers">WRAPPERS</NavHeader>
+          <DocumentationLink current={props.current} isHeader="true" href="/documentation/wrappers">WRAPPERS</DocumentationLink>
           {linkList(wrappers, props.current)}
 
         </ul>
@@ -68,9 +70,10 @@ export default class DocumentationNavigation extends Component {
 }
 
 
-function NavHeader(props) {
-  const isCurrent = props.href === props.current;
-  const className = `navHeader ${isCurrent ? 'current' : ''}`;
+function DocumentationLink(props) {
+  const currentClass = props.href === props.current ? 'current' : '';
+  const headerClass = props.isHeader ? 'navHeader' : '';
+  const className = `${headerClass} ${currentClass}`;
   return (
     <li class={className}>
       <a href={props.href}>{props.children}</a>
@@ -80,13 +83,7 @@ function NavHeader(props) {
 
 
 function linkList(items, current) {
-  return items.map(item => {
-    const isCurrent = item === current;
-    const className = isCurrent ? 'current' : '';
-    return (
-      <li class={className}>
-        <a href={`/documentation/${item}`}>{item}</a>
-      </li>
-    );
-  });
+  return items.map(item =>
+    <DocumentationLink current={current} href={`/documentation/${item}`}>{item}</DocumentationLink>
+  );
 }
