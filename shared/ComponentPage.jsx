@@ -1,5 +1,6 @@
 import { Component, h } from 'preact'; // jshint ignore:line
 import DocumentationPage from './DocumentationPage';
+import DocumentationSection from './DocumentationSection';
 import fetch from 'node-fetch';
 
 
@@ -10,10 +11,10 @@ export default class ComponentPage extends Component {
 
   get asyncProperties() {
     const componentName = this.props.request.params.name;
-    const url = `${this.props.baseUrl}/json/${componentName}.json`;
+    const url = `${this.props.baseUrl}/json/${componentName}.html`;
     return fetch(url)
     .then(response => {
-      return response.json();
+      return response.text();
     })
     .then(documentation => {
       return { documentation };
@@ -22,16 +23,10 @@ export default class ComponentPage extends Component {
 
   render(props) {
 
-    const documentation = props.documentation;
-    const componentDocs = documentation[0];
-
     return (
       <DocumentationPage request={props.request}>
-        <h1>{componentDocs.name}</h1>
-        <p>Extends: {componentDocs.augments}</p>
-        <section class="section1 documentation">
-          {JSON.stringify(documentation, null, 2)}
-        </section>
+        <DocumentationSection documentation={props.documentation}>
+        </DocumentationSection>
       </DocumentationPage>
     );
   }

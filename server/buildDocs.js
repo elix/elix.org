@@ -5,10 +5,9 @@ const fs = require('fs');
 const jsDocParse = require('jsdoc-parse');
 const dmd = require('dmd');
 const Readable = require('stream').Readable;
+const marked = require('marked');
 
-const outputMarkdown = false;  // true: markdown, false: json
 const outputPath = 'build/docs/';
-const outputExtension = outputMarkdown ? '.md' : '.json';
 
 //
 // Array of peer directories for use in docsList
@@ -34,13 +33,15 @@ function buildDocsList(dirName) {
       const fileRoot = file.replace('.js', '');
       return {
         src: `${dirName}/${file}`,
-        dest: `${outputPath}${fileRoot}${outputExtension}`
+        destJSON: `${outputPath}${fileRoot}.json`,
+        destMD: `${outputPath}${fileRoot}.md`,
+        destHTML: `${outputPath}${fileRoot}.html`
       };
     });
 }
 
 function buildMarkdownDoc(docItem) {
-  console.log('Building ' + docItem.dest + ' from ' + docItem.src);
+  console.log('Building ' + docItem.destHTML + ' from ' + docItem.src);
 
   return parseScriptToJSDocJSON(docItem.src)
   .then(json => {
@@ -60,42 +61,46 @@ function buildMarkdownDoc(docItem) {
     json.map((item, index) => {
       item.order = index;
     });
-
-    if (outputMarkdown) {
-      // Convert the JSON to Markdown
-      return parseJSONToMarkdown(json);
-    }
-    else {
-      return json;
-    }
-  })
-  .then(function(obj) {
-    if (outputMarkdown) {
-      let string = obj;
-
-      // Write the markdown to the output file
-      return new Promise(function(resolve, reject) {
-        fs.writeFile(docItem.dest, string, 'utf-8', function (err) {
-          if (err) {
-            return reject(err);
-          }
-          resolve();
-        });
-      });
-    }
-    else {
-      // Write the json to the output file
-      let json = obj;
     
-      return new Promise(function(resolve, reject) {
-        fs.writeFile(docItem.dest, JSON.stringify(json, null, 2), 'utf-8', function (err) {
-          if (err) {
-            return reject(err);
-          }
-          resolve();
-        });
+    return json;
+  })
+  .then(function(json) {
+    // Write the json to output file
+    return new Promise(function(resolve, reject) {
+      fs.writeFile(docItem.destJSON, JSON.stringify(json, null, 2), 'utf-8', function (err) {
+        if (err) {
+          return reject(err);
+        }
+        resolve(json);
       });
-    }
+    });
+  })
+  .then(function(json) {
+    // Convert json to markdown
+    return parseJSONToMarkdown(json);
+  })
+  .then(function(markdown) {
+    // Write the markdown to the output file
+    return new Promise(function(resolve, reject) {
+      fs.writeFile(docItem.destMD, markdown, 'utf-8', function(err) {
+        if (err) {
+          return reject(err);
+        }
+        resolve(markdown);
+      });
+    });
+  })
+  .then(function(markdown) {
+    // Convert markdown to HTML and write to output file
+    let html = marked(markdown);
+    return new Promise(function(resolve, reject) {
+      fs.writeFile(docItem.destHTML, html, 'utf-8', function(err) {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    });
   });
 }
 

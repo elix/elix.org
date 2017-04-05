@@ -31,7 +31,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "postinstall": "gulp buildoninstall; webpack",
+    "postinstall": "gulp buildoninstall; node server/buildDocs.js; webpack",
     "start": "node server/app.js",
     "watch": "webpack --watch"
   },
