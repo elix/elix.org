@@ -9,18 +9,40 @@ export default class APICard extends Component {
 
   render(props) {
     const api = props.api;
-    let definedBy = '';
-    if (api.originalmemberof !== undefined) {
-      definedBy = (
-        <p>Defined by {api.originalmemberof}</p>
+    
+    let apiName = api.name;
+    if (api.kind === 'function') {
+      apiName = `${apiName}()`;
+    }
+    if (api.type && api.type.names && api.type.names.length) {
+      apiName = `${apiName} : ${api.type.names[0]}`;
+    }
+    
+    let definedByJSX = (<p/>);
+    let definedBy = api.originalmemberof;
+    if (definedBy !== undefined) {
+      let strings = definedBy.split(/:|~/);
+      switch (strings.length) {
+        case 1:
+          definedBy = `${strings[0]}Mixin`;
+          break;
+        case 3:
+          definedBy = strings[1];
+          break;
+        default:
+          break;
+      }
+      
+      definedByJSX = (
+        <p>Defined by <a href={definedBy}>{definedBy}</a></p>
       );
     }
 
     return (
-      <div>
-        <p>{api.name}</p>
+      <div style="margin-bottom: 10px; background-color: #f0f0f0">
+        <p>{apiName}</p>
         <p><Markdown markdown={api.description}/></p>
-        {definedBy}
+        {definedByJSX}
       </div>
     );
   }

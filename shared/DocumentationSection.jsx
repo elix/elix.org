@@ -16,11 +16,7 @@ export default class DocumentationSection extends Component {
       let api = {};
       let jsonItem = json[i];
       
-      api.name = jsonItem.name;
-      api.description = jsonItem.description;
-      api.originalmemberof = jsonItem.originalmemberof;
-      
-      apiElements.push(<APICard api={api}></APICard>);
+      apiElements.push(<APICard api={jsonItem}></APICard>);
     }
 
     return (
