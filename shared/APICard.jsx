@@ -21,18 +21,6 @@ export default class APICard extends Component {
     let definedByJSX = (<p/>);
     let definedBy = api.originalmemberof;
     if (definedBy !== undefined) {
-      let strings = definedBy.split(/:|~/);
-      switch (strings.length) {
-        case 1:
-          definedBy = `${strings[0]}Mixin`;
-          break;
-        case 3:
-          definedBy = strings[1];
-          break;
-        default:
-          break;
-      }
-      
       definedByJSX = (
         <p>Defined by <a href={definedBy}>{definedBy}</a></p>
       );
