@@ -11,8 +11,6 @@ click an item to select it, or navigate the selection with the keyboard (per
 `KeyboardDirectionMixin`, `KeyboardPagedSelectionMixin`, and
 `KeyboardPrefixSelectionMixin`).
 
-[A horizontal list](/demos/horizontalList.html)
-
 By default, the selected item is shown with standard highlight colors (CSS
 `highlight` color for the background, `highlighttext` for the text). This will
 eventually be configurable with CSS, although Elix is still working out a
@@ -22,8 +20,20 @@ The ListBox exposes an `orientation` property that can either by "vertical" (the
 default), or "horizontal". Moreover, the list reflects its `orientation`
 property value as an attribute to simplify conditional styling.
 
+[A horizontal list](/demos/horizontalList.html)
+
 The ListBox applies `SelectedItemTextValueMixin` (below) to expose a `value`
 property.
+
+Lists typically obtain their items from their child elements using
+`DefaultSlotContentMixin`. However, it is easy to create variations of
+`ListBox` for lists with hard-coded content. For example, the following demo
+shows a list of browser "plugins" registered with your browser via
+<code>navigator.plugins</code>. (These tend to be internal components, rather
+than user-visible browser extensions. If you do not see a demo, your browser
+may have no plugins installed.)
+
+[A list with hard-coded items](/demos/browserPluginList.html)
 
 By default, a `ListBox` shows a generic visual style. Once the Elix project
 establishes a theming strategy, we will allow developers to style a `ListBox`
