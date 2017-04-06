@@ -40,7 +40,7 @@ export default class APICard extends Component {
 
     return (
       <div style="margin-bottom: 10px; background-color: #f0f0f0">
-        <p>{apiName}</p>
+        <h3>{apiName}</h3>
         <p><Markdown markdown={api.description}/></p>
         {definedByJSX}
       </div>
