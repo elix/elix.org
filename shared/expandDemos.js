@@ -25,7 +25,7 @@ function loadDemo(demoPath, readSiteFile) {
   .then(source => {
     // Extract demo from inside of a div with class="demo".
     // const bodyRegex = /<body>([\s\S]*)<\/body>/;
-    const bodyRegex = /(<div class="demo".*>[\s\S]*<\/div>)/;
+    const bodyRegex = /(<div class="demo(?: .*)?".*>[\s\S]*<\/div>)/;
     const match = bodyRegex.exec(source);
     return match ?
       match[1] :
