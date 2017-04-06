@@ -317,6 +317,28 @@ footer {
   margin-top: 1em;
 }
 
+.apiSection {
+  background: #ececee;
+}
+
+.apiCard {
+  background: white;
+  border-top: 7px solid #869cbe;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+.apiCard > :first-child {
+  margin-top: 0;
+}
+.apiCard > :last-child {
+  margin-bottom: 0;
+}
+
+.apiDescription > :last-child {
+  margin-bottom: 0;
+}
+
 
 /*
  * Demos

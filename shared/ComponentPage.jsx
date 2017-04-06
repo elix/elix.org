@@ -74,7 +74,6 @@ export default class ComponentPage extends Component {
     return (
       <DocumentationPage request={props.request}>
         {overview}
-        <h1>API</h1>
         <DocumentationSection documentation={props.api}/>
       </DocumentationPage>
     );

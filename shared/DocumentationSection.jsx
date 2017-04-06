@@ -9,21 +9,21 @@ export default class DocumentationSection extends Component {
 
   render(props) {
     const json = props.documentation;
-    const title = json[0].name;
     let apiElements = [];
 
     for (let i = 1; i < json.length; i++) {
-      let api = {};
       let jsonItem = json[i];
-
       apiElements.push(<APICard api={jsonItem}></APICard>);
     }
 
-    return (
-      <section>
-        {apiElements}
-      </section>
-    );
+    return apiElements.length > 0 ?
+      (
+        <section class="apiSection">
+          <h1>API</h1>
+          {apiElements}
+        </section>
+      ) :
+      null;
   }
 
 }
