@@ -19,6 +19,7 @@ export default class DocumentationSection extends Component {
     return apiElements.length > 0 ?
       (
         <section class="apiSection">
+          <div class="apiBackground"/>
           <h1>API</h1>
           {apiElements}
         </section>
