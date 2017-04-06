@@ -32,13 +32,12 @@ export default class ComponentPage extends Component {
       return JSON.parse(response);
     });
 
-    // Get the Markdown for the overview documentation.
-    const overviewPath = `/markdown/${componentName}.md`;
+    // Get the Markdown for the component overview (if it exists).
+    const overviewPath = `/content/${componentName}.md`;
     const overviewPromise = this.props.readSiteFile(overviewPath)
     .then(response => {
       // Convert to HTML.
       const html = marked(response);
-      // return expandDemos(response, this.props.readSiteFile);
       return expandDemos(html, this.props.readSiteFile);
     })
     .catch(exception => {
@@ -63,7 +62,7 @@ export default class ComponentPage extends Component {
     const overview = props.overview ?
       // Found an overview for the component.
       (<section dangerouslySetInnerHTML={{ __html: props.overview }} />) :
-      
+
       // No overview for this component, use the jsDoc header docs instead.
       (
         <section>

@@ -4,14 +4,14 @@ import Markdown from './Markdown';
 
 
 /**
- * Documentation for an element or mixin.
+ * A general-purpose content page in the Documentation area.
  */
-export default class MarkdownPage extends Component {
+export default class ContentPage extends Component {
 
   get asyncProperties() {
     const parts = this.props.request.path.split('/');
     const title = parts[parts.length - 1] || 'Introduction';
-    const path = `/markdown/${title}.md`;
+    const path = `/content/${title}.md`;
     return this.props.readSiteFile(path)
     .then(markdown => {
       return { markdown, title };
