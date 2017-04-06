@@ -39,7 +39,9 @@ By default, a `ListBox` shows a generic visual style. Once the Elix project
 establishes a theming strategy, we will allow developers to style a `ListBox`
 instance with CSS.
 
-## Use cases
+The `ListBox` class is registered as element `<elix-list-box>`.
+
+## Usage
 
 Single-selection list boxes are common in user interfaces. As written, the
 `ListBox` component supports the same use cases as a standard `select` element
