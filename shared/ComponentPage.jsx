@@ -80,7 +80,7 @@ export default class ComponentPage extends Component {
           Rendered API documentation for {apiHeader.name} goes here...
         </p>
         <section>
-          <DocumentationSection documentation={props.html}/>
+          <DocumentationSection documentation={props.api}/>
         </section>
       </DocumentationPage>
     );

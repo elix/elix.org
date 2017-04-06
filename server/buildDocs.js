@@ -41,7 +41,7 @@ function buildDocsList(dirName) {
 }
 
 function buildMarkdownDoc(docItem) {
-  console.log('Building ' + docItem.destHTML + ' from ' + docItem.src);
+  console.log('Building ' + docItem.destJSON + ' from ' + docItem.src);
 
   return parseScriptToJSDocJSON(docItem.src)
   .then(json => {
@@ -138,10 +138,10 @@ function parseJSONToMarkdown(json) {
     // Use dmd to create the markdown string which we will
     // write to an output .md file (NYI)
     const partials = [
-      './node_modules/elix/gulp/templates/main.hbs',
-      './node_modules/elix/gulp/templates/scope.hbs',
-      './node_modules/elix/gulp/templates/mixes.hbs',
-      './node_modules/elix/gulp/templates/mixin-linked-type-list.hbs'];
+      './server/md-templates/main.hbs',
+      './server/md-templates/scope.hbs',
+      './server/md-templates/mixes.hbs',
+      './server/md-templates/mixin-linked-type-list.hbs'];
     const dmdStream = dmd({partial: partials, 'global-index-format': 'none', 'group-by': ['none']});
     s.pipe(dmdStream);
     dmdStream.setEncoding('utf8');
@@ -185,12 +185,30 @@ function mergeMixinDocs(componentJson) {
   );
 }
 
+function resolveOriginalMemberOf(omo) {
+  if (omo !== undefined) {
+    let strings = omo.split(/:|~/);
+    switch (strings.length) {
+      case 1:
+        omo = `${strings[0]}Mixin`;
+        break;
+      case 3:
+        omo = strings[1];
+        break;
+      default:
+        break;
+    }
+  }
+  
+  return omo;
+}
+
 function mergeMixinIntoBag(mixinPath, componentJson, hostId) {
   return parseScriptToJSDocJSON(mixinPath)
   .then(mixinJson => {
     for (let i = 1; i < mixinJson.length; i++) {
       if (mixinJson[i].memberof != null && mixinJson[i].memberof != hostId) {
-        mixinJson[i].originalmemberof = mixinJson[i].memberof;
+        mixinJson[i].originalmemberof = resolveOriginalMemberOf(mixinJson[i].memberof);
         mixinJson[i].memberof = hostId;
       }
       componentJson.push(mixinJson[i]);
