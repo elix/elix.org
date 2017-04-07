@@ -20,9 +20,24 @@ export default class ComponentPage extends Component {
 
     // Get the JSON for the API documentation.
     const apiPath = `/build/docs/${componentName}.json`;
+    let json;
     const apiPromise = this.props.readSiteFile(apiPath)
     .then(response => {
-      return JSON.parse(response);
+      json = JSON.parse(response);
+      // Preprocess Markdown and demos.
+      // We need to do this here because fetching demos is asynchronous.
+      if (json[0] && json[0].description) {
+        const html = marked(json[0].description);
+        return expandDemos(html, this.props.readSiteFile);
+      } else {
+        return Promise.resolve(null);
+      }
+    })
+    .then(descriptionHtml => {
+      if (json[0] && json[0].description && descriptionHtml) {
+        json[0].description = descriptionHtml;
+      }
+      return json;
     });
 
     // Get the Markdown for the component overview (if it exists).
@@ -56,10 +71,12 @@ export default class ComponentPage extends Component {
       (<section dangerouslySetInnerHTML={{ __html: props.overview }} />) :
 
       // No overview for this component, use the jsDoc header docs instead.
+      // NOTE: As indicated above, the description (if it exists) will have
+      // already been translated to HTML.
       (
         <section>
           <h1>{apiHeader.name}</h1>
-          <Markdown markdown={apiHeader.description}/>
+          <div dangerouslySetInnerHTML={{ __html: apiHeader.description }}/>
         </section>
       );
 

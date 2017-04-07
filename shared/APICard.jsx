@@ -11,11 +11,12 @@ export default class APICard extends Component {
     const api = props.api;
 
     let apiName = api.name;
+    let apiHeading;
     if (api.kind === 'function') {
-      apiName = `${apiName}()`;
+      apiHeading = `${apiName}()`;
     }
     if (api.type && api.type.names && api.type.names.length) {
-      apiName = `${apiName} : ${api.type.names[0]}`;
+      apiHeading = `${apiName} : ${api.type.names[0]}`;
     }
 
     const definedBy = api.originalmemberof;
@@ -25,7 +26,7 @@ export default class APICard extends Component {
 
     return (
       <div class="apiCard">
-        <h3>{apiName}</h3>
+        <a name={apiName}><h3>{apiHeading}</h3></a>
         <Markdown class="apiDescription" markdown={api.description}/>
         {definedByJSX}
       </div>

@@ -10,6 +10,7 @@ import ContentPage from './ContentPage';
 export default {
   '/documentation': ContentPage,
   '/documentation/elements': ContentPage,
+  '/documentation/helpers': ContentPage,
   '/documentation/mixins': ContentPage,
   '/documentation/wrappers': ContentPage,
   '/documentation/:name': ComponentPage,

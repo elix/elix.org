@@ -33,13 +33,16 @@ export default class DocumentationNavigation extends Component {
       'SelectionInViewMixin',
       'ShadowReferencesMixin',
       'ShadowTemplateMixin',
-      'SingleSelectionMixin',
-      'Symbol',
+      'SingleSelectionMixin'
+    ];
+
+    const helpers = [
       'attributes',
       'constants',
       'content',
       'defaultScrollTarget',
       'renderArrayAsElements',
+      'Symbol',
       'symbols'
     ];
 
@@ -61,6 +64,9 @@ export default class DocumentationNavigation extends Component {
 
           <DocumentationLink current={props.current} isHeader="true" href="/documentation/wrappers">WRAPPERS</DocumentationLink>
           {linkList(wrappers, props.current)}
+
+          <DocumentationLink current={props.current} isHeader="true" href="/documentation/helpers">HELPERS</DocumentationLink>
+          {linkList(helpers, props.current)}
 
         </ul>
       </nav>
