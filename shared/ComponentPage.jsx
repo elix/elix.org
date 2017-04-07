@@ -18,13 +18,6 @@ export default class ComponentPage extends Component {
   get asyncProperties() {
     const componentName = this.props.request.params.name;
 
-    // TODO: Remove when we start to render API documentation ourselves.
-    const htmlPath = `/build/docs/${componentName}.html`;
-    const htmlPromise = this.props.readSiteFile(htmlPath)
-    .then(response => {
-      return response;
-    });
-
     // Get the JSON for the API documentation.
     const apiPath = `/build/docs/${componentName}.json`;
     const apiPromise = this.props.readSiteFile(apiPath)
@@ -44,12 +37,11 @@ export default class ComponentPage extends Component {
       return null;
     });
 
-    return Promise.all([apiPromise, overviewPromise, htmlPromise])
+    return Promise.all([apiPromise, overviewPromise])
     .then(results => {
       return {
         api: results[0],
-        overview: results[1],
-        html: results[2]
+        overview: results[1]
       };
     });
   }

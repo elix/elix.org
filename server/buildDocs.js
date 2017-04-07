@@ -74,6 +74,7 @@ function buildMarkdownDoc(docItem) {
         resolve(json);
       });
     });
+  /*  
   })
   .then(function(json) {
     // Convert json to markdown
@@ -101,6 +102,7 @@ function buildMarkdownDoc(docItem) {
         resolve();
       });
     });
+  */
   });
 }
 
