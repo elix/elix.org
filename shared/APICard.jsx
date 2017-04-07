@@ -15,6 +15,9 @@ export default class APICard extends Component {
     // Initialize the apiName variable
     let apiName = api.name;
     
+    // Initialize returnsJSX
+    let returnsJSX = '';
+    
     //
     // If this api is a function/member, we build a parameter list
     // for display with the api (eg: foo(param1, param2) ).
@@ -31,7 +34,19 @@ export default class APICard extends Component {
         }
       }
       
-      apiName = `${apiName}(${parameterList})`;
+      let returnValString = '';
+      let returnType = '';
+      if (api.returns !== undefined && api.returns.length > 0) {
+        returnType = api.returns[0].type.names[0];
+        returnValString = ` ⇒ ${returnType}`;
+        returnsJSX = (
+          <p>
+            <strong>Returns:</strong> <code>{returnType}</code> &#8212; {api.returns[0].description}
+          </p>
+        );
+      }
+
+      apiName = `${apiName}(${parameterList})${returnValString}`;
     }
     
     //
@@ -58,6 +73,7 @@ export default class APICard extends Component {
         <h3>{apiName}</h3>
         <Markdown class="apiDescription" markdown={api.description}/>
         {definedByJSX}
+        {returnsJSX}
         <ParameterTable parameters={params}/>
       </div>
     );
