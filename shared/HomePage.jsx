@@ -17,7 +17,7 @@ export default class HomePage extends Component {
           <li><a href="#components">Components</a></li>
           <li><a href="#overview">Overview</a></li>
           <li><a href="#core-principles">Core Principles</a></li>
-          <li><a href="#getting-started">Getting Started</a></li>
+          {/*<li><a href="#getting-started">Getting Started</a></li>*/}
         </ul>
       </nav>
     );
@@ -188,11 +188,13 @@ export default class HomePage extends Component {
           </ul>
         </section>
 
+        {/*
         <section class="homeSection4">
           <a name="getting-started">
             <h1>Getting Started</h1>
           </a>
         </section>
+        */}
 
       </PageTemplate>
     );

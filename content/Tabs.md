@@ -17,7 +17,7 @@ example of `Tabs` being used for navigation:
 
     </elix-tabs>
 
-When styling and icons are added, the result would be:
+When styling and icons are added, the result might be:
 
 [Tabs used for navigation](/demos/toolbarTabs.html)
 
