@@ -80,9 +80,30 @@ export default class ComponentPage extends Component {
         </section>
       );
 
+    //
+    // "Mixes" section
+    //
+    let mixesJSX;
+    const mixins = apiHeader.mixes;
+    if (mixins) {
+      const mixinsJSX = mixins.map((mixin, index) => (
+        <span>
+          { mixins.length > 2 && index > 0 && ', ' }
+          { mixins.length > 1 && index === mixins.length -1 && 'and '}
+          <a href={mixin}>{mixin}</a>
+        </span>
+      ));
+      mixesJSX = (
+        <p>
+          This element uses {mixinsJSX}.
+        </p>
+      );
+    }
+
     return (
       <DocumentationPage request={props.request}>
         {overview}
+        {mixesJSX}
         <DocumentationSection documentation={props.api}/>
       </DocumentationPage>
     );

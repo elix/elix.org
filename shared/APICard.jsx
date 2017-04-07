@@ -11,13 +11,13 @@ export default class APICard extends Component {
   render(props) {
     const api = props.api;
     const params = api.params;
-    
+
     // Initialize
     const apiName = api.name;
     let apiHeading;
     let returnsJSX = '';
     let defaultValueJSX = '';
-    
+
     //
     // If this api is a function/member, we build a parameter list
     // for display with the api (eg: foo(param1, param2) ).
@@ -27,13 +27,13 @@ export default class APICard extends Component {
       if (params.length > 0) {
         for (let i = 0; i < params.length; i++) {
           let param = params[i];
-          
+
           // Build the parameter list for use in the api name display. The
           // funky conditionalized code handles comma placements in the string.
           parameterList = `${parameterList}${param.name}${(i+1) < params.length ? ', ' : ''}`;
         }
       }
-      
+
       let returnValString = '';
       let returnType = '';
       if (api.returns !== undefined && api.returns.length > 0) {
@@ -48,7 +48,7 @@ export default class APICard extends Component {
 
       apiHeading = `${apiName}(${parameterList})${returnValString}`;
     }
-    
+
     if (api.defaultvalue !== undefined) {
       defaultValueJSX = (
         <p>
@@ -56,7 +56,7 @@ export default class APICard extends Component {
         </p>
       );
     }
-    
+
     //
     // We format the api with a type following a colon if a type
     // is specified
@@ -72,7 +72,7 @@ export default class APICard extends Component {
     const definedByJSX = definedBy !== undefined ?
       (<p>Defined by <a href={definedBy}>{definedBy}</a></p>) :
       '';
-    
+
     //
     // The final API card JSX
     //
