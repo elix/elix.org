@@ -12,11 +12,10 @@ export default class APICard extends Component {
     const api = props.api;
     const params = api.params;
     
-    // Initialize the apiName variable
+    // Initialize
     let apiName = api.name;
-    
-    // Initialize returnsJSX
     let returnsJSX = '';
+    let defaultValueJSX = '';
     
     //
     // If this api is a function/member, we build a parameter list
@@ -49,6 +48,14 @@ export default class APICard extends Component {
       apiName = `${apiName}(${parameterList})${returnValString}`;
     }
     
+    if (api.defaultvalue !== undefined) {
+      defaultValueJSX = (
+        <p>
+          <strong>Default:</strong> <code>{api.defaultvalue}</code>
+        </p>
+      );
+    }
+    
     //
     // We format the api with a type following a colon if a type
     // is specified
@@ -73,6 +80,7 @@ export default class APICard extends Component {
         <h3>{apiName}</h3>
         <Markdown class="apiDescription" markdown={api.description}/>
         {definedByJSX}
+        {defaultValueJSX}
         {returnsJSX}
         <ParameterTable parameters={params}/>
       </div>
