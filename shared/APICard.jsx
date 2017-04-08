@@ -10,44 +10,20 @@ export default class APICard extends Component {
 
   render(props) {
     const api = props.api;
-    const params = api.params;
 
     // Initialize
     const apiName = api.name;
-    let apiHeading;
     let returnsJSX = '';
     let defaultValueJSX = '';
 
-    //
-    // If this api is a function/member, we build a parameter list
-    // for display with the api (eg: foo(param1, param2) ).
-    //
-    let parameterList = '';
-    if (api.kind === 'function') {
-      if (params.length > 0) {
-        for (let i = 0; i < params.length; i++) {
-          let param = params[i];
-
-          // Build the parameter list for use in the api name display. The
-          // funky conditionalized code handles comma placements in the string.
-          parameterList = `${parameterList}${param.name}${(i+1) < params.length ? ', ' : ''}`;
-        }
-      }
-
-      let returnValString = '';
-      let returnType = '';
-      if (api.returns !== undefined && api.returns.length > 0) {
-        returnType = api.returns[0].type.names[0];
-        returnValString = ` ⇒ ${returnType}`;
-        returnsJSX = (
-          <p>
-            <strong>Returns:</strong> <code>{returnType}</code> &#8212; {api.returns[0].description}
-          </p>
-        );
-      }
-
-      apiHeading = `${apiName}(${parameterList})${returnValString}`;
-    }
+    // The API member kind (event, method, etc.) determines the heading.
+    const headingsForKind = {
+      'function': methodHeading,
+      'event': eventHeading,
+      'member': propertyHeading
+    };
+    const headingFunction = headingsForKind[api.kind];
+    const apiHeading = headingFunction && headingFunction(api);
 
     if (api.defaultvalue !== undefined) {
       defaultValueJSX = (
@@ -58,20 +34,25 @@ export default class APICard extends Component {
     }
 
     //
-    // We format the api with a type following a colon if a type
-    // is specified
-    //
-    if (api.type && api.type.names && api.type.names.length) {
-      apiHeading = `${apiName} : ${api.type.names[0]}`;
-    }
-
-    //
-    // Handle the "definedBy" section
+    // "Defined by" section
     //
     const definedBy = api.originalmemberof;
     const definedByJSX = definedBy !== undefined ?
       (<p>Defined by <a href={definedBy}>{definedBy}</a></p>) :
       '';
+
+    //
+    // "Returns" section
+    //
+    let returnType = '';
+    if (api.returns !== undefined && api.returns.length > 0) {
+      returnType = getReturnType(api);
+      returnsJSX = (
+        <p>
+          <strong>Returns:</strong> <code>{returnType}</code> &#8212; {api.returns[0].description}
+        </p>
+      );
+    }
 
     //
     // The final API card JSX
@@ -83,9 +64,59 @@ export default class APICard extends Component {
         {definedByJSX}
         {defaultValueJSX}
         {returnsJSX}
-        <ParameterTable parameters={params}/>
+        <ParameterTable parameters={api.params}/>
       </div>
     );
   }
 
+}
+
+
+function eventHeading(api) {
+  return (
+    <span>
+      {api.name}
+      <span class="apiMemberType"> event</span>
+    </span>
+  );
+}
+
+function methodHeading(api) {
+  //
+  // We format the api with a type following a colon if a type
+  // is specified
+  //
+  // if (api.type && api.type.names && api.type.names.length) {
+  //   apiHeading = `${apiName} : ${api.type.names[0]}`;
+  // }
+
+  // Build the parameter list for use in the api name display.
+  const params = api.params;
+  const parameterList = params.map((param, index) =>
+    // The conditionalized code handles comma placements in the string.
+    `${param.name}${ (index+1) < params.length ? ', ' : '' }`
+  );
+
+  return (
+    <span>
+      {api.name}
+      ({parameterList})
+      <span class="apiMemberType"> method</span>
+    </span>
+  );
+}
+
+function getReturnType(api) {
+  return api.returns && api.returns.length > 0 ?
+    api.returns[0].type.names[0] :
+    null;
+}
+
+function propertyHeading(api) {
+  return (
+    <span>
+      {api.name}
+      <span class="apiMemberType"> property</span>
+    </span>
+  );
 }
