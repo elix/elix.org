@@ -90,7 +90,7 @@ function methodHeading(api) {
   //   apiHeading = `${apiName} : ${api.type.names[0]}`;
   // }
 
-  // Build the parameter list for use in the api name display.
+  // Build the parameter list.
   const params = api.params;
   const parameterList = params.map((param, index) =>
     // The conditionalized code handles comma placements in the string.
