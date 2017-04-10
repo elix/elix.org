@@ -1,6 +1,5 @@
 import { Component, h } from 'preact'; // jshint ignore:line
 import Markdown from './Markdown';
-import ParameterTable from './ParameterTable';
 
 
 /**
@@ -9,114 +8,154 @@ import ParameterTable from './ParameterTable';
 export default class APICard extends Component {
 
   render(props) {
-    const api = props.api;
-
-    // Initialize
-    const apiName = api.name;
-    let returnsJSX = '';
-    let defaultValueJSX = '';
-
-    // The API member kind (event, method, etc.) determines the heading.
-    const headingsForKind = {
-      'function': methodHeading,
-      'event': eventHeading,
-      'member': propertyHeading
+    // The API member kind (event, method, etc.) determines the card type.
+    const cardForKind = {
+      'function': MethodCard,
+      'event': EventCard,
+      'member': PropertyCard
     };
-    const headingFunction = headingsForKind[api.kind];
-    const apiHeading = headingFunction && headingFunction(api);
-
-    if (api.defaultvalue !== undefined) {
-      defaultValueJSX = (
-        <p>
-          <strong>Default:</strong> <code>{api.defaultvalue}</code>
-        </p>
-      );
-    }
-
-    //
-    // "Defined by" section
-    //
-    const definedBy = api.originalmemberof;
-    const definedByJSX = definedBy !== undefined ?
-      (<p>Defined by <a href={definedBy}>{definedBy}</a></p>) :
-      '';
-
-    //
-    // "Returns" section
-    //
-    let returnType = '';
-    if (api.returns !== undefined && api.returns.length > 0) {
-      returnType = getReturnType(api);
-      returnsJSX = (
-        <p>
-          <strong>Returns:</strong> <code>{returnType}</code> &#8212; {api.returns[0].description}
-        </p>
-      );
-    }
-
-    //
-    // The final API card JSX
-    //
-    return (
-      <div class="apiCard">
-        <a name={apiName}><h3>{apiHeading}</h3></a>
-        <Markdown class="apiDescription" markdown={api.description}/>
-        {definedByJSX}
-        {defaultValueJSX}
-        {returnsJSX}
-        <ParameterTable parameters={api.params}/>
-      </div>
-    );
+    const api = props.api;
+    const cardFunction = cardForKind[api.kind];
+    return cardFunction && cardFunction(api);
   }
 
 }
 
 
-function eventHeading(api) {
+// Template shared by all API card types.
+function CardTemplate(props) {
+
+  const originalmemberof = props.originalmemberof;
+  const definedBy = originalmemberof &&
+    (<p>Defined by <a href={originalmemberof}>{originalmemberof}</a></p>);
+
   return (
-    <span>
-      {api.name}
-      <span class="apiMemberType"> event</span>
-    </span>
+    <div class="apiCard">
+      <a name={props.name}><h3>{props.heading}</h3></a>
+      <Markdown class="apiDescription" markdown={props.description}/>
+      {props.children}
+      {definedBy}
+    </div>
   );
 }
 
-function methodHeading(api) {
-  //
-  // We format the api with a type following a colon if a type
-  // is specified
-  //
-  // if (api.type && api.type.names && api.type.names.length) {
-  //   apiHeading = `${apiName} : ${api.type.names[0]}`;
-  // }
 
-  // Build the parameter list.
-  const params = api.params || [];
-  const parameterList = params.map((param, index) =>
+function EventCard(props) {
+  const heading = (
+    <span>
+      {props.name}
+      <span class="apiMemberType"> event</span>
+    </span>
+  );
+
+  return (
+    <CardTemplate
+      description={props.description}
+      heading={heading}
+      name={props.name}
+      >
+    </CardTemplate>
+  );
+}
+
+
+function MethodCard(props) {
+
+  // Build the heading's parameter list.
+  const params = props.params || [];
+  const headingParameters = params.map((param, index) =>
     // The conditionalized code handles comma placements in the string.
     `${param.name}${ (index+1) < params.length ? ', ' : '' }`
   );
 
-  return (
+  const heading = (
     <span>
-      {api.name}
-      ({parameterList})
+      {props.name}
+      ({headingParameters})
       <span class="apiMemberType"> method</span>
     </span>
   );
-}
 
-function getReturnType(api) {
-  return api.returns && api.returns.length > 0 ?
-    api.returns[0].type.names[0] :
-    null;
-}
+  // "Returns" section
+  const returnType = props.returns && props.returns.length > 0 &&
+    props.returns[0].type.names[0];
+  const returns = returnType && (
+    <p>
+      <span class="apiLabel">Returns: </span>
+      <code>{returnType}</code>
+      &nbsp;{props.returns[0].description}
+    </p>
+  );
 
-function propertyHeading(api) {
   return (
+    <CardTemplate
+      description={props.description}
+      heading={heading}
+      name={props.name}
+      >
+      {returns}
+      <MethodParameterList parameters={props.params}/>
+    </CardTemplate>
+  );
+}
+
+
+function MethodParameterList(props) {
+
+  const params = props.parameters;
+  if (!params || params.length === 0) {
+    return '';
+  }
+
+  const parameterItems = params.map(param => {
+    const type = param.type && param.type.names[0] ;
+    const formattedType = type && (<span><code>{type}</code> – </span>);
+    return (
+      <li>
+        {param.name}: {formattedType}{param.description}
+      </li>
+    );
+  });
+
+  return (
+    <p>
+      <div class="apiLabel">Parameters:</div>
+      <ul>
+        {parameterItems}
+      </ul>
+    </p>
+  );
+}
+
+
+function PropertyCard(props) {
+
+  const heading = (
     <span>
-      {api.name}
+      {props.name}
       <span class="apiMemberType"> property</span>
     </span>
+  );
+
+  const defaultValue = props.defaultvalue && (
+    <p>
+      <span class="apiLabel">Default:</span> <code>{props.defaultvalue}</code>
+    </p>
+  );
+
+  const type = props.type && props.type.names && props.type.names[0];
+  const formattedType = type && (<p>
+    <span class="apiLabel">Type:</span> <code>{type}</code>
+  </p>);
+
+  return (
+    <CardTemplate
+      description={props.description}
+      heading={heading}
+      name={props.name}
+      >
+      {formattedType}
+      {defaultValue}
+    </CardTemplate>
   );
 }

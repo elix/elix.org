@@ -353,6 +353,10 @@ footer {
   color: #888;
 }
 
+.apiLabel {
+  font-weight: bold;
+}
+
 
 /*
  * Demos
