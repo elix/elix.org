@@ -53,6 +53,7 @@ function EventCard(props) {
       description={props.description}
       heading={heading}
       name={props.name}
+      originalmemberof={props.originalmemberof}
       >
     </CardTemplate>
   );
@@ -92,6 +93,7 @@ function MethodCard(props) {
       description={props.description}
       heading={heading}
       name={props.name}
+      originalmemberof={props.originalmemberof}
       >
       {returns}
       <MethodParameterList parameters={props.params}/>
@@ -153,6 +155,7 @@ function PropertyCard(props) {
       description={props.description}
       heading={heading}
       name={props.name}
+      originalmemberof={props.originalmemberof}
       >
       {formattedType}
       {defaultValue}
