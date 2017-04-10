@@ -91,7 +91,7 @@ function methodHeading(api) {
   // }
 
   // Build the parameter list.
-  const params = api.params;
+  const params = api.params || [];
   const parameterList = params.map((param, index) =>
     // The conditionalized code handles comma placements in the string.
     `${param.name}${ (index+1) < params.length ? ', ' : '' }`
