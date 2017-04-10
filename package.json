@@ -13,7 +13,7 @@
     "babel-plugin-transform-react-jsx": "^6.23.0",
     "compression": "^1.6.2",
     "del": "^2.2.2",
-    "elix": "JanMiksovsky/elix#tabs",
+    "elix": "elix/elix#master",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.4",
