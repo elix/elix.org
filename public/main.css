@@ -238,12 +238,11 @@ footer {
   color: white;
   display: inline-block;
   font-size: 14px;
-  height: 300px;
+  height: 280px;
   margin-bottom: 10px;
-  margin-right: 10px;
   text-decoration: none;
   vertical-align: top;
-  width: 215px;
+  width: 100%;
 }
 
 .componentCard:hover {
@@ -251,13 +250,19 @@ footer {
   transform: scale(1.01);
 }
 
-.cardPreview {
+.cardPreviewContainer {
+  align-items: center;
   background: white;
-  border: 1px solid;
-  border-left-color: #ccc;
-  border-right-color: #ccc;
-  height: 165px;
+  display: flex;
+  height: 162px;
+  justify-content: center;
   margin-top: 7px;
+  padding: 7px;
+}
+
+.cardPreview {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .cardDetails {
@@ -424,5 +429,9 @@ footer {
  * Desktop
  */
 
-@media (min-width: 800px) {
+@media (min-width: 600px) {
+  .componentCard {
+    margin-right: 10px;
+    width: 215px;
+  }
 }

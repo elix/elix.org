@@ -11,7 +11,9 @@ export default class ComponentCard extends Component {
     const className = `componentCard cardColor${color}`;
     return (
       <a class={className} href={`/documentation/${props.name}`}>
-        <div class="cardPreview"></div>
+        <div class="cardPreviewContainer">
+          <img class="cardPreview" src={`/static/previews/${props.name}.png`}/>
+        </div>
         <div class="cardDetails">
           <div class="cardName">{props.name}</div>
           <div>{props.children}</div>
