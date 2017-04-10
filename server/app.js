@@ -13,7 +13,9 @@ const renderReactRoute = require('./renderReactRoute');
 // Tell Express to serve up static content.
 app.use('/static', express.static(path.join(__dirname, '../public')));
 app.use('/elix', express.static(path.join(__dirname, '../node_modules/elix')));
- 
+app.use('/demos', express.static(path.join(__dirname, '../node_modules/elix/demos')));
+app.use('/build', express.static(path.join(__dirname, '../node_modules/elix/build')));
+
 //
 // Redirect http to https under Heroku
 //
