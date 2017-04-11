@@ -10,6 +10,16 @@ elements. Like all mixins, a wrapper accepts a class and returns a new class. In
 the case of a wrapper, it returns a new class whose template incorporates the
 base class' template.
 
+<div class="pageNavigation">
+  <h2>Wrappers</h2>
+  <ul>
+    <li><a href="TabStripWrapper">TabStripWrapper</a></li>
+  </ul>
+</div>
+
+
+## Example
+
 As an example, [TabStripWrapper](TabStripWrapper) adds a [TabStrip](TabStrip) to
 a base element's template and wires their selection states together. Suppose
 we want to add tabs to a simple single-selection component. The component uses

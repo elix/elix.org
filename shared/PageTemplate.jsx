@@ -15,8 +15,8 @@ export default class PageTemplate extends Component {
         <Header headerTexture={props.headerTexture}/>
         <div class="mainContent contentContainer">
           <div class="leftGutter sideNavigation">
-            <h1>&nbsp;</h1>
-            <div class="navigationContainer">
+            <h1 class="desktopOnly">&nbsp;</h1>
+            <div class="navigationContainer desktopOnly">
               {props.sideNavigation}
             </div>
           </div>

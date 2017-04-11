@@ -2,7 +2,6 @@ import { Component, h } from 'preact'; // jshint ignore:line
 import DocumentationPage from './DocumentationPage';
 import DocumentationSection from './DocumentationSection';
 import expandDemos from './expandDemos';
-import Markdown from './Markdown';
 import marked from 'marked';
 
 

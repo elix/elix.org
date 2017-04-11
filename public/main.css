@@ -70,6 +70,7 @@ code {
   background: linear-gradient(to right, black 60%, rgba(255,255,255,0) 90%);
   background-clip: text;
   -webkit-background-clip: text;
+  display: none; /* For now, not visible on mobile */
   font-size: 13px;
   overflow: hidden;
   padding: 8px 24px;
@@ -131,12 +132,7 @@ code {
   display: flex;
 }
 
-.leftGutter {
-  flex: 1;
-  max-width: 300px;
-  min-width: 200px;
-}
-
+.leftGutter,
 .rightGutter {
   min-width: 30px;
 }
@@ -161,6 +157,7 @@ article {
 
 header {
   display: flex;
+  flex-direction: column;
   font-size: 15px;
   padding: 20px 0;
 }
@@ -173,8 +170,6 @@ header {
 .headerLinks {
   flex: 1;
   font-family: "Century Gothic", Helvetica, Arial, sans-serif;
-  text-align: right;
-  white-space: nowrap;
 }
 
 .headerLinks a {
@@ -323,7 +318,7 @@ footer {
 }
 
 .apiSection {
-  background: #ececee;
+  /*background: #ececee;*/
 }
 
 .apiBackground {
@@ -340,7 +335,7 @@ footer {
   background: white;
   border-top: 7px solid #869cbe;
   margin-bottom: 1em;
-  padding: 1em;
+  padding: 1em 0;
 }
 
 .apiCard > :first-child {
@@ -442,8 +437,33 @@ footer {
  */
 
 @media (min-width: 600px) {
+
+  .leftGutter {
+    flex: 1;
+    max-width: 300px;
+    min-width: 200px;
+  }
+
+  .desktopOnly {
+    display: block;
+  }
+
+  header {
+    flex-direction: row;
+  }
+
+  .headerLinks {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .pageNavigation {
+    display: none;
+  }
+
   .componentCard {
     margin-right: 10px;
     width: 215px;
   }
+
 }
