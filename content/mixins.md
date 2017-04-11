@@ -29,9 +29,8 @@ target object's prototype, or generating property/method wrappers to broker name
 mixin property/method invocations. Those solutions can create brittle solutions
 which are hard to debug, maintain, or extend.
 
-In contrast, this proposal calls for functional mixins to extend the JavaScript
-prototype chain. This has the immediate benefit of leveraging a standard,
-performant, and well-documented feature of the JavaScript language.
+In contrast, functional mixins extend the JavaScript prototype chain: a
+standard, performant, and well-documented feature of the JavaScript language.
 Additional benefits:
 
 1. Mixin effects on the prototype chain is deterministically established by the
@@ -69,7 +68,7 @@ The React community promotes the use of
 instead of classic mixins. Functional mixins, as described here, share at least
 one key characteristic with React's higher-order components: both use functions
 that accept a class and return a new class. In React's case, the new class
-_wraps_ an instance of the original class. In this proposal, the new class
+_wraps_ an instance of the original class. In a functional mixin, the new class
 _extends_ the original class. In both cases, the function allows more developer
 control over what is happening, and the function's effects are made more readily
 apparent to someone reading the code.
