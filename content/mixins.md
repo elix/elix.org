@@ -1,9 +1,9 @@
 # Mixins
 
-Elix components use functional mixins as a standard way to share aspects of
-behavior and public APIs across our components. Such mixins take the form of a
-plain JavaScript function that accepts a class argument and returns an extended
-class adding the mixin's functionality:
+Elix elements use functional mixins as a standard way to share aspects of
+behavior and public APIs. Such mixins take the form of a plain JavaScript
+function that accepts a class argument and returns an extended class adding the
+mixin's functionality:
 
     const GreetMixin = (base) => class Greet extends base {
       // Mixin defines properties and methods here.
@@ -397,6 +397,12 @@ latest value will be returned. All other work of the mixin should be done
         // Do any other mixin work here.
       }
     };
+
+
+# Wrapper mixins
+
+Elix includes functional mixins called [wrappers](wrappers) that add elements to
+a base class' template. See that area for details.
 
 
 # Performance

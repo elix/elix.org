@@ -179,11 +179,14 @@ export default class HomePage extends Component {
             </li>
             <li>
               <strong>Open process.</strong>&nbsp;
-              The process that drives the project
-              is as important to use as the code artifacts. We strive to
-              incorporate feedback from a general web audience, while at the
-              same time imposing just enough structure to keep the project
-              moving forward at a consistent pace in a consistent direction.
+              The process behind Elix is as important to us as the code
+              artifacts. We strive to incorporate feedback from a general web
+              audience, while at the same time imposing just enough structure to
+              keep the project moving forward at a consistent pace in a
+              consistent direction. To that end, all significant changes to the
+              project are proposed and tracked through Request for Comments
+              (RFC) documents tracked in
+              the <a href="https://github.com/elix/rfcs">Elix RFC</a> repository.
             </li>
           </ul>
         </section>
