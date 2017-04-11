@@ -14,7 +14,15 @@ export default function(markdown, readSiteFile) {
   .then(demos => {
     return markdown.replace(demoLinkRegex, (match, demoPath, text) => {
       const demo = demos.shift();
-      return `<div class="demoContainer">${demo}<div class="demoCaption">${text}</div></div>`;
+      return `
+        <div class="demoContainer">
+          ${demo}
+          <div class="demoCaption">
+            Demo: ${text}
+            <a class="demoLink" href="${demoPath}" target="_blank">⇒</a>
+          </div>
+        </div>
+      `;
     });
   });
 }

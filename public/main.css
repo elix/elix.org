@@ -385,6 +385,18 @@ footer {
   margin-top: 0.5em;
 }
 
+.demoLink {
+  border: 1px solid transparent;
+  color: inherit;
+  font-style: normal;
+  text-decoration: none;
+}
+.demoLink:hover,
+.demoLink:focus {
+  background: lightgray;
+  border-color: gray;
+}
+
 .demo,
 .demo button,
 .demo input {
