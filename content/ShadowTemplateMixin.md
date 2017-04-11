@@ -32,6 +32,9 @@ The mixin does the following:
 * If the ShadyCSS polyfill is loaded, in the component's `connectedCallback`,
   the mixin invokes ShadyCSS to apply styles to the new component instance.
 
+All Elix [elements](elements) use `ShadowTemplateMixin` to populate their
+Shadow DOM subtree with template elements.
+
 
 ## The template property
 

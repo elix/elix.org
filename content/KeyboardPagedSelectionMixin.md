@@ -1,7 +1,8 @@
 # KeyboardPagedSelectionMixin
 
 This mixin supplies standard behavior for the Page Up and Page Down keys,
-mapping those to selection operations.
+mapping those to selection operations. The following [ListBox](ListBox) shows
+the mixin in use:
 
 [A list box that supports Page Up and Page Down](/demos/listBox.html)
 

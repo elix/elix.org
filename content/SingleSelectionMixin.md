@@ -42,11 +42,12 @@ a value (e.g., as the target of an action, or in configuring something), or
 as a navigation construct (where only one page/mode is visible at a time).
 Examples:
 
-* List boxes
+* List boxes such as [ListBox](ListBox).
 * Dropdown lists and combo boxes
 * Carousels
 * Slideshows
-* Tab panels (including top-level navigation toolbars that behave like tabs)
+* Tab UIs (including top-level navigation toolbars that behave like tabs)
+  such as [Tabs](Tabs) and [LabeledTabs](LabeledTabs).
 
 
 # The `items` collection

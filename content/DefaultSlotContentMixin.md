@@ -38,7 +38,7 @@ class CountingElement extends DefaultSlotContentMixin(HTMLElement) {
 
 To receive `contentChanged` notification, this mixin expects a component to
 invoke a method called
-[symbols.symbols.shadowCreated](Symbols#symbols.shadowCreated) after the
+[symbols.shadowCreated](Symbols#shadowCreated) after the
 component's shadow root has been created and populated. This allows the mixin to
 inspect the shadow subtree for a default `slot` element and listen to its
 `slotchange` event. A console warning is emitted if no such slot is found.
