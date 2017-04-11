@@ -32,7 +32,7 @@
   "scripts": {
     "build": "webpack",
     "buildDocs": "node server/buildDocs.js",
-    "postinstall": "gulp buildoninstall; webpack; node server/buildDocs.js",
+    "postinstall": "gulp buildelix; webpack; node server/buildDocs.js",
     "start": "node server/app.js",
     "watch": "webpack --watch"
   },
