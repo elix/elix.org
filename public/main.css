@@ -21,7 +21,7 @@ h1 {
   color: #72413c;
   font-family: "Century Gothic", Helvetica, Arial, sans-serif;
   font-weight: normal;
-  font-size: 48px;
+  font-size: 32px;
   margin: 1.5em 0 0.5em 0;
 }
 
@@ -34,7 +34,7 @@ h2 {
 
 h3 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 26px;
+  font-size: 18px;
   font-weight: normal;
 }
 
@@ -139,9 +139,9 @@ code {
 
 header,
 article {
+  flex: 1;
   max-width: 900px;
-  position: relative;
-  width: 100%;
+  min-width: 0;
 }
 
 
@@ -437,6 +437,16 @@ footer {
  */
 
 @media (min-width: 600px) {
+
+  h1 {
+    font-size: 48px;
+  }
+  h2 {
+    font-size: 36px;
+  }
+  h3 {
+    font-size: 24px;
+  }
 
   .leftGutter {
     flex: 1;
