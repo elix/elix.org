@@ -10,6 +10,7 @@ export default class APICard extends Component {
   render(props) {
     // The API member kind (event, method, etc.) determines the card type.
     const cardForKind = {
+      'constant': ConstantCard,
       'function': MethodCard,
       'event': EventCard,
       'member': PropertyCard
@@ -25,9 +26,28 @@ export default class APICard extends Component {
 // Template shared by all API card types.
 function CardTemplate(props) {
 
+  const memberof = props.memberof;
   const originalmemberof = props.originalmemberof;
-  const definedBy = originalmemberof &&
-    (<p>Defined by <a href={originalmemberof}>{originalmemberof}</a></p>);
+  const inheritedfrom = props.inheritedfrom;
+  
+  let definedBy = null;
+  
+  if (originalmemberof 
+      && originalmemberof !== memberof 
+      && inheritedfrom 
+      && inheritedfrom !== originalmemberof 
+      && inheritedfrom !== memberof) {
+    definedBy = (
+      <p>
+        Defined by <a href={originalmemberof}>{originalmemberof}</a> inherited from <a href={inheritedfrom}>{inheritedfrom}</a>
+      </p>);
+  }
+  else if (originalmemberof && inheritedfrom !== memberof) {
+    definedBy = (<p>Inherited from <a href={originalmemberof}>{originalmemberof}</a></p>);
+  }
+  else if (originalmemberof) {
+    definedBy = (<p>Defined by <a href={originalmemberof}>{originalmemberof}</a></p>);
+  }
 
   return (
     <div class="apiCard">
@@ -53,7 +73,9 @@ function EventCard(props) {
       description={props.description}
       heading={heading}
       name={props.name}
+      memberof={props.memberof}
       originalmemberof={props.originalmemberof}
+      inheritedfrom={props.inheritedfrom}
       >
     </CardTemplate>
   );
@@ -93,7 +115,9 @@ function MethodCard(props) {
       description={props.description}
       heading={heading}
       name={props.name}
+      memberof={props.memberof}
       originalmemberof={props.originalmemberof}
+      inheritedfrom={props.inheritedfrom}
       >
       {returns}
       <MethodParameterList parameters={props.params}/>
@@ -155,7 +179,50 @@ function PropertyCard(props) {
       description={props.description}
       heading={heading}
       name={props.name}
+      memberof={props.memberof}
       originalmemberof={props.originalmemberof}
+      inheritedfrom={props.inheritedfrom}
+      >
+      {formattedType}
+      {defaultValue}
+    </CardTemplate>
+  );
+}
+
+//
+// ConstantCard is nearly identical to PropertyCard, but we
+// keep them separated for now should we want further distinction in
+// the display between the two. If we decide the two cards should look
+// near-identical, we can parameterize PropertyCard to handle both cases.
+//
+function ConstantCard(props) {
+
+  const heading = (
+    <span>
+      {props.name}
+      <span class="apiMemberType"> constant</span>
+    </span>
+  );
+
+  const defaultValue = props.defaultvalue && (
+    <p>
+      <span class="apiLabel">Default:</span> <code>{props.defaultvalue}</code>
+    </p>
+  );
+
+  const type = props.type && props.type.names && props.type.names[0];
+  const formattedType = type && (<p>
+    <span class="apiLabel">Type:</span> <code>{type}</code>
+  </p>);
+
+  return (
+    <CardTemplate
+      description={props.description}
+      heading={heading}
+      name={props.name}
+      memberof={props.memberof}
+      originalmemberof={props.originalmemberof}
+      inheritedfrom={props.inheritedfrom}
       >
       {formattedType}
       {defaultValue}

@@ -15,6 +15,7 @@
     "del": "^2.2.2",
     "elix": "elix/elix#master",
     "express": "^4.14.0",
+    "fs-extra": "^2.1.2",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.4",
     "gulp-rename": "^1.2.2",
