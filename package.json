@@ -16,10 +16,6 @@
     "elix": "elix/elix#master",
     "express": "^4.14.0",
     "fs-extra": "^2.1.2",
-    "gulp": "^3.9.1",
-    "gulp-jshint": "^2.0.4",
-    "gulp-rename": "^1.2.2",
-    "gulp-util": "^3.0.8",
     "jsdoc-to-markdown": "1.3.3",
     "jshint": "^2.9.4",
     "marked": "^0.3.6",
@@ -33,7 +29,7 @@
   "scripts": {
     "build": "webpack",
     "buildDocs": "node server/buildDocs.js",
-    "postinstall": "gulp buildelix; webpack; node server/buildDocs.js",
+    "postinstall": "node server/buildElix.js; webpack; node server/buildDocs.js",
     "start": "node server/app.js",
     "watch": "webpack --watch"
   },
