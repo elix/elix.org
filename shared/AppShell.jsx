@@ -18,7 +18,7 @@ export default class AppShell extends Component {
           <title>{titleBar}</title>
           <script src="/elix/demos/node_modules/webcomponentsjs/webcomponents-lite.js"></script>
           <script src="/elix/demos/node_modules/custom-elements/src/native-shim.js"></script>
-          <script src="/elix/build/demos.js"></script>
+          <script src="/elix/build/demos.min.js"></script>
           <link rel="shortcut icon" href="/static/images/favicon.png"/>
           <link rel="stylesheet" href="/static/main.css"/>
         </head>
