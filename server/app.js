@@ -85,10 +85,7 @@ function logException(exception) {
 }
 
 
-//
-// Start the server
-//
-// See what app version we're running.
+// Cache the app's version and build for display in the version page
 version.getVersionInfo()
 .then(versionInfo => {
   // Store version info for use in constructing responses.
@@ -97,8 +94,11 @@ version.getVersionInfo()
   return versionInfo;
 })
 .then(versionInfo => {
+  //
+  // Start the server
+  //
   app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
+    console.log(`Server listening on port ${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
   });  
 });
 
