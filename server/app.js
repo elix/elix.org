@@ -6,6 +6,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+const version = require('./version.js');
 
 const renderReactRoute = require('./renderReactRoute');
 
@@ -84,9 +85,20 @@ function logException(exception) {
 }
 
 
-//
-// Start the server
-//
-app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
+// Cache the app's version and build for display in the version page
+version.getVersionInfo()
+.then(versionInfo => {
+  // Store version info for use in constructing responses.
+  app.locals.build = versionInfo.build;
+  app.locals.version = versionInfo.version;
+  return versionInfo;
+})
+.then(versionInfo => {
+  //
+  // Start the server
+  //
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
+  });  
 });
+

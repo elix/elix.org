@@ -2,6 +2,7 @@ import ComponentPage from './ComponentPage';
 import ErrorPage from './ErrorPage';
 import HomePage from './HomePage';
 import ContentPage from './ContentPage';
+import VersionPage from './VersionPage';
 
 
 /**
@@ -15,5 +16,6 @@ export default {
   '/documentation/wrappers': ContentPage,
   '/documentation/:name': ComponentPage,
   '/error': ErrorPage,
+  '/version': VersionPage,
   '/': HomePage
 };

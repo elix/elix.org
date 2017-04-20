@@ -29,7 +29,7 @@
   "scripts": {
     "build": "webpack",
     "buildDocs": "node server/buildDocs.js",
-    "postinstall": "node server/buildElix.js; webpack; node server/buildDocs.js",
+    "postinstall": "node server/buildElix.js; webpack; node server/buildDocs.js; node server/buildVersion.js",
     "start": "node server/app.js",
     "watch": "webpack --watch"
   },
