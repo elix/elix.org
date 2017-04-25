@@ -12,15 +12,16 @@ const renderReactRoute = require('./renderReactRoute');
 
 // Cache-Control maxage values expressed in seconds and milliseconds
 // Set to 10 minutes
-const cacheTime = 60 * 10;
-const cacheTimeMillis = cacheTime * 1000;
+const cacheMinutes = 10;
+const cacheSeconds = 60 * cacheMinutes;
+const cacheMilliseconds = cacheSeconds * 1000;
 
 
 // Tell Express to serve up static content.
-app.use('/static', express.static(path.join(__dirname, '../public'), {maxAge: `${cacheTimeMillis}`}));
-app.use('/elix', express.static(path.join(__dirname, '../node_modules/elix'), {maxAge: `${cacheTimeMillis}`}));
-app.use('/demos', express.static(path.join(__dirname, '../node_modules/elix/demos'), {maxAge: `${cacheTimeMillis}`}));
-app.use('/build', express.static(path.join(__dirname, '../node_modules/elix/build'), {maxAge: `${cacheTimeMillis}`}));
+app.use('/static', express.static(path.join(__dirname, '../public'), {maxAge: `${cacheMilliseconds}`}));
+app.use('/elix', express.static(path.join(__dirname, '../node_modules/elix'), {maxAge: `${cacheMilliseconds}`}));
+app.use('/demos', express.static(path.join(__dirname, '../node_modules/elix/demos'), {maxAge: `${cacheMilliseconds}`}));
+app.use('/build', express.static(path.join(__dirname, '../node_modules/elix/build'), {maxAge: `${cacheMilliseconds}`}));
 
 //
 // Redirect http to https under Heroku
@@ -53,7 +54,7 @@ app.get('*', (request, response, next) => {
     if (html) {
       response.set({
         'Content-Type': 'text/html',
-        'Cache-Control' : `public, max-age=${cacheTime}`
+        'Cache-Control' : `public, max-age=${cacheSeconds}`
       });
       response.send(html);
     } else {
