@@ -10,12 +10,17 @@ const version = require('./version.js');
 
 const renderReactRoute = require('./renderReactRoute');
 
+// Cache-Control maxage values expressed in seconds and milliseconds
+// Set to 10 minutes
+const cacheTime = 60 * 10;
+const cacheTimeMillis = cacheTime * 1000;
+
 
 // Tell Express to serve up static content.
-app.use('/static', express.static(path.join(__dirname, '../public')));
-app.use('/elix', express.static(path.join(__dirname, '../node_modules/elix')));
-app.use('/demos', express.static(path.join(__dirname, '../node_modules/elix/demos')));
-app.use('/build', express.static(path.join(__dirname, '../node_modules/elix/build')));
+app.use('/static', express.static(path.join(__dirname, '../public'), {maxAge: `${cacheTimeMillis}`}));
+app.use('/elix', express.static(path.join(__dirname, '../node_modules/elix'), {maxAge: `${cacheTimeMillis}`}));
+app.use('/demos', express.static(path.join(__dirname, '../node_modules/elix/demos'), {maxAge: `${cacheTimeMillis}`}));
+app.use('/build', express.static(path.join(__dirname, '../node_modules/elix/build'), {maxAge: `${cacheTimeMillis}`}));
 
 //
 // Redirect http to https under Heroku
@@ -32,6 +37,8 @@ app.get('*', (request, response, next) => {
 // General route handler for pages that can be rendered by React components.
 //
 app.get('*', (request, response, next) => {
+  
+  response.set({'Cache-Control': `maxage=${cacheTime}`});
 
   let renderPromise;
   try {
