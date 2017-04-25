@@ -38,8 +38,6 @@ app.get('*', (request, response, next) => {
 //
 app.get('*', (request, response, next) => {
   
-  response.set({'Cache-Control': `maxage=${cacheTime}`});
-
   let renderPromise;
   try {
     renderPromise = renderReactRoute(request);
@@ -54,7 +52,8 @@ app.get('*', (request, response, next) => {
   renderPromise.then(html => {
     if (html) {
       response.set({
-        'Content-Type': 'text/html'
+        'Content-Type': 'text/html',
+        'Cache-Control' : `public, max-age=${cacheTime}`
       });
       response.send(html);
     } else {
