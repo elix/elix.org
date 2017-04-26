@@ -186,9 +186,6 @@ function analyzeAndUpdateExtendedJson(docsListItem) {
   let json = extendedDocumentationMap[docsListItem.name];
   let itemName = json[0].name;
   
-  json[0].mixinUsedBy = [];
-  json[0].classInheritedBy = [];
-
   docsList.forEach(docsListItem => {
     // Don't process the item itself
     if (docsListItem.name === itemName) {
@@ -214,7 +211,11 @@ function updateMixinUsedBy(json, objectName) {
   if (searchItem[0].mixes 
       && searchItem[0].mixes.length > 0 
       && searchItem[0].mixes.includes(name)) {
-        
+    
+    if (json[0].mixinUsedBy === undefined) {
+      json[0].mixinUsedBy = [];
+    }
+    
     json[0].mixinUsedBy.push(objectName);
   }    
 }
@@ -231,7 +232,11 @@ function updateClassInheritedBy(json, objectName) {
   if (searchItem[0].inheritance 
       && searchItem[0].inheritance.length > 0 
       && searchItem[0].inheritance.includes(name)) {
-        
+    
+    if (json[0].classInheritedBy === undefined) {
+      json[0].classInheritedBy = [];
+    }    
+    
     json[0].classInheritedBy.push(objectName);
   }    
 }
@@ -315,7 +320,9 @@ function mergeExtensionDocs(componentJson) {
   // we choose to create a new field so we don't tamper with augment's original
   // intention.
   //
-  componentJson[0].inheritance = augmentsList;
+  if (augmentsList.length > 0) {
+    componentJson[0].inheritance = augmentsList;
+  }
 
   //
   // We update the object's mixes field to include those mixins contributed
@@ -410,7 +417,7 @@ function mergeExtensionIntoBag(extensionName, componentJson, hostId) {
     // of mixins, and then map the inheritedfrom field from the root item's
     // mixinOrigins array.
     //
-    if (componentJson[0].inheritance.indexOf(originalmemberof) >= 0) {
+    if (componentJson[0].inheritance && componentJson[0].inheritance.indexOf(originalmemberof) >= 0) {
       extensionJson[i].inheritedfrom = originalmemberof;
     }
     else if (extensionJson[i].originalmemberof !== extensionJson[i].memberof) {

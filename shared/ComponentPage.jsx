@@ -88,7 +88,7 @@ export default class ComponentPage extends Component {
       const mixinsJSX = mixins.map((mixin, index) => (
         <span>
           { mixins.length > 2 && index > 0 && ', ' }
-          { mixins.length > 1 && index === mixins.length -1 && 'and '}
+          { mixins.length > 1 && index === mixins.length -1 && ' and '}
           <a href={mixin}>{mixin}</a>
         </span>
       ));
@@ -98,11 +98,72 @@ export default class ComponentPage extends Component {
         </p>
       );
     }
+    
+    //
+    // "UsedBy" section
+    //
+    let mixinUsedByJSX;
+    const usedBy = apiHeader.mixinUsedBy;
+    if (usedBy) {
+      const usedByJSX = usedBy.map((item, index) => (
+        <span>
+          { usedBy.length > 2 && index > 0 && ', ' }
+          { usedBy.length > 1 && index === usedBy.length -1 && ' and '}
+          <a href={item}>{item}</a>
+        </span>
+      ));
+      mixinUsedByJSX = (
+        <p>
+          {apiHeader.name} is used by {usedByJSX}.
+        </p>
+      );
+    }
+    
+    //
+    // "InheritsFrom" section
+    //
+    let inheritsFromJSX;
+    const inheritance = apiHeader.inheritance;
+    if (inheritance) {
+      const inheritsJSX = (
+        <span>
+          <a href={inheritance[0]}>{inheritance[0]}</a>
+        </span>
+      );
+      inheritsFromJSX = (
+        <p>
+          {apiHeader.name} inherits from {inheritsJSX}.
+        </p>
+      );
+    }
+    
+    //
+    // "InheritedBy" section
+    //
+    let classInheritedByJSX;
+    const inheritedBy = apiHeader.classInheritedBy;
+    if (inheritedBy) {
+      const inheritedJSX = inheritedBy.map((item, index) => (
+        <span>
+          { inheritedBy.length > 2 && index > 0 && ', ' }
+          { inheritedBy.length > 1 && index === inheritedBy.length -1 && ' and '}
+          <a href={item}>{item}</a>
+        </span>
+      ));
+      classInheritedByJSX = (
+        <p>
+          {apiHeader.name} is inherited by {inheritedJSX}.
+        </p>
+      );
+    }
 
     return (
       <DocumentationPage request={props.request}>
         {overview}
         {mixesJSX}
+        {mixinUsedByJSX}
+        {inheritsFromJSX}
+        {classInheritedByJSX}
         <DocumentationSection documentation={props.api}/>
       </DocumentationPage>
     );
