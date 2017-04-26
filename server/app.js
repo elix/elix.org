@@ -98,7 +98,6 @@ version.getVersionInfo()
   // Start the server
   //
   app.listen(port, () => {
-    console.log(`Server listening on port ${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
-  });  
+    console.log(`Server listening on http://localhost:${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
+  });
 });
-
