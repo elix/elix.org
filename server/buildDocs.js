@@ -177,6 +177,66 @@ function buildAndMapExtendedJson(docsListItem) {
 }
 
 //
+// Once the extendedDocumentationMap is fully constructed, it can
+// be analyzed for reverse relationships such as classInheritedBy and
+// mixinUsedBy. Anything that needs to be done once the map is completed
+// is done here.
+//
+function analyzeAndUpdateExtendedJson(docsListItem) {
+  let json = extendedDocumentationMap[docsListItem.name];
+  let itemName = json[0].name;
+  
+  json[0].mixinUsedBy = [];
+  json[0].classInheritedBy = [];
+
+  docsList.forEach(docsListItem => {
+    // Don't process the item itself
+    if (docsListItem.name === itemName) {
+      return;
+    }
+    
+    updateMixinUsedBy(json, docsListItem.name);
+    updateClassInheritedBy(json, docsListItem.name);
+  });
+
+  return Promise.resolve();
+}
+
+//
+// Updates the extended json by checking another extended json object
+// in the extendedDocumentationMap to see if this object is included
+// as a mixin.
+//
+function updateMixinUsedBy(json, objectName) {
+  const name = json[0].name;
+  
+  const searchItem = extendedDocumentationMap[objectName];
+  if (searchItem[0].mixes 
+      && searchItem[0].mixes.length > 0 
+      && searchItem[0].mixes.includes(name)) {
+        
+    json[0].mixinUsedBy.push(objectName);
+  }    
+}
+
+//
+// Updates the extended json by checking another extended json object
+// in the extendedDocumentationMap to see if this object is
+// inherited from the other object.
+//
+function updateClassInheritedBy(json, objectName) {
+  const name = json[0].name;
+  
+  const searchItem = extendedDocumentationMap[objectName];
+  if (searchItem[0].inheritance 
+      && searchItem[0].inheritance.length > 0 
+      && searchItem[0].inheritance.includes(name)) {
+        
+    json[0].classInheritedBy.push(objectName);
+  }    
+}
+
+//
 // Writes an extendedDocumentationMap item to disk
 //
 function writeExtendedJson(docsListItem) {
@@ -418,6 +478,9 @@ function buildDocs() {
   })
   .then(() => {
     return mapAndChain(docsList, buildAndMapExtendedJson);
+  })
+  .then(() => {
+    return mapAndChain(docsList, analyzeAndUpdateExtendedJson);
   })
   .then(() => {
     return mapAndChain(docsList, writeExtendedJson);
