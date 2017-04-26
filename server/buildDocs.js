@@ -38,6 +38,15 @@ let docsList;
 //
 let unextendedDocumentationMap = {};
 
+//
+// extendedDocumentationMap the resulting dictionary of jsDoc objects
+// with extended schema, and which get written to disk. We keep this
+// map in memory so we can do reverse-lookup sorts of analysis and extension,
+// such as "What objects use this mixin?" or "What objects inherit from
+// this class?".
+//
+let extendedDocumentationMap = {};
+
 function buildDocsList() {
   return mapAndChain(sourceDirs, buildDocsListForDirectory)
   .catch(error => {
@@ -122,12 +131,10 @@ function buildUnextendedJson(docItem) {
 // the extended documentation for objects having @extend and @mixes
 // attributes.
 //
-// buildAndWriteExtendedJson takes a single item from the docsList array
+// buildAndMapExtendedJson takes a single item from the docsList array
 // and builds the extended documentation for that item.
 //
-function buildAndWriteExtendedJson(docsListItem) {
-  const writeJsonPromise = promisify(fs.writeJson);
-  
+function buildAndMapExtendedJson(docsListItem) {
   // Make a copy of the unextended json so we don't corrupt the cache
   let srcJson = unextendedDocumentationMap[docsListItem.name];
   let componentJson = cloneJSON(srcJson);
@@ -160,11 +167,27 @@ function buildAndWriteExtendedJson(docsListItem) {
     return json;
   })
   .then((json) => {
-    console.log(`Writing ${docsListItem.dest}`);
-    writeJsonPromise(docsListItem.dest, json, {spaces: 2});
+    // Add the item to the extendedDocumentationMap
+    extendedDocumentationMap[json[0].name] = json;
+    return json;
   })
   .catch(error => {
-    console.error(`buildAndWriteExtendedJson: ${error}`);
+    console.error(`buildAndMapExtendedJson: ${error}`);
+  });
+}
+
+//
+// Writes an extendedDocumentationMap item to disk
+//
+function writeExtendedJson(docsListItem) {
+  const json = extendedDocumentationMap[docsListItem.name];
+  const dest = docsListItem.dest;
+  const writeJsonPromise = promisify(fs.writeJson);
+  
+  console.log(`Writing ${dest}`);
+  return writeJsonPromise(dest, json, {spaces: 2})
+  .catch(error => {
+    console.error(`writeExtendedJson: ${error}`);
   });
 }
 
@@ -394,7 +417,10 @@ function buildDocs() {
     return mapAndChain(docsList, buildUnextendedJson);
   })
   .then(() => {
-    return mapAndChain(docsList, buildAndWriteExtendedJson);
+    return mapAndChain(docsList, buildAndMapExtendedJson);
+  })
+  .then(() => {
+    return mapAndChain(docsList, writeExtendedJson);
   });
 }
 
