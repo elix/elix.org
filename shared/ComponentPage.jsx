@@ -134,7 +134,7 @@ export default class ComponentPage extends Component {
       ));
       inheritsFromJSX = (
         <p>
-          Inheritance: {inheritanceJSX}
+          Ancestry: {inheritanceJSX}
         </p>
       );
     }
@@ -154,7 +154,7 @@ export default class ComponentPage extends Component {
       ));
       classInheritedByJSX = (
         <p>
-          {apiHeader.name} is inherited by {inheritedJSX}.
+          {apiHeader.name} is extended by {inheritedJSX}.
         </p>
       );
     }
