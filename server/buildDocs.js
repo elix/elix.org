@@ -231,7 +231,7 @@ function updateClassInheritedBy(json, objectName) {
   const searchItem = extendedDocumentationMap[objectName];
   if (searchItem[0].inheritance 
       && searchItem[0].inheritance.length > 0 
-      && searchItem[0].inheritance.includes(name)) {
+      && searchItem[0].inheritance[0] === name) {
     
     if (json[0].classInheritedBy === undefined) {
       json[0].classInheritedBy = [];
@@ -264,6 +264,10 @@ function writeExtendedJson(docsListItem) {
 // This function is first called with the root item as the json parameter.
 // There's nothing asynchronous about this work; the function is used as
 // a utility and does not return a Promise.
+//
+// Note that due to the recursive calling, the json array field, inheritance,
+// will be constructed in an ordered manner with the 0th index holding the
+// immediate class parent, the 1st index holding the grandparent, etc.
 //
 function buildAugmentsListAndExtendMixinsArray(json, augmentsArray, mixinArray) {
   if (json[0].augments == null || json[0].augments === undefined) {
@@ -306,7 +310,8 @@ function mergeExtensionDocs(componentJson) {
   
   //
   // First, walk the inheritance list, adding to the root item's mixin array,
-  // and building an array of augments/extends items
+  // and building an array of augments/extends items in the order of
+  // ancestry.
   //
   
   let augmentsList = [];

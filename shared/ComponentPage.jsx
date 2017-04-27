@@ -123,20 +123,22 @@ export default class ComponentPage extends Component {
     // "InheritsFrom" section
     //
     let inheritsFromJSX;
-    const inheritance = apiHeader.inheritance;
-    if (inheritance) {
-      const inheritsJSX = (
+    if (apiHeader.inheritance) {
+      let inheritance = apiHeader.inheritance.reverse();
+      inheritance.push(apiHeader.name);
+      const inheritanceJSX = inheritance.map((item, index) => (
         <span>
-          <a href={inheritance[0]}>{inheritance[0]}</a>
+          { index > 0 && ' → '}
+          <a href={item}>{item}</a>
         </span>
-      );
+      ));
       inheritsFromJSX = (
         <p>
-          {apiHeader.name} inherits from {inheritsJSX}.
+          Inheritance: {inheritanceJSX}
         </p>
       );
     }
-    
+
     //
     // "InheritedBy" section
     //
@@ -162,8 +164,8 @@ export default class ComponentPage extends Component {
         {overview}
         {mixesJSX}
         {mixinUsedByJSX}
-        {inheritsFromJSX}
         {classInheritedByJSX}
+        {inheritsFromJSX}
         <DocumentationSection documentation={props.api}/>
       </DocumentationPage>
     );
