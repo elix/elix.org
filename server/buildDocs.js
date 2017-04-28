@@ -38,6 +38,15 @@ let docsList;
 //
 let unextendedDocumentationMap = {};
 
+//
+// extendedDocumentationMap the resulting dictionary of jsDoc objects
+// with extended schema, and which get written to disk. We keep this
+// map in memory so we can do reverse-lookup sorts of analysis and extension,
+// such as "What objects use this mixin?" or "What objects inherit from
+// this class?".
+//
+let extendedDocumentationMap = {};
+
 function buildDocsList() {
   return mapAndChain(sourceDirs, buildDocsListForDirectory)
   .catch(error => {
@@ -122,12 +131,10 @@ function buildUnextendedJson(docItem) {
 // the extended documentation for objects having @extend and @mixes
 // attributes.
 //
-// buildAndWriteExtendedJson takes a single item from the docsList array
+// buildAndMapExtendedJson takes a single item from the docsList array
 // and builds the extended documentation for that item.
 //
-function buildAndWriteExtendedJson(docsListItem) {
-  const writeJsonPromise = promisify(fs.writeJson);
-  
+function buildAndMapExtendedJson(docsListItem) {
   // Make a copy of the unextended json so we don't corrupt the cache
   let srcJson = unextendedDocumentationMap[docsListItem.name];
   let componentJson = cloneJSON(srcJson);
@@ -160,11 +167,92 @@ function buildAndWriteExtendedJson(docsListItem) {
     return json;
   })
   .then((json) => {
-    console.log(`Writing ${docsListItem.dest}`);
-    writeJsonPromise(docsListItem.dest, json, {spaces: 2});
+    // Add the item to the extendedDocumentationMap
+    extendedDocumentationMap[json[0].name] = json;
+    return json;
   })
   .catch(error => {
-    console.error(`buildAndWriteExtendedJson: ${error}`);
+    console.error(`buildAndMapExtendedJson: ${error}`);
+  });
+}
+
+//
+// Once the extendedDocumentationMap is fully constructed, it can
+// be analyzed for reverse relationships such as classInheritedBy and
+// mixinUsedBy. Anything that needs to be done once the map is completed
+// is done here.
+//
+function analyzeAndUpdateExtendedJson(docsListItem) {
+  let json = extendedDocumentationMap[docsListItem.name];
+  let itemName = json[0].name;
+  
+  docsList.forEach(docsListItem => {
+    // Don't process the item itself
+    if (docsListItem.name === itemName) {
+      return;
+    }
+    
+    updateMixinUsedBy(json, docsListItem.name);
+    updateClassInheritedBy(json, docsListItem.name);
+  });
+
+  return Promise.resolve();
+}
+
+//
+// Updates the extended json by checking another extended json object
+// in the extendedDocumentationMap to see if this object is included
+// as a mixin.
+//
+function updateMixinUsedBy(json, objectName) {
+  const name = json[0].name;
+  
+  const searchItem = extendedDocumentationMap[objectName];
+  if (searchItem[0].mixes 
+      && searchItem[0].mixes.length > 0 
+      && searchItem[0].mixes.includes(name)) {
+    
+    if (json[0].mixinUsedBy === undefined) {
+      json[0].mixinUsedBy = [];
+    }
+    
+    json[0].mixinUsedBy.push(objectName);
+  }    
+}
+
+//
+// Updates the extended json by checking another extended json object
+// in the extendedDocumentationMap to see if this object is
+// inherited from the other object.
+//
+function updateClassInheritedBy(json, objectName) {
+  const name = json[0].name;
+  
+  const searchItem = extendedDocumentationMap[objectName];
+  if (searchItem[0].inheritance 
+      && searchItem[0].inheritance.length > 0 
+      && searchItem[0].inheritance[0] === name) {
+    
+    if (json[0].classInheritedBy === undefined) {
+      json[0].classInheritedBy = [];
+    }    
+    
+    json[0].classInheritedBy.push(objectName);
+  }    
+}
+
+//
+// Writes an extendedDocumentationMap item to disk
+//
+function writeExtendedJson(docsListItem) {
+  const json = extendedDocumentationMap[docsListItem.name];
+  const dest = docsListItem.dest;
+  const writeJsonPromise = promisify(fs.writeJson);
+  
+  console.log(`Writing ${dest}`);
+  return writeJsonPromise(dest, json, {spaces: 2})
+  .catch(error => {
+    console.error(`writeExtendedJson: ${error}`);
   });
 }
 
@@ -176,6 +264,10 @@ function buildAndWriteExtendedJson(docsListItem) {
 // This function is first called with the root item as the json parameter.
 // There's nothing asynchronous about this work; the function is used as
 // a utility and does not return a Promise.
+//
+// Note that due to the recursive calling, the json array field, inheritance,
+// will be constructed in an ordered manner with the 0th index holding the
+// immediate class parent, the 1st index holding the grandparent, etc.
 //
 function buildAugmentsListAndExtendMixinsArray(json, augmentsArray, mixinArray) {
   if (json[0].augments == null || json[0].augments === undefined) {
@@ -218,7 +310,8 @@ function mergeExtensionDocs(componentJson) {
   
   //
   // First, walk the inheritance list, adding to the root item's mixin array,
-  // and building an array of augments/extends items
+  // and building an array of augments/extends items in the order of
+  // ancestry.
   //
   
   let augmentsList = [];
@@ -232,7 +325,9 @@ function mergeExtensionDocs(componentJson) {
   // we choose to create a new field so we don't tamper with augment's original
   // intention.
   //
-  componentJson[0].inheritance = augmentsList;
+  if (augmentsList.length > 0) {
+    componentJson[0].inheritance = augmentsList;
+  }
 
   //
   // We update the object's mixes field to include those mixins contributed
@@ -327,7 +422,7 @@ function mergeExtensionIntoBag(extensionName, componentJson, hostId) {
     // of mixins, and then map the inheritedfrom field from the root item's
     // mixinOrigins array.
     //
-    if (componentJson[0].inheritance.indexOf(originalmemberof) >= 0) {
+    if (componentJson[0].inheritance && componentJson[0].inheritance.indexOf(originalmemberof) >= 0) {
       extensionJson[i].inheritedfrom = originalmemberof;
     }
     else if (extensionJson[i].originalmemberof !== extensionJson[i].memberof) {
@@ -394,7 +489,13 @@ function buildDocs() {
     return mapAndChain(docsList, buildUnextendedJson);
   })
   .then(() => {
-    return mapAndChain(docsList, buildAndWriteExtendedJson);
+    return mapAndChain(docsList, buildAndMapExtendedJson);
+  })
+  .then(() => {
+    return mapAndChain(docsList, analyzeAndUpdateExtendedJson);
+  })
+  .then(() => {
+    return mapAndChain(docsList, writeExtendedJson);
   });
 }
 
