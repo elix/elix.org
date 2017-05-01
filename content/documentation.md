@@ -17,3 +17,12 @@ This section is organized into several areas:
 * [Helpers](/documentation/helpers): low-level functions used by the above, and
   also avaible for cases where you need to build your own solution.
 
+## Other resources
+
+More information and background about the Elix project can be found at the 
+following:
+
+* [The Web Platform Podcast: The Gold Standard Checklist for Web Components](http://thewebplatformpodcast.com/126-gold-standard-checklist-for-web-components)
+* [The Web Platform Podcast: Elix Project](http://thewebplatformpodcast.com/129-elix-project)
+* [Web Components Remote Conf: Getting the basics right with Jan Miksovsky](https://youtu.be/3Xq0IrFbZGg)
+* [Component Kitchen](https://component.kitchen)
