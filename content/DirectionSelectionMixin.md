@@ -31,6 +31,3 @@ other forms of interaction. E.g., a separate mixin to handle touch gestures only
 has to map a "swipe left" gesture to a direction method like `goRight` in order
 to patch into this chain. This saves the touch logic from having to know
 anything about selection.
-
-Examples of components using `DirectionSelectionMixin` include
-[ListBox](ListBox) and [TabStrip](TabStrip).

@@ -37,6 +37,3 @@ The mixin inspects a property called [symbols.orientation](symbols#orientation)
 to determine whether horizontal navigation, vertical navigation, or both are
 enabled. Valid values for that property are "horizontal", "vertical", or "both",
 respectively. The default value is "both".
-
-Examples of components using `KeyboardDirectionMixin` include [ListBox](ListBox)
-and [TabStrip](TabStrip).

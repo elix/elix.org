@@ -55,6 +55,3 @@ Example:
 If an implementation of `symbols.keydown` returns `true` — indicating that the
 event was handled — then `KeyboardMixin` invokes the event's `preventDefault`
 and `stopPropagation` methods to let the browser know the event was handled.
-
-Examples of components using `KeyboardMixin` include
-[ListBox](ListBox) and [TabStrip](TabStrip).

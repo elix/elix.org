@@ -79,93 +79,9 @@ export default class ComponentPage extends Component {
         </section>
       );
 
-    //
-    // "Mixes" section
-    //
-    let mixesJSX;
-    const mixins = apiHeader.mixes;
-    if (mixins) {
-      const mixinsJSX = mixins.map((mixin, index) => (
-        <span>
-          { mixins.length > 2 && index > 0 && ', ' }
-          { mixins.length > 1 && index === mixins.length -1 && ' and '}
-          <a href={mixin}>{mixin}</a>
-        </span>
-      ));
-      mixesJSX = (
-        <p>
-          This element uses {mixinsJSX}.
-        </p>
-      );
-    }
-    
-    //
-    // "UsedBy" section
-    //
-    let mixinUsedByJSX;
-    const usedBy = apiHeader.mixinUsedBy;
-    if (usedBy) {
-      const usedByJSX = usedBy.map((item, index) => (
-        <span>
-          { usedBy.length > 2 && index > 0 && ', ' }
-          { usedBy.length > 1 && index === usedBy.length -1 && ' and '}
-          <a href={item}>{item}</a>
-        </span>
-      ));
-      mixinUsedByJSX = (
-        <p>
-          {apiHeader.name} is used by {usedByJSX}.
-        </p>
-      );
-    }
-    
-    //
-    // "InheritsFrom" section
-    //
-    let inheritsFromJSX;
-    if (apiHeader.inheritance) {
-      let inheritance = apiHeader.inheritance.reverse();
-      inheritance.push(apiHeader.name);
-      const inheritanceJSX = inheritance.map((item, index) => (
-        <span>
-          { index > 0 && ' → '}
-          <a href={item}>{item}</a>
-        </span>
-      ));
-      inheritsFromJSX = (
-        <p>
-          Ancestry: {inheritanceJSX}
-        </p>
-      );
-    }
-
-    //
-    // "InheritedBy" section
-    //
-    let classInheritedByJSX;
-    const inheritedBy = apiHeader.classInheritedBy;
-    if (inheritedBy) {
-      const inheritedJSX = inheritedBy.map((item, index) => (
-        <span>
-          { inheritedBy.length > 2 && index > 0 && ', ' }
-          { inheritedBy.length > 1 && index === inheritedBy.length -1 && ' and '}
-          <a href={item}>{item}</a>
-        </span>
-      ));
-      classInheritedByJSX = (
-        <p>
-          {apiHeader.name} is extended by {inheritedJSX}.
-        </p>
-      );
-    }
-
     return (
       <DocumentationPage request={props.request}>
         {overview}
-        {mixesJSX}
-        {mixinUsedByJSX}
-        {classInheritedByJSX}
-        {inheritsFromJSX}
         <DocumentationSection documentation={props.api}/>
       </DocumentationPage>
     );
