@@ -41,6 +41,3 @@ prefix will be matched against.
 For performance, the mixin caches the extracted text of the items. This cache is
 invalidated whenever the component or its mixins invoke
 [symbols.itemsChanged](symbols#itemsChanged).
-
-An example of an element using `KeyboardPrefixSelectionMixin` is
-[ListBox](ListBox).
