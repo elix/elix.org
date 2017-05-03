@@ -1665,7 +1665,7 @@ ee-first@1.1.1:
 
 elix@elix/elix#master:
   version "0.9.0-pre"
-  resolved "https://codeload.github.com/elix/elix/tar.gz/b5174c7a712a92d876c2a242d72dc12c9cf987fb"
+  resolved "https://codeload.github.com/elix/elix/tar.gz/ea7f9260c30a2b12beeeb30aa468e67682e375d8"
   dependencies:
     babel-loader "^6.2.10"
     babel-preset-es2015 "^6.6.0"
