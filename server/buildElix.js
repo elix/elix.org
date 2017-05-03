@@ -8,8 +8,8 @@ const spawn = require('child_process').spawn;
 //
 function buildElix() {
   let cmd = spawn(
-    'node_modules/.bin/gulp', 
-    ['build'], 
+    'node', 
+    ['tasks/build.js'], 
     {cwd: 'node_modules/elix', stdio: 'inherit'});
     
   cmd.on('close', function(code) {
