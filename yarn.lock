@@ -1343,9 +1343,9 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-elix@robbear/elix#rb-dependencies:
+elix@elix/elix#master:
   version "0.9.0-pre"
-  resolved "https://codeload.github.com/robbear/elix/tar.gz/1251c0d345f6d7e1e49f06db4383dd933987d2fa"
+  resolved "https://codeload.github.com/elix/elix/tar.gz/f9ce6aadd46af94f1defc47d9e6cfa23ff0d58b5"
 
 elliptic@^6.0.0:
   version "6.4.0"
