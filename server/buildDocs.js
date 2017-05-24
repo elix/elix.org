@@ -184,17 +184,19 @@ function buildAndMapExtendedJson(docsListItem) {
 //
 function analyzeAndUpdateExtendedJson(docsListItem) {
   let json = extendedDocumentationMap[docsListItem.name];
-  let itemName = json[0].name;
-  
-  docsList.forEach(docsListItem => {
-    // Don't process the item itself
-    if (docsListItem.name === itemName) {
-      return;
-    }
+  if (json) {
+    let itemName = json[0].name;
     
-    updateMixinUsedBy(json, docsListItem.name);
-    updateClassInheritedBy(json, docsListItem.name);
-  });
+    docsList.forEach(docsListItem => {
+      // Don't process the item itself
+      if (docsListItem.name === itemName) {
+        return;
+      }
+      
+      updateMixinUsedBy(json, docsListItem.name);
+      updateClassInheritedBy(json, docsListItem.name);
+    });
+  }
 
   return Promise.resolve();
 }
@@ -208,7 +210,8 @@ function updateMixinUsedBy(json, objectName) {
   const name = json[0].name;
   
   const searchItem = extendedDocumentationMap[objectName];
-  if (searchItem[0].mixes 
+  if (searchItem
+      && searchItem[0].mixes 
       && searchItem[0].mixes.length > 0 
       && searchItem[0].mixes.includes(name)) {
     
@@ -229,7 +232,8 @@ function updateClassInheritedBy(json, objectName) {
   const name = json[0].name;
   
   const searchItem = extendedDocumentationMap[objectName];
-  if (searchItem[0].inheritance 
+  if (searchItem
+      && searchItem[0].inheritance 
       && searchItem[0].inheritance.length > 0 
       && searchItem[0].inheritance[0] === name) {
     

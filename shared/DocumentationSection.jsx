@@ -10,12 +10,13 @@ export default class DocumentationSection extends Component {
   render(props) {
     const json = props.documentation;
     const apiHeader = json[0];
-    let apiElements = [];
-
-    for (let i = 1; i < json.length; i++) {
-      let jsonItem = json[i];
-      apiElements.push(<APICard api={jsonItem}></APICard>);
-    }
+    
+    const apiElements = json.map(memberApi => {
+      // Only show members that are not anonymous and have a description.
+      return memberApi.memberof !== '<anonymous>' && memberApi.description ?
+        (<APICard api={memberApi}></APICard>) :
+        null ;
+    });
 
     //
     // "Mixes" section
