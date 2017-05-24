@@ -19,9 +19,6 @@ const cacheMilliseconds = cacheSeconds * 1000;
 
 // Tell Express to serve up static content.
 app.use('/static', express.static(path.join(__dirname, '../public'), {maxAge: `${cacheMilliseconds}`}));
-app.use('/elix', express.static(path.join(__dirname, '../node_modules/elix'), {maxAge: `${cacheMilliseconds}`}));
-app.use('/demos', express.static(path.join(__dirname, '../node_modules/elix/demos'), {maxAge: `${cacheMilliseconds}`}));
-app.use('/build', express.static(path.join(__dirname, '../node_modules/elix/build'), {maxAge: `${cacheMilliseconds}`}));
 
 //
 // Redirect http to https under Heroku
@@ -58,7 +55,7 @@ app.get('*', (request, response, next) => {
       });
       response.send(html);
     } else {
-      // We didn't have a React component for this route; shouldn't happen.
+      // We didn't have a React component for this route.
       next();
     }
   })
@@ -70,6 +67,10 @@ app.get('*', (request, response, next) => {
   });
 
 });
+
+// Serve remaining routes as static content out of the Elix project.
+// This is used to obtain demos and their associated files.
+app.use('/', express.static(path.join(__dirname, '../node_modules/elix'), {maxAge: `${cacheMilliseconds}`}));
 
 // Error handler.
 app.get('/error', (request, response, next) => {

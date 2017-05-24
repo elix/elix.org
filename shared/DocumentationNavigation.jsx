@@ -9,8 +9,8 @@ export default class DocumentationNavigation extends Component {
   render(props) {
 
     const elements = [
-      'LabeledTabs',
       'LabeledTabButton',
+      'LabeledTabs',
       'ListBox',
       'Modes',
       'Tabs',
