@@ -19,6 +19,7 @@
     "express": "^4.14.0",
     "fs-extra": "^2.1.2",
     "jsdoc-api": "^3.0.0",
+    "jsdoc-parse": "^3.0.0",
     "jshint": "^2.9.4",
     "marked": "^0.3.6",
     "node-fetch": "^1.6.3",

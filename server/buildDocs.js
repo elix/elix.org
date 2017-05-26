@@ -3,6 +3,7 @@
 
 const fs = require('fs-extra');
 const jsdoc = require('jsdoc-api');
+const jsdocParse = require('jsdoc-parse');
 const promisify = require('./promisify');
 
 const outputPath = './build/docs/';
@@ -91,6 +92,9 @@ function buildDocsListForDirectory(dirName) {
 function parseScriptToJSDocJSON(src) {
   return jsdoc.explain({
     files: src
+  })
+  .then(json => {
+    return jsdocParse(json);
   });
 }
 
@@ -227,21 +231,6 @@ function updateClassInheritedBy(json, objectName) {
     
     json[0].classInheritedBy.push(objectName);
   }    
-}
-
-//
-// BUGBUG - temporary: allows us to write unextended json for examination
-//
-function writeUnxtendedJson(docsListItem) {
-  const json = unextendedDocumentationMap[docsListItem.name];
-  const dest = docsListItem.dest;
-  const writeJsonPromise = promisify(fs.writeJson);
-  
-  console.log(`Writing ${dest}`);
-  return writeJsonPromise(dest, json, {spaces: 2})
-  .catch(error => {
-    console.error(`writeUnextendedJson: ${error}`);
-  });
 }
 
 //
@@ -391,6 +380,7 @@ function resolveOriginalMemberOf(omo) {
           omo = `${trial}Mixin`;
         }
         break;
+      case 2:
       case 3:
         omo = strings[1];
         break;
@@ -492,11 +482,6 @@ function buildDocs() {
     return mapAndChain(docsList, buildUnextendedJson);
   })
   .then(() => {
-    // BUGBUG: temporary
-    return mapAndChain(docsList, writeUnxtendedJson);
-  });
-  /* BUGBUG
-  .then(() => {
     return mapAndChain(docsList, buildAndMapExtendedJson);
   })
   .then(() => {
@@ -505,7 +490,7 @@ function buildDocs() {
   .then(() => {
     return mapAndChain(docsList, writeExtendedJson);
   });
-  */
+  
 }
 
 buildDocs();
