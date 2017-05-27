@@ -2,7 +2,8 @@
 'use strict';
 
 const fs = require('fs-extra');
-const jsDocParse = require('jsdoc-parse');
+const jsdoc = require('jsdoc-api');
+const jsdocParse = require('jsdoc-parse');
 const promisify = require('./promisify');
 
 const outputPath = './build/docs/';
@@ -86,27 +87,14 @@ function buildDocsListForDirectory(dirName) {
 }
 
 //
-// Uses jsdoc-parse to convert a .js file to jsDoc json
+// Uses jsdoc-api to convert a .js file to jsDoc json
 //
 function parseScriptToJSDocJSON(src) {
-  return new Promise((resolve, reject) => {
-    // Start by parsing the jsdoc into a stream which will contain
-    // the jsdoc represented in JSON
-    const stream = jsDocParse({src: src});
-
-    // Convert the stream to jsdoc JSON
-    let string = '';
-    stream.setEncoding('utf8');
-    stream.on('data', chunk => {
-      string += chunk;
-    })
-    .on('end', () => {
-      const json = JSON.parse(string);
-      resolve(json);
-    })
-    .on('error', err => {
-      reject(err);
-    });
+  return jsdoc.explain({
+    files: src
+  })
+  .then(json => {
+    return jsdocParse(json);
   });
 }
 
@@ -392,6 +380,7 @@ function resolveOriginalMemberOf(omo) {
           omo = `${trial}Mixin`;
         }
         break;
+      case 2:
       case 3:
         omo = strings[1];
         break;
@@ -501,6 +490,7 @@ function buildDocs() {
   .then(() => {
     return mapAndChain(docsList, writeExtendedJson);
   });
+  
 }
 
 buildDocs();
