@@ -1129,7 +1129,7 @@ ee-first@1.1.1:
 
 elix@elix/elix#master:
   version "1.0.0-dev.YYYYMMDD"
-  resolved "https://codeload.github.com/elix/elix/tar.gz/d4d8d9f815e04fe98940ce9f19fd4433cfbdb5c1"
+  resolved "https://codeload.github.com/elix/elix/tar.gz/ed1bb884f68698e9a5b99f80af4ac73758319418"
 
 elliptic@^6.0.0:
   version "6.4.0"
