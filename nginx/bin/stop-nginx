@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-nginx/bin/nginx -p . -c nginx/config/nginx.conf -s quit
