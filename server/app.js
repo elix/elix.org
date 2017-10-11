@@ -48,7 +48,7 @@ app.get('*', (request, response, next) => {
     if (html) {
       response.set({
         'Content-Type': 'text/html',
-        'Cache-Control' : `public, max-age=${cacheSeconds}`
+        'Cache-Control': 'no-cache'
       });
       response.send(html);
     } else {
@@ -100,9 +100,14 @@ version.getVersionInfo()
 })
 .then(versionInfo => {
   // Tell Express to serve up static content.
+  // If we're running against public/src on a local test, then set no max-age, 
+  // otherwise 365 days
   const logicalPath = `/static/${versionInfo.build}`;
   const filePath = `../public/${versionInfo.build}`;
-  app.use(logicalPath, express.static(path.join(__dirname, filePath), {maxAge: `${cacheMilliseconds}`}));
+  const staticCacheTime = versionInfo.build === 'src' ?
+          0 :
+          1000*60*60*24*365;
+  app.use(logicalPath, express.static(path.join(__dirname, filePath), {maxAge: `${staticCacheTime}`}));
 
   //
   // Start the server
