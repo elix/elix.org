@@ -18,7 +18,7 @@ const cacheMilliseconds = cacheSeconds * 1000;
 
 
 // Tell Express to serve up static content.
-app.use('/static', express.static(path.join(__dirname, '../public'), {maxAge: `${cacheMilliseconds}`}));
+app.use('/static', express.static(path.join(__dirname, '../public/src'), {maxAge: `${cacheMilliseconds}`}));
 
 //
 // Redirect http to https under Heroku
