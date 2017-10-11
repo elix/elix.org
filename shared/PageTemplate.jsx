@@ -12,7 +12,7 @@ export default class PageTemplate extends Component {
     const path = props.request ? props.request.path : '';
     return (
       <div class="pageContainer" data-path={path}>
-        <Header headerTexture={props.headerTexture}/>
+        <Header headerTexture={props.headerTexture} request={props.request}/>
         <div class="mainContent contentContainer">
           <div class="leftGutter sideNavigation">
             <h1 class="desktopOnly">&nbsp;</h1>

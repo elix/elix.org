@@ -9,10 +9,11 @@ import PageTemplate from './PageTemplate';
 export default class VersionPage extends Component {
 
   render(props) {
+    const staticPath = `/static/${props.request.app.locals.build}`;
 
     return (
       <PageTemplate
-          headerTexture="/static/images/homeTexture.png"
+          headerTexture={`${staticPath}/images/homeTexture.png`}
           request={props.request}
         >
         

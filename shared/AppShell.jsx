@@ -9,6 +9,8 @@ export default class AppShell extends Component {
       props.titleBar ||
       (props.title && `${props.title} - Elix`) ||
       'Elix - Quality Web Components';
+      
+    const staticPath = `/static/${props.request.app.locals.build}`;
 
     return (
       <html lang="en">
@@ -19,8 +21,8 @@ export default class AppShell extends Component {
           <script src="/demos/node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
           <script src="/demos/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
           <script src="/build/demos.min.js"></script>
-          <link rel="shortcut icon" href="/static/images/favicon.png"/>
-          <link rel="stylesheet" href="/static/main.css"/>
+          <link rel="shortcut icon" href={`${staticPath}/images/favicon.png`}/>
+          <link rel="stylesheet" href={`${staticPath}/main.css`}/>
         </head>
         <body>
           <div id="root">

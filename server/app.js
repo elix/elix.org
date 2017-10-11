@@ -17,9 +17,6 @@ const cacheSeconds = 60 * cacheMinutes;
 const cacheMilliseconds = cacheSeconds * 1000;
 
 
-// Tell Express to serve up static content.
-app.use('/static', express.static(path.join(__dirname, '../public/src'), {maxAge: `${cacheMilliseconds}`}));
-
 //
 // Redirect http to https under Heroku
 //
@@ -102,6 +99,11 @@ version.getVersionInfo()
   return versionInfo;
 })
 .then(versionInfo => {
+  // Tell Express to serve up static content.
+  const logicalPath = `/static/${versionInfo.build}`;
+  const filePath = `../public/${versionInfo.build}`;
+  app.use(logicalPath, express.static(path.join(__dirname, filePath), {maxAge: `${cacheMilliseconds}`}));
+
   //
   // Start the server
   //
