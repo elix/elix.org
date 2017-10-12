@@ -8,10 +8,18 @@ const compression = require('compression');
 const app = express();
 const port = process.env.PORT || 5000;
 const version = require('./version.js');
+const logger = require('./logger.js').logger('elix.org');
 
 const renderReactRoute = require('./renderReactRoute');
 
+// Log all requests
+function logRequest(req, res, next) {
+  logger.info({req: req}, 'REQUEST');
+  next();
+}
+
 app.use(compression());
+app.use(logRequest);
 
 //
 // Redirect http to https under Heroku
@@ -92,7 +100,7 @@ app.get('/error', (request, response, next) => {
 
 // Log an error message.
 function logException(exception) {
-  console.log(`*** Exception: ${exception}`);
+  logger.info(`*** Exception: ${exception}`);
 }
 
 
@@ -119,6 +127,6 @@ version.getVersionInfo()
   // Start the server
   //
   app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
+    logger.info(`Server listening on http://localhost:${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
   });
 });
