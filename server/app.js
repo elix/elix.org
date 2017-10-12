@@ -4,12 +4,14 @@
 
 const path = require('path');
 const express = require('express');
+const compression = require('compression');
 const app = express();
 const port = process.env.PORT || 5000;
 const version = require('./version.js');
 
 const renderReactRoute = require('./renderReactRoute');
 
+app.use(compression());
 
 //
 // Redirect http to https under Heroku
