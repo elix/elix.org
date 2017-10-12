@@ -67,7 +67,17 @@ app.get('*', (request, response, next) => {
 
 // Serve remaining routes as static content out of the Elix project.
 // This is used to obtain demos and their associated files.
-app.use('/', express.static(path.join(__dirname, '../node_modules/elix'), {maxAge: `${cacheMilliseconds}`}));
+// We set no-cache as the Cache-Control header since these resources are not 
+// able to be fetched from our cache-busting strategy
+app.use(
+  '/', 
+  express.static(path.join(__dirname, '../node_modules/elix'), 
+  {
+    setHeaders: function(res, path, stat) {
+      res.set({'Cache-Control': 'no-cache'});
+    }
+  })
+);
 
 // Error handler.
 app.get('/error', (request, response, next) => {
