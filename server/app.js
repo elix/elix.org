@@ -10,12 +10,6 @@ const version = require('./version.js');
 
 const renderReactRoute = require('./renderReactRoute');
 
-// Cache-Control maxage values expressed in seconds and milliseconds
-// Set to 10 minutes
-const cacheMinutes = 10;
-const cacheSeconds = 60 * cacheMinutes;
-const cacheMilliseconds = cacheSeconds * 1000;
-
 
 //
 // Redirect http to https under Heroku
