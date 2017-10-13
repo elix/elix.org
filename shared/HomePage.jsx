@@ -11,6 +11,7 @@ export default class HomePage extends Component {
 
   render(props) {
 
+    const staticPath = `/static/${props.request.app.locals.build}`;
     const sideNavigation = (
       <nav>
         <ul>
@@ -24,7 +25,7 @@ export default class HomePage extends Component {
 
     return (
       <PageTemplate
-          headerTexture="/static/images/homeTexture.png"
+          headerTexture={`${staticPath}/images/homeTexture.png`}
           request={props.request}
           sideNavigation={sideNavigation}
         >
@@ -44,22 +45,22 @@ export default class HomePage extends Component {
 
         <section class="homeSection1">
           <a name="components"></a>
-          <ComponentCard name="LabeledTabButton" color="0">
+          <ComponentCard name="LabeledTabButton" request={props.request} color="0">
             A generic tab button with a text label
           </ComponentCard>
-          <ComponentCard name="LabeledTabs" color="1">
+          <ComponentCard name="LabeledTabs" request={props.request} color="1">
             Classic tabs for Settings and other configuration
           </ComponentCard>
-          <ComponentCard name="ListBox" color="2">
+          <ComponentCard name="ListBox" request={props.request} color="2">
             Single-selection list box
           </ComponentCard>
-          <ComponentCard name="Modes" color="3">
+          <ComponentCard name="Modes" request={props.request} color="3">
             Shows a single panel at a time
           </ComponentCard>
-          <ComponentCard name="Tabs" color="1">
+          <ComponentCard name="Tabs" request={props.request} color="1">
             Basic tabs structure for navigation and configuration
           </ComponentCard>
-          <ComponentCard name="TabStrip" color="3">
+          <ComponentCard name="TabStrip" request={props.request} color="3">
             A strip of tab buttons
           </ComponentCard>
         </section>

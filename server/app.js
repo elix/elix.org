@@ -4,21 +4,22 @@
 
 const path = require('path');
 const express = require('express');
+const compression = require('compression');
 const app = express();
 const port = process.env.PORT || 5000;
 const version = require('./version.js');
+const logger = require('./logger.js').logger('elix.org');
 
 const renderReactRoute = require('./renderReactRoute');
 
-// Cache-Control maxage values expressed in seconds and milliseconds
-// Set to 10 minutes
-const cacheMinutes = 10;
-const cacheSeconds = 60 * cacheMinutes;
-const cacheMilliseconds = cacheSeconds * 1000;
+// Log all requests
+function logRequest(req, res, next) {
+  logger.info({req: req}, 'REQUEST');
+  next();
+}
 
-
-// Tell Express to serve up static content.
-app.use('/static', express.static(path.join(__dirname, '../public'), {maxAge: `${cacheMilliseconds}`}));
+app.use(compression());
+app.use(logRequest);
 
 //
 // Redirect http to https under Heroku
@@ -51,7 +52,7 @@ app.get('*', (request, response, next) => {
     if (html) {
       response.set({
         'Content-Type': 'text/html',
-        'Cache-Control' : `public, max-age=${cacheSeconds}`
+        'Cache-Control': 'no-cache'
       });
       response.send(html);
     } else {
@@ -70,7 +71,17 @@ app.get('*', (request, response, next) => {
 
 // Serve remaining routes as static content out of the Elix project.
 // This is used to obtain demos and their associated files.
-app.use('/', express.static(path.join(__dirname, '../node_modules/elix'), {maxAge: `${cacheMilliseconds}`}));
+// We set no-cache as the Cache-Control header since these resources are not 
+// able to be fetched from our cache-busting strategy
+app.use(
+  '/', 
+  express.static(path.join(__dirname, '../node_modules/elix'), 
+  {
+    setHeaders: function(res, path, stat) {
+      res.set({'Cache-Control': 'no-cache'});
+    }
+  })
+);
 
 // Error handler.
 app.get('/error', (request, response, next) => {
@@ -89,7 +100,7 @@ app.get('/error', (request, response, next) => {
 
 // Log an error message.
 function logException(exception) {
-  console.log(`*** Exception: ${exception}`);
+  logger.info(`*** Exception: ${exception}`);
 }
 
 
@@ -102,10 +113,20 @@ version.getVersionInfo()
   return versionInfo;
 })
 .then(versionInfo => {
+  // Tell Express to serve up static content.
+  // If we're running against public/src on a local test, then set no max-age, 
+  // otherwise 365 days
+  const logicalPath = `/static/${versionInfo.build}`;
+  const filePath = `../public/${versionInfo.build}`;
+  const staticCacheTime = versionInfo.build === 'src' ?
+          0 :
+          1000*60*60*24*365;
+  app.use(logicalPath, express.static(path.join(__dirname, filePath), {maxAge: `${staticCacheTime}`}));
+
   //
   // Start the server
   //
   app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
+    logger.info(`Server listening on http://localhost:${port}, version ${versionInfo.version}, build ${versionInfo.build}`);
   });
 });

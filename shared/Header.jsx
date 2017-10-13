@@ -8,8 +8,9 @@ export default class Header extends Component {
 
   render(props) {
 
+    const staticPath = `/static/${props.request.app.locals.build}`;
     const headerTexture = props.headerTexture ||
-        '/static/images/headerTexture.png';
+        `${staticPath}/images/headerTexture.png`;
 
     return (
       <div class="header contentContainer">
@@ -17,7 +18,7 @@ export default class Header extends Component {
         <div class="leftGutter"></div>
         <header>
           <a class="logoLink" href="/">
-            <img src="/static/images/elix.png"/>
+            <img src={`${staticPath}/images/elix.png`}/>
           </a>
           <div class="headerLinks">
             <a id="linkAbout" href="/">HOME</a> &nbsp; / &nbsp;&nbsp;
