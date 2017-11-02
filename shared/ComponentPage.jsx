@@ -57,13 +57,21 @@ export default class ComponentPage extends Component {
         api: results[0],
         overview: results[1]
       };
+    })
+    .catch(() => {
+      return {
+        api: null,
+        overview: null
+      };
     });
   }
 
   render(props) {
-
+      
     const api = props.api;
-    const apiHeader = api[0];
+    const apiHeader = api ? 
+      api[0] : 
+      {name: `"${this.props.request.params.name}" not found`, description: ''};
 
     const overview = props.overview ?
       // Found an overview for the component.
@@ -78,7 +86,6 @@ export default class ComponentPage extends Component {
           <div dangerouslySetInnerHTML={{ __html: apiHeader.description }}/>
         </section>
       );
-
     return (
       <DocumentationPage request={props.request}>
         {overview}
