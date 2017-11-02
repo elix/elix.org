@@ -8,6 +8,10 @@ import APICard from './APICard';
 export default class DocumentationSection extends Component {
 
   render(props) {
+    if (!props.documentation) {
+      return (<div></div>);
+    }
+    
     const json = props.documentation;
     const apiHeader = json[0];
     
