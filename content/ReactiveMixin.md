@@ -121,23 +121,27 @@ from the outside.
 
     import symbols from ‘.../symbols.js’;
 
-    // This goes in the IncrementDecrement class ...
-    [symbols.render]() {
-      if (!this.shadowRoot) {
-        // On our first render, clone the template into a shadow root.
-        const root = this.attachShadow({ mode: 'open' });
-        const clone = document.importNode(template.content, true);
-        root.appendChild(clone);
-        // Wire up event handlers too.
-        root.querySelector('#decrement').addEventListener('click', () => {
-          this.value--;
-        });
-        root.querySelector('#increment').addEventListener('click', () => {
-          this.value++;
-        });
+    class IncrementDecrement extends ReactiveMixin(HTMLElement) {
+    
+      // The following would be added to the component definition at the top...
+    
+      [symbols.render]() {
+        if (!this.shadowRoot) {
+          // On our first render, clone the template into a shadow root.
+          const root = this.attachShadow({ mode: 'open' });
+          const clone = document.importNode(template.content, true);
+          root.appendChild(clone);
+          // Wire up event handlers too.
+          root.querySelector('#decrement').addEventListener('click', () => {
+            this.value--;
+          });
+          root.querySelector('#increment').addEventListener('click', () => {
+            this.value++;
+          });
+        }
+        // Render the state into the shadow.
+        this.shadowRoot.querySelector('#value').textContent = this.state.value;
       }
-      // Render the state into the shadow.
-      this.shadowRoot.querySelector('#value').textContent = this.state.value;
     }
 
 
@@ -148,6 +152,45 @@ DOM every time the state changes. The two buttons update state by setting the
 This ReactiveMixin would also be a natural fit with template literal libraries
 like [lit-html](https://github.com/PolymerLabs/lit-html/) or
 [hyperHTML](https://github.com/WebReflection/hyperHTML).
+
+
+## Using with `ShadowTemplateMixin` and `PropsMixin`.
+
+The Elix project itself generally renders its components with two mixins: `ShadowTemplateMixin`, which handles the task of populating the component's shadow root when it is first connected to the document, and `PropsMixin`, which handles subsequent updates to the component's host element and shadow elements in response to changes in component state. With those two mixins, the above `symbols.render` definition for our increment/decrement sample can be replaced with the following:
+
+
+    import symbols from ‘.../symbols.js’;
+
+    class IncrementDecrement extends ReactiveMixin(HTMLElement) {
+    
+      // The following would be added to the component definition at the top...
+
+      get props() {
+        return {
+          $: {
+            value: {
+              textContent: this.state.value
+            }
+          }
+        }
+      }
+
+      get [symbols.template]() {
+        return `
+          <button id="decrement">-</button>
+          <span id="value"></span>
+          <button id="increment">+</button>
+        `;
+      }
+
+    }
+
+
+The `symbols.template` defines the template that `ShadowTemplateMixin` will use to populate the component's shadow root. The `props` getter then defines changes to the DOM that should be applied when state changes. In this case, the JavaScript object returned by `props` asks `PropsMixin` to update the `textContent` of the span with id `#value`. That is, it is effectively equivalent to this line from the earlier `symbols.render` function above:
+
+    this.shadowRoot.querySelector('#value').textContent = this.state.value;
+
+The three mixins, `ReactiveMixin`, `ShadowTemplateMixin`, and `PropsMixin` are used together in Elix so often that, for convenience, they are used to create an Elix component base class called `ElementBase`. There is nothing special about the `ElementBase` base class, and it can easily be recreated by using the mixins directly.
 
 
 ## Web component and FRP lifecycle methods
