@@ -1,29 +1,39 @@
 # ReactiveMixin
 
-**Purpose:** Give a component class a functional-reactive programming (FRP) architecture that can track internal state and render that state to the DOM.
+**Purpose:** Give a component class a functional-reactive programming (FRP) architecture that can track internal state and render that state to the DOM. It forms a core part of the Elix user interface pipeline:
+
+> events → methods → **setState** → **render** → update DOM
+
+**Expects the component to provide:**
+* An internal `symbols.render` method that actually updates the DOM. You can use [ShadowTemplateMixin](ShadowTemplateMixin) and [RenderUpdatesMixin](RenderUpdatesMixin) for that purpose.
+* An optional `shouldComponentUpdate` method that can be used to determine when a change in state is significant enough that the component should be rerendered.
+* An optional `componentDidMount` method that runs after the component renders for the first time.
+* An optional `componentDidUpdate` method that runs after subsequent component renderings.
 
 **Provides the component with:**
 * A `state` object representing the current state.
 * A `setState()` method to chnage state.
-* A `render` method that will be invoked when state changes.
-
-**Expects the component to provide:**
-* An internal `symbols.render` method that actually updates the DOM. You can use [ShadowTemplateMixin](ShadowTemplateMixin) and [RenderPropsMixin](RenderPropsMixin) for that purpose.
-* An optional `shouldComponentUpdate` method that can be used to determine when a change in state is significant enough that the component should be rerendered.
-* An optional `componentDidMount` method that runs after the component renders for the first time.
-* An optional `componentDidUpdate` method that runs after subsequent component renderings.
+* A `render` method that will be invoked when state changes. This in turn invokes the component's internal `symbols.render` method.
 
 `ReactiveMixin` represents a minimal implementation of the functional-reactive programming architecture populate in React and similar frameworks. The mixin itself focuses exclusively on managing state and determining when the state should be
 rendered.
 
 You can use this mixin with whatever DOM rendering technology you like
-(virtual-dom, hyperHTML, lit-html, plain old DOM API calls, etc.). The Elix project itself uses `ReactiveMixin` as a core part of all its components. Elix components generally use `ShadowTemplateMixin` and `RenderPropsMixin` to actually render the component state to the DOM.
+(virtual-dom, hyperHTML, lit-html, plain old DOM API calls, etc.). The Elix project itself uses `ReactiveMixin` as a core part of all its components. Elix components generally use `ShadowTemplateMixin` and `RenderUpdatesMixin` to actually render the component state to the DOM.
 
-## Example: an increment/decrement component
+
+## Usage
+
+    import ReactiveMixin from 'elix/src/ReactiveMixin.js';
+
+    class MyElement extends ReactiveMixin(HTMLElement) {}
+
+
+### Example: an increment/decrement component
 
 Functional-reactive frameworks often use a canonical increment/decrement component as an example. The ReactiveMixin version looks like this:
 
-    import ReactiveMixin from '.../ReactiveMixin.js';
+    import ReactiveMixin from 'elix/src/ReactiveMixin.js';
 
     // Create a native web component with reactive behavior.
     class IncrementDecrement extends ReactiveMixin(HTMLElement) {
@@ -119,11 +129,12 @@ name collisions, and discourages someone from trying to invoke the render method
 from the outside.
 
 
-    import symbols from ‘.../symbols.js’;
+    import ReactiveMixin from ‘elix/src/ReactiveMixin.js’;
+    import symbols from ‘elix/src/symbols.js’;
 
     class IncrementDecrement extends ReactiveMixin(HTMLElement) {
     
-      // The following would be added to the component definition at the top...
+      // The following would be added to the earlier component definition...
     
       [symbols.render]() {
         if (!this.shadowRoot) {
@@ -145,36 +156,55 @@ from the outside.
     }
 
 
-That’s all that’s necessary. The last line is the core bit that will update the
-DOM every time the state changes. The two buttons update state by setting the
-`value` property, which in turn calls `setState`.
+The last line is the core bit that will update the DOM every time the state
+changes. The two buttons update state by setting the `value` property, which in
+turn calls `setState`.
 
 This ReactiveMixin would also be a natural fit with template literal libraries
 like [lit-html](https://github.com/PolymerLabs/lit-html/) or
 [hyperHTML](https://github.com/WebReflection/hyperHTML).
 
 
-## Using with `ShadowTemplateMixin` and `PropsMixin`.
+## Using with `ShadowTemplateMixin` and `RenderUpdatesMixin`.
 
-The Elix project itself generally renders its components with two mixins: `ShadowTemplateMixin`, which handles the task of populating the component's shadow root when it is first connected to the document, and `PropsMixin`, which handles subsequent updates to the component's host element and shadow elements in response to changes in component state. With those two mixins, the above `symbols.render` definition for our increment/decrement sample can be replaced with the following:
+The Elix project itself generally renders its components with two mixins: 
+[ShadowTemplateMixin](ShadowTemplateMixin) , which handles the task of populating the component's shadow root when it is first connected to the document, and [RenderUpdatesMixin](RenderUpdatesMixin), which handles subsequent updates to the component's host element and shadow elements in response to changes in component state. With those two mixins, the above `symbols.render` definition for our increment/decrement sample can be replaced with the following:
 
 
-    import symbols from ‘.../symbols.js’;
+    import ReactiveMixin from 'elix/src/ReactiveMixin.js';
+    import RenderUpdatesMixin from 'elix/src/RenderUpdatesMixin.js';
+    import ShadowTemplateMixin from 'elix/src/ShadowTemplateMixin.js';
+    import symbols from ‘elix/src/symbols.js’;
 
-    class IncrementDecrement extends ReactiveMixin(HTMLElement) {
-    
-      // The following would be added to the component definition at the top...
+    const Base =
+      ReactiveMixin(RenderUpdatesMixin(ShadowTemplateMixin(HTMLElement)));
 
-      get props() {
-        return {
-          $: {
-            value: {
-              textContent: this.state.value
-            }
-          }
-        }
+    class IncrementDecrement extends Base {
+
+      // This property becomes the initial value of this.state at constructor time.
+      get defaultState() {
+        return { value: 0 };
       }
 
+      // Provide a public property that gets/sets state.
+      get value() {
+        return this.state.value;
+      }
+      set value(value) {
+        this.setState({ value });
+      }
+
+      // Expose "value" as an attribute.
+      attributeChangedCallback(attributeName, oldValue, newValue) {
+        if (attributeName === 'value') {
+          this.value = parseInt(newValue);
+        }
+      }
+      static get observedAttributes() {
+        return ['value'];
+      }
+
+      // Define an initial component template.
       get [symbols.template]() {
         return `
           <button id="decrement">-</button>
@@ -183,14 +213,25 @@ The Elix project itself generally renders its components with two mixins: `Shado
         `;
       }
 
+      // Indicate what should update when state changes.
+      get updates() {
+        return {
+          $: {
+            value: {
+              textContent: this.state.value
+            }
+          }
+        };
+      }
+
     }
 
 
-The `symbols.template` defines the template that `ShadowTemplateMixin` will use to populate the component's shadow root. The `props` getter then defines changes to the DOM that should be applied when state changes. In this case, the JavaScript object returned by `props` asks `PropsMixin` to update the `textContent` of the span with id `#value`. That is, it is effectively equivalent to this line from the earlier `symbols.render` function above:
+The `symbols.template` property defines the template that `ShadowTemplateMixin` will use to populate the component's shadow root. The `updates` property defines changes to the DOM that should be applied when state changes. In this case, the JavaScript object returned by `updates` asks `RenderUpdatesMixin` to update the `textContent` of the span with id `#value`. That is, it is effectively equivalent to this line from the earlier `symbols.render` function above:
 
     this.shadowRoot.querySelector('#value').textContent = this.state.value;
 
-The three mixins, `ReactiveMixin`, `ShadowTemplateMixin`, and `PropsMixin` are used together in Elix so often that, for convenience, they are used to create an Elix component base class called `ElementBase`. There is nothing special about the `ElementBase` base class, and it can easily be recreated by using the mixins directly.
+The three mixins, `ReactiveMixin`, `ShadowTemplateMixin`, and `RenderUpdatesMixin` are used together in Elix so often that, for convenience, they are used to create an Elix component base class called [ElementBase](ElementBase). There is nothing special about the `ElementBase` base class, and it can easily be recreated by using the mixins directly.
 
 
 ## Web component and FRP lifecycle methods
