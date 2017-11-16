@@ -49,7 +49,7 @@ _in_ only a specific type of element (using, say, `querySelectorAll`).
 [symbols.content](Symbols#content) for the raw set of HTML elements the
 component contains. How a component interprets "contains" can vary, but it
 typically means the component's light DOM children. In that common case,
-[DefaultSlotContentMixin](DefaultSlotContentMixin) can be used to define
+[SlotContentMixin](SlotContentMixin) can be used to define
 `symbols.content` as the light DOM children assigned to the component's default
 `slot`. But other definitions of content are possible. Your component could, for
 example, define `symbols.content` to only extract nodes assigned to a particular
@@ -76,6 +76,6 @@ request, this mixin supports an optimized mode. If the method
 notify it of future content changes, and turns on the optimization. In that
 mode, the mixin saves a reference to the computed set of items, and will return
 that immediately on subsequent calls to the `items` property. If this mixin is
-used in conjunction with `DefaultSlotContentMixin` (above), the latter will take
+used in conjunction with `SlotContentMixin` (above), the latter will take
 care of automatically invoking `symbols.contentChanged`, and automatically
 engage the optimization.

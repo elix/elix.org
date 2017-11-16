@@ -27,7 +27,7 @@ the base class could be HTMLElement:
     <li><a href="AttributeMarshallingMixin">AttributeMarshallingMixin</a></li>
     <li><a href="ClickSelectionMixin">ClickSelectionMixin</a></li>
     <li><a href="ContentItemsMixin">ContentItemsMixin</a></li>
-    <li><a href="DefaultSlotContentMixin">DefaultSlotContentMixin</a></li>
+    <li><a href="SlotContentMixin">SlotContentMixin</a></li>
     <li><a href="DirectionSelectionMixin">DirectionSelectionMixin</a></li>
     <li><a href="FocusRingMixin">FocusRingMixin</a></li>
     <li><a href="KeyboardDirectionMixin">KeyboardDirectionMixin</a></li>
@@ -35,7 +35,7 @@ the base class could be HTMLElement:
     <li><a href="KeyboardPagedSelectionMixin">KeyboardPagedSelectionMixin</a></li>
     <li><a href="KeyboardPrefixSelectionMixin">KeyboardPrefixSelectionMixin</a></li>
     <li><a href="SelectedItemTextValueMixin">SelectedItemTextValueMixin</a></li>
-    <li><a href="SelectionAriaMixin">SelectionAriaMixin</a></li>
+    <li><a href="AriaListMixin">AriaListMixin</a></li>
     <li><a href="SelectionInViewMixin">SelectionInViewMixin</a></li>
     <li><a href="ShadowReferencesMixin">ShadowReferencesMixin</a></li>
     <li><a href="ShadowTemplateMixin">ShadowTemplateMixin</a></li>

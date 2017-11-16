@@ -13,7 +13,7 @@ checklist item [Declared
 Semantics](https://github.com/webcomponents/gold-standard/wiki/Declared-Semantics)
 (Does the component expose its semantics by wrapping/extending a native element,
 or using ARIA roles, states, and properties?). See
-[SelectionAriaMixin](SelectionAriaMixin) for more details.
+[AriaListMixin](AriaListMixin) for more details.
 
 This mixin uses a `keydown` listener rather than `keyup`, as most keyboard
 behavior (e.g., pressing arrow keys) should respond on keydown for faster

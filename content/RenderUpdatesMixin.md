@@ -2,17 +2,19 @@
 
 **Purpose:** Renders changes in a component's state by efficiently updating
 attributes, classes, styles, and properties on the component's host element and
-its shadow elements. It forms a core part of the Elix user interface pipeline:
+its shadow elements.
 
-> events → methods → setState → render → **update DOM**
+This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 
-**Expects the component to provide:**
-* An `updates` getter that contains the changes the component would like to make to its own attributes, classes, styles, as well as to those of its shadow elements.
+> events → methods → setState → **render → update DOM**
 
-**Provides the component with:**
-* An internal `symbols.render` method that will be invoked when the component is rendering. This is designed to interoperate with [ReactiveMixin](ReactiveMixin). When the render method is called, RenderUpdatesMixin will asks the component for `updates`, then applies those to the DOM.
-* A state property `state.original` that returns the original attributes, classes, and styles on the host element.
-* An overridden `setAttribute` method and `style` property setter that can track live changes to a component's style made by the application.
+**Expects** the component to provide:
+* `updates` property that contains the changes the component would like to make to its own attributes, classes, styles, as well as to those of its shadow elements.
+
+**Provides** the component with:
+* Internal `symbols.render` method that will be invoked when the component is rendering. This is designed to interoperate with [ReactiveMixin](ReactiveMixin). When the render method is called, RenderUpdatesMixin will asks the component for `updates`, then applies those to the DOM.
+* `state.original` property that returns the original attributes, classes, and styles on the host element.
+* `setAttribute()` method override and `style` property override that track live changes to a component's style made by the application.
 
 
 ## Usage

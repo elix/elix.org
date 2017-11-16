@@ -1,19 +1,21 @@
 # ReactiveMixin
 
-**Purpose:** Give a component class a functional-reactive programming (FRP) architecture that can track internal state and render that state to the DOM. It forms a core part of the Elix user interface pipeline:
+**Purpose:** Give a component class a functional-reactive programming (FRP) architecture that can track internal state and render that state to the DOM.
 
-> events → methods → **setState** → **render** → update DOM
+This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 
-**Expects the component to provide:**
-* An internal `symbols.render` method that actually updates the DOM. You can use [ShadowTemplateMixin](ShadowTemplateMixin) and [RenderUpdatesMixin](RenderUpdatesMixin) for that purpose.
-* An optional `shouldComponentUpdate` method that can be used to determine when a change in state is significant enough that the component should be rerendered.
-* An optional `componentDidMount` method that runs after the component renders for the first time.
-* An optional `componentDidUpdate` method that runs after subsequent component renderings.
+> events → methods → **setState → render** → update DOM
 
-**Provides the component with:**
-* A `state` object representing the current state.
-* A `setState()` method to chnage state.
-* A `render` method that will be invoked when state changes. This in turn invokes the component's internal `symbols.render` method.
+**Expects** the component to provide:
+* Internal `symbols.render` method that actually updates the DOM. You can use [ShadowTemplateMixin](ShadowTemplateMixin) and [RenderUpdatesMixin](RenderUpdatesMixin) for that purpose.
+* Optional `shouldComponentUpdate` method that can be used to determine when a change in state is significant enough that the component should be rerendered.
+* Optional `componentDidMount` method that runs after the component renders for the first time.
+* Optional `componentDidUpdate` method that runs after subsequent component renderings.
+
+**Provides** the component with:
+* `state` property representing the current state.
+* `setState()` method to chnage state.
+* `render()` method that will be invoked when state changes. This in turn invokes the component's internal `symbols.render` method.
 
 `ReactiveMixin` represents a minimal implementation of the functional-reactive programming architecture populate in React and similar frameworks. The mixin itself focuses exclusively on managing state and determining when the state should be
 rendered.
