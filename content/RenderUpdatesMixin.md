@@ -64,7 +64,7 @@ An `updates` object with an `attributes` key asks `UpdateMixin` to update the ho
 The values of the attributes will be cast to strings, so `tabindex: 0` and `tabindex: '0'` are equivalent. A `null` value asks that the indicated attribute be _removed_ from the element.
 
 
-### Updatding classes
+### Updating classes
 
 An `updates` object with a `classes` key indicates CSS classes that should be added to, or removed from, the host element:
 
