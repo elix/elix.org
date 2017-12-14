@@ -32,9 +32,9 @@
   },
   "scripts": {
     "build": "webpack; node server/buildVersion.js; node server/copyStatic.js",
-    "buildDocs": "node server/buildDocs.js",
+    "buildDocs": "node server/buildDocs.js; node server/buildDocsNavigation.js",
     "devbuild": "webpack; rm -f timestamp.txt; node server/copyStatic",
-    "postinstall": "cd node_modules/elix/demos; npm install; cd ../; npm install; cd ../../; node server/buildElix.js; webpack; node server/buildDocs.js; node server/buildVersion.js; node server/copyStatic.js",
+    "postinstall": "cd node_modules/elix/demos; npm install; cd ../; npm install; cd ../../; node server/buildElix.js; webpack; node server/buildDocs.js; node server/buildDocsNavigation.js; node server/buildVersion.js; node server/copyStatic.js",
     "start": "node server/app.js",
     "watch": "webpack --watch"
   },
