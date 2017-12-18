@@ -12,15 +12,25 @@ export default class ContentPage extends Component {
     const parts = this.props.request.path.split('/');
     const title = parts[parts.length - 1] || 'Introduction';
     const path = `/content/${title}.md`;
-    return this.props.readSiteFile(path)
+    let navigation;
+
+    // Get the JSON for the DocumentationNavigation panel
+    const navPath = '/build/docsNavigation.json';
+    return this.props.readSiteFile(navPath)
+    .then(response => {
+    	navigation = JSON.parse(response);
+    })
+		.then(() => {
+	    return this.props.readSiteFile(path);
+		})
     .then(markdown => {
-      return { markdown, title };
+      return { markdown, title, navigation };
     });
   }
 
   render(props) {
     return (
-      <DocumentationPage request={props.request} title={props.title}>
+      <DocumentationPage request={props.request} title={props.title} navigation={props.navigation}>
         <Markdown markdown={props.markdown}/>
       </DocumentationPage>
     );

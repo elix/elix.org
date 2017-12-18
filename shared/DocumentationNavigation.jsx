@@ -7,48 +7,11 @@ import { Component, h } from 'preact'; // jshint ignore:line
 export default class DocumentationNavigation extends Component {
 
   render(props) {
-
-    const elements = [
-      'LabeledTabButton',
-      'LabeledTabs',
-      'ListBox',
-      'Modes',
-      'Tabs',
-      'TabStrip',
-    ];
-
-    const mixins = [
-      'AttributeMarshallingMixin',
-      'ClickSelectionMixin',
-      'ContentItemsMixin',
-      'SlotContentMixin',
-      'DirectionSelectionMixin',
-      'FocusRingMixin',
-      'KeyboardDirectionMixin',
-      'KeyboardMixin',
-      'KeyboardPagedSelectionMixin',
-      'KeyboardPrefixSelectionMixin',
-      'SelectedItemTextValueMixin',
-      'AriaListMixin',
-      'SelectionInViewMixin',
-      'ShadowReferencesMixin',
-      'ShadowTemplateMixin',
-      'SingleSelectionMixin'
-    ];
-
-    const helpers = [
-      'attributes',
-      'constants',
-      'content',
-      'defaultScrollTarget',
-      'renderArrayAsElements',
-      'Symbol',
-      'symbols'
-    ];
-
-    const wrappers = [
-      'TabStripWrapper'
-    ];
+  	
+  	const elements = props.navigation.elements;
+  	const mixins = props.navigation.mixins;
+  	const helpers = props.navigation.helpers;
+  	const wrappers = props.navigation.wrappers;
 
     return (
       <nav>
