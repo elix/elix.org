@@ -10,7 +10,8 @@ export default class DocumentationPage extends Component {
 
   render(props) {
     const current = props.request.path;
-    const sideNavigation = (<DocumentationNavigation current={current}/>);
+    const navigation = props.navigation;
+    const sideNavigation = (<DocumentationNavigation current={current} navigation={navigation}/>);
 
     return (
       <PageTemplate

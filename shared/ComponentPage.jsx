@@ -16,6 +16,13 @@ export default class ComponentPage extends Component {
 
   get asyncProperties() {
     const componentName = this.props.request.params.name;
+    
+    // Get the JSON for the DocumentationNavigation panel
+    const navPath = '/build/docsNavigation.json';
+    const navigationPromise = this.props.readSiteFile(navPath)
+    .then(response => {
+    	return JSON.parse(response);
+    });
 
     // Get the JSON for the API documentation.
     const apiPath = `/build/docs/${componentName}.json`;
@@ -51,17 +58,19 @@ export default class ComponentPage extends Component {
       return null;
     });
 
-    return Promise.all([apiPromise, overviewPromise])
+    return Promise.all([apiPromise, overviewPromise, navigationPromise])
     .then(results => {
       return {
         api: results[0],
-        overview: results[1]
+        overview: results[1],
+        navigation: results[2]
       };
     })
     .catch(() => {
       return {
         api: null,
-        overview: null
+        overview: null,
+        navigation: null
       };
     });
   }
@@ -87,7 +96,7 @@ export default class ComponentPage extends Component {
         </section>
       );
     return (
-      <DocumentationPage request={props.request}>
+      <DocumentationPage request={props.request} navigation={props.navigation}>
         {overview}
         <DocumentationSection documentation={props.api}/>
       </DocumentationPage>
