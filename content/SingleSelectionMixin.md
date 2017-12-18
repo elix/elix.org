@@ -1,11 +1,38 @@
 # SingleSelectionMixin
 
-This mixin tracks a single selected item at a time. It includes a public API for
-setting and retrieving the selected item, as well as methods for moving the
-selection with cursor operations.
+**Purpose:**
+Updates component state to track a single selected item at a time. It includes a public API for setting and retrieving the selected item, as well as methods for moving the selection with cursor operations.
+
+This mixin generally works in the middle of the render [pipeline](pipeline):
+
+> events → **methods/properties → state** → render
+
+**Expects** the component to provide:
+* `setState` method, usually supplied by [ReactiveMixin](ReactiveMixin).
+* `items` property representing the items that can be selected. This is usually provided by [ContentItemsMixin](ContentItemsMixin).
+
+**Provides** the component with:
+* `state.selectedIndex` property that tracks the index of the currently selected item.
+* `selectFirst()`, `selectLast()`, `selectNext()`, and `selectPrevious()` methods to set and move the selection.
+
+
+## Usage
+
+`SingleSelectionMixin` is designed to support components that let the user select a single thing at a time. This is generally done to let the user select a value (e.g., as the target of an action, or in configuring something), or as a navigation construct (where only one page/mode is visible at a time).
+
+Examples:
+
+* List boxes such as [ListBox](ListBox).
+* Dropdown lists and combo boxes
+* Carousels such as [SlidingCarousel](SlidingCarousel).
+* Slideshows
+* Tab UIs (including top-level navigation toolbars that behave like tabs) such as [Tabs](Tabs).
+
+
+### Example
 
     // A sample element that supports single-selection on its children.
-    class SimpleList extends SingleSelectionMixin(HTMLElement) {
+    class SimpleList extends SingleSelectionMixin(ReactiveMixin(HTMLElement)) {
       get items() {
         return this.children;
       }
@@ -34,22 +61,6 @@ color:
 Here, the currently-selected item is tracked with `SingleSelectionMixin`.
 
 
-## Usage
-
-`SingleSelectionMixin` is designed to support components that let the user
-select a single thing at a time. This is generally done to let the user select
-a value (e.g., as the target of an action, or in configuring something), or
-as a navigation construct (where only one page/mode is visible at a time).
-Examples:
-
-* List boxes such as [ListBox](ListBox).
-* Dropdown lists and combo boxes
-* Carousels
-* Slideshows
-* Tab UIs (including top-level navigation toolbars that behave like tabs)
-  such as [Tabs](Tabs) and [LabeledTabs](LabeledTabs).
-
-
 # The `items` collection
 
 `SingleSelectionMixin` manages a selection within an identified collection of
@@ -67,14 +78,14 @@ Note: The above definition for `items` is too simplistic, as it does not support
 the Gold Standard checklist item [Content
 Assignment](https://github.com/webcomponents/gold-standard/wiki/Content-Assignment),
 but it can suffice here for demonstration purposes. A more complete component
-could use [DefaultSlotContentMixin](DefaultSlotContentMixin) and
+could use [SlotContentMixin](SlotContentMixin) and
 [ContentItemsMixin](ContentItemsMixin) to meet the Gold Standard criteria.
 
 The key point is that the component provides the collection of items, and they
 can come from anywhere. The component could, for example, indicate that the
 items being managed reside in the component's own Shadow DOM subtree:
 
-    class ShadowList extends SingleSelectionMixin(HTMLElement) {
+    class ShadowList extends SingleSelectionMixin(ReactiveMixin(HTMLElement)) {
       constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -89,32 +100,7 @@ For flexibility, SingleSelectionMixin can work with an `items` collection
 of type `NodeList` (as in the above examples) or `Array` (e.g., if the
 component wants to filter elements for use as items).
 
-
-## Tracking changes in `items`
-
-If a component wishes `SingleSelectionMixin` to track changes in the `items`
-collection, the component must notify the mixin when the set of items has
-changed by invoking its [symbols.itemsChanged](symbols#itemsChanged) method.
-(That method is referenced via a `Symbol`, and is generally only available to
-the component itself.)
-
-A component that is treating its DOM content (including distributed content)
-as `items` should invoke `itemsChanged` when that content changes. The
-conventional means to detect such DOM changes is for the component to listen
-to `slotchange` events on its slots. You can implement that yourself, or take
-advantage of [DefaultSlotContentMixin](DefaultSlotContentMixin), which will
-wire up a `slotchange` handler on the component's default slot.
-
-When `symbols.itemsChanged` is invoked, `SingleSelectionMixin` performs several
-tasks:
-
-1. The mixin determines whether any items are new, and were added since the
-   last called to `symbols.itemsChanged`. For each new item, the mixin invokes a method
-   [symbols.itemAdded](symbols#itemAdded), passing in the new item. This allows
-   other mixins to perform any per-item initialization. See the ARIA mixin
-   example below in "Per-item selection state".
-2. If the previously selected item has moved position in the set or has been
-   removed, the mixin attempts to preserve the selection; see below.
+The `items` property should normally be defined in terms of component state. This ensures that `SingleSelectionMixin` will be notified when the component's state changes.
 
 
 ## The selected item
@@ -173,7 +159,7 @@ selected items.
 
 The above code is provided for reference only. A more complete implementation
 of the attributes required for full ARIA supports is provided by
-[SelectionAriaMixin](SelectionAriaMixin).
+[AriaListMixin](AriaListMixin).
 
 
 ### Updating the selection in response to `itemsChanged`

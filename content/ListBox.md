@@ -26,7 +26,7 @@ The ListBox applies `SelectedItemTextValueMixin` (below) to expose a `value`
 property.
 
 Lists typically obtain their items from their child elements using
-`DefaultSlotContentMixin`. However, it is easy to create variations of
+`SlotContentMixin`. However, it is easy to create variations of
 `ListBox` for lists with hard-coded content. For example, the following demo
 shows a list of browser "plugins" registered with your browser via
 <code>navigator.plugins</code>. (These tend to be internal components, rather
@@ -39,9 +39,17 @@ By default, a `ListBox` shows a generic visual style. Once the Elix project
 establishes a theming strategy, we will allow developers to style a `ListBox`
 instance with CSS.
 
-The `ListBox` class is registered as element `<elix-list-box>`.
 
 ## Usage
+
+    import ListBox from 'elix/src/ListBox.js';
+
+    const listBox = new ListBox(); // or
+    const listBox = document.createElement('elix-list-box');
+
+    <elix-list-box>
+      <!-- List items go here -->
+    </elix-list-box>
 
 Single-selection list boxes are common in user interfaces. As written, the
 `ListBox` component supports the same use cases as a standard `select` element

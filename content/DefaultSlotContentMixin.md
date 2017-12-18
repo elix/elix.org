@@ -1,4 +1,4 @@
-# DefaultSlotContentMixin
+# SlotContentMixin
 
 This mixin provides an implementation of a property called
 [symbols.content](Symbols#content) that returns all nodes assigned to the
@@ -18,7 +18,7 @@ distributed content?).
 Example:
 
 ```
-class CountingElement extends DefaultSlotContentMixin(HTMLElement) {
+class CountingElement extends SlotContentMixin(HTMLElement) {
 
   constructor() {
     super();
