@@ -6,7 +6,7 @@ its shadow elements.
 
 This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 
-> events → methods → setState → **render → update DOM**
+> events → methods → setState → **render** ➞ **update DOM**
 
 **Expects** the component to provide:
 * `updates` property that contains the changes the component would like to make to its own attributes, classes, styles, as well as to those of its shadow elements.

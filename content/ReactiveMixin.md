@@ -4,7 +4,7 @@
 
 This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 
-> events → methods → **setState → render** → update DOM
+> events → methods → **setState** ➞ **render** → update DOM
 
 **Expects** the component to provide:
 * Internal `symbols.render` method that actually updates the DOM. You can use [ShadowTemplateMixin](ShadowTemplateMixin) and [RenderUpdatesMixin](RenderUpdatesMixin) for that purpose.

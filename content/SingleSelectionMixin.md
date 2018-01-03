@@ -3,9 +3,9 @@
 **Purpose:**
 Updates component state to track a single selected item at a time. It includes a public API for setting and retrieving the selected item, as well as methods for moving the selection with cursor operations.
 
-This mixin generally works in the middle of the render [pipeline](pipeline):
+This mixin generally works in the middle of the Elix user interface [pipeline](pipeline):
 
-> events → **methods/properties → state** → render
+> events → **methods/properties** ➞ **state** → render
 
 **Expects** the component to provide:
 * `setState` method, usually supplied by [ReactiveMixin](ReactiveMixin).

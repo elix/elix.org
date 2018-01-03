@@ -12,7 +12,7 @@ or using ARIA roles, states, and properties?).
 
 This mixin generally works at the end of the render [pipeline](pipeline):
 
-> events → methods/properties → **state → render**
+> events → methods/properties → **state** ➞ **render**
 
 **Expects** the component to provide:
 * `state.selectedIndex` property indicating the index of the currently selected item.
