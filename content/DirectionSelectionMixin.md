@@ -1,8 +1,7 @@
 # DirectionSelectionMixin
 
 This mixin maps direction semantics (e.g., "down") to selection semantics
-("selectNext"). When a direction method with a standard identifier is invoked, a
-corresponding selection method is invoked:
+("selectNext"). When a direction method with a standard identifier is invoked, a corresponding selection method is invoked:
 
 * [symbols.goDown](symbols#goDown) → `selectNext`
 * [symbols.goEnd](symbols#goEnd) → `selectLast`
@@ -11,11 +10,7 @@ corresponding selection method is invoked:
 * [symbols.goStart](symbols#goStart) → `selectFirst`
 * [symbols.goUp](symbols#goUp) → `selectPrevious`
 
-A common use of `DirectionSelectionMixin` will be to connect the
-[KeyboardMixin](KeyboardMixin) and
-[KeyboardDirectionMixin](KeyboardDirectionMixin) above to the Elix
-[SingleSelectionMixin](SingleSelectionMixin). This effectively creates a chain
-of actions that convert keyboard events to changes in selection.
+A common use of `DirectionSelectionMixin` will be to connect the [KeyboardMixin](KeyboardMixin) and [KeyboardDirectionMixin](KeyboardDirectionMixin) above to the Elix [SingleSelectionMixin](SingleSelectionMixin). This effectively creates a chain of actions that convert keyboard events to changes in selection.
 
 Example: a press of the Down arrow key can be handled in the following steps:
 
@@ -26,8 +21,4 @@ Example: a press of the Down arrow key can be handled in the following steps:
 3. `DirectionSelectionMixin` handles `symbols.goDown` and invokes `selectNext`.
 4. [SingleSelectionMixin](SingleSelectionMixin) handles `selectNext` and updates the selection.
 
-This sequence may seem circuitous, but factoring the behaviors this way allows
-other forms of interaction. E.g., a separate mixin to handle touch gestures only
-has to map a "swipe left" gesture to a direction method like `goRight` in order
-to patch into this chain. This saves the touch logic from having to know
-anything about selection.
+This sequence may seem circuitous, but factoring the behaviors this way allows other forms of interaction. E.g., a separate mixin to handle touch gestures only has to map a "swipe left" gesture to a direction method like `goRight` in order to patch into this chain. This saves the touch logic from having to know anything about selection.

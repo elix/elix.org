@@ -1,13 +1,10 @@
 # KeyboardPagedSelectionMixin
 
-This mixin supplies standard behavior for the Page Up and Page Down keys,
-mapping those to selection operations. The following [ListBox](ListBox) shows
-the mixin in use:
+This mixin supplies standard behavior for the Page Up and Page Down keys, mapping those to selection operations. The following [ListBox](ListBox) shows the mixin in use:
 
 [A list box that supports Page Up and Page Down](/demos/listBox.html)
 
-The paging behavior is modeled after that of standard Microsoft Windows list
-boxes, which seem to provide more useful keyboard paging than those in macOS:
+The paging behavior is modeled after that of standard Microsoft Windows list boxes, which seem to provide more useful keyboard paging than those in macOS:
 
 * The Page Up and Page Down keys actually change the selection, rather than just
   scrolling. The former behavior seems more generally useful for keyboard users,
@@ -18,10 +15,6 @@ boxes, which seem to provide more useful keyboard paging than those in macOS:
   visible item if the selection is not already there. Thereafter, the key will
   move the selection up/down by a page.
 
-The `KeyboardPagedSelectionMixin` only updates the selection by setting the
-`selectedIndex` property. It does not itself scroll the component. That
-responsibility is left to [SelectionInViewMixin](SelectionInViewMixin).
+The `KeyboardPagedSelectionMixin` only updates the selection by setting the `selectedIndex` property. It does not itself scroll the component. That responsibility is left to [SelectionInViewMixin](SelectionInViewMixin).
 
-This mixin relies on [symbols.keydown](symbols#keydown) being invoked. That will
-typically be done with [KeyboardMixin](KeyboardMixin), but you can also invoke
-that yourself.
+This mixin relies on [symbols.keydown](symbols#keydown) being invoked. That will typically be done with [KeyboardMixin](KeyboardMixin), but you can also invoke that yourself.

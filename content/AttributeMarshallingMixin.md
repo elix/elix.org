@@ -33,31 +33,21 @@ This sample component defines a custom property:
 
     customElements.define('my-element', MyElement);
 
-Because the component applies `AttributeMarshallingMixin`, the camelCase
-`fooBar` property can be set in markup via the hyphenated "foo-bar" attribute:
+Because the component applies `AttributeMarshallingMixin`, the camelCase `fooBar` property can be set in markup via the hyphenated "foo-bar" attribute:
 
     <my-element foo-bar="Hello"></my-element>
 
-When this element is instantiated, the `fooBar` property setter will
-automatically be invoked with the initial value "Hello".
+When this element is instantiated, the `fooBar` property setter will automatically be invoked with the initial value "Hello".
 
 
 ## `attributeChangedCallback`
 
-This mixin provides a default `attributeChangedCallback` implementation that
-will convert a change in an element attribute into a call to the corresponding
-property setter.
+This mixin provides a default `attributeChangedCallback` implementation that will convert a change in an element attribute into a call to the corresponding property setter.
 
-Attributes typically follow hyphenated names ("foo-bar"), whereas properties
-typically use camelCase names ("fooBar"). This mixin respects that convention,
-automatically mapping the hyphenated attribute name to the corresponding
-camelCase property name and invoking the indicated property setter.
+Attributes typically follow hyphenated names ("foo-bar"), whereas properties typically use camelCase names ("fooBar"). This mixin respects that convention, automatically mapping the hyphenated attribute name to the corresponding camelCase property name and invoking the indicated property setter.
 
-Attributes can only have string values, so a string value is what is passed to
-the property setter. If you'd like to convert string attributes to other types
-(numbers, booleans), you must implement parsing yourself in the property setter.
-For example, the following code implements a Boolean property that can be set as
-either: a) a Boolean value or b) a string representing a Boolean value:
+Attributes can only have string values, so a string value is what is passed to the property setter. If you'd like to convert string attributes to other types
+(numbers, booleans), you must implement parsing yourself in the property setter. For example, the following code implements a Boolean property that can be set as either: a) a Boolean value or b) a string representing a Boolean value:
 
     get fooBar() {
       return this[fooBarSymbol];
@@ -76,15 +66,6 @@ either: a) a Boolean value or b) a string representing a Boolean value:
 
 ## `observedAttributes`
 
-`AttributeMarshallingMixin` also provides a default implementation of the static
-`observedAttributes` property. This static getter on the class returns an array
-of the attributes the component wishes to monitor.
+`AttributeMarshallingMixin` also provides a default implementation of the static `observedAttributes` property. This static getter on the class returns an array of the attributes the component wishes to monitor.
 
-This mixin assumes that the component wishes to monitor changes in attributes
-that map to all public properties in the component's API. E.g., in the above
-example, the component defines a property called `fooBar`, so the default value
-of `observedAttributes` will automatically include an entry for the hyphenated
-attribute name, "foo-bar". A component can override this default implementation
-`observedAttributes` if, for some reason, it does _not_ want to monitor changes
-in some of its properties. (It is unclear why that would be useful, but that's
-up to the developer to decide.)
+This mixin assumes that the component wishes to monitor changes in attributes that map to all public properties in the component's API. E.g., in the above example, the component defines a property called `fooBar`, so the default value of `observedAttributes` will automatically include an entry for the hyphenated attribute name, "foo-bar". A component can override this default implementation `observedAttributes` if, for some reason, it does _not_ want to monitor changes in some of its properties. (It is unclear why that would be useful, but that's up to the developer to decide.)

@@ -1,16 +1,12 @@
 # TabStrip
 
-A row or column of tab buttons, typically as part of a [Tabs](Tabs) or similar
-component. It is responsible for positioning the tab buttons, handling keyboard
-navigation, and supporting accessibility.
+A row or column of tab buttons, typically as part of a [Tabs](Tabs) or similar component. It is responsible for positioning the tab buttons, handling keyboard navigation, and supporting accessibility.
 
-A generic instance of `TabStrip` that uses plain `<button>` instances for tab
-buttons might look like this:
+A generic instance of `TabStrip` that uses plain `<button>` instances for tab buttons might look like this:
 
 [Generic TabStrip with plain buttons](/demos/tabStrip.html)
 
-The [LabeledTabs](LabeledTabs) component uses `TabStrip` internally to
-position its buttons:
+The [LabeledTabs](LabeledTabs) component uses `TabStrip` internally to position its buttons:
 
 [LabeledTabs uses TabStrip interally](/demos/labeledTabs.html)
 

@@ -1,8 +1,6 @@
 # RenderUpdatesMixin
 
-**Purpose:** Renders changes in a component's state by efficiently updating
-attributes, classes, styles, and properties on the component's host element and
-its shadow elements.
+**Purpose:** Renders changes in a component's state by efficiently updating attributes, classes, styles, and properties on the component's host element and its shadow elements.
 
 This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 

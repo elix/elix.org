@@ -17,8 +17,7 @@ This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 * `setState()` method to chnage state.
 * `render()` method that will be invoked when state changes. This in turn invokes the component's internal `symbols.render` method.
 
-`ReactiveMixin` represents a minimal implementation of the functional-reactive programming architecture populate in React and similar frameworks. The mixin itself focuses exclusively on managing state and determining when the state should be
-rendered.
+`ReactiveMixin` represents a minimal implementation of the functional-reactive programming architecture populate in React and similar frameworks. The mixin itself focuses exclusively on managing state and determining when the state should be rendered.
 
 You can use this mixin with whatever DOM rendering technology you like
 (virtual-dom, hyperHTML, lit-html, plain old DOM API calls, etc.). The Elix project itself uses `ReactiveMixin` as a core part of all its components. Elix components generally use `ShadowTemplateMixin` and `RenderUpdatesMixin` to actually render the component state to the DOM.
@@ -70,51 +69,30 @@ Functional-reactive frameworks often use a canonical increment/decrement compone
 
 [A simple increment/decrement component defined with ReactiveMixin](/demos/reactiveExample.html)
 
-ReactiveMixin provides a foundation very similar to React’s `Component` class (or,
-more specifically, `PureComponent`), but for native HTML web components. The
-compact mixin provides a small core of features that enable reactive web
-component development in a flexible way.
+ReactiveMixin provides a foundation very similar to React’s `Component` class (or, more specifically, `PureComponent`), but for native HTML web components. The compact mixin provides a small core of features that enable reactive web component development in a flexible way.
 
 
 ## Defining state
 
-ReactiveMixin gives the component a property called `state`, a dictionary object with all state defined by the component and any of its other mixins. The `state` property itself is read-only and immutable. You can reference it during rendering, and to provide backing for public properties like the `value` getter
-above.
+ReactiveMixin gives the component a property called `state`, a dictionary object with all state defined by the component and any of its other mixins. The `state` property itself is read-only and immutable. You can reference it during rendering, and to provide backing for public properties like the `value` gette r above.
 
-ReactiveMixin provides a `setState` method the component invokes to update its
-own state. The mixin sets the initial state in the constructor by passing the
-value of the `defaultState` property to `setState`. You can invoke `setState` in response to user interaction, as in the example above. *** show event handlers ***
+ReactiveMixin provides a `setState` method the component invokes to update its own state. The mixin sets the initial state in the constructor by passing the value of the `defaultState` property to `setState`. You can invoke `setState` in response to user interaction, as in the example above. *** show event handlers ***
 
 
 ## Detecting state changes
 
-When you call `setState`, ReactiveMixin updates your component’s state. It then
-invokes a `shouldComponentUpdate` method to determine whether the component
-should be rerendered.
+When you call `setState`, ReactiveMixin updates your component’s state. It then invokes a `shouldComponentUpdate` method to determine whether the component should be rerendered.
 
-The default implementation of `shouldComponentUpdate` method performs a shallow
-check on the state properties: if any top-level state properties have changed
-identity or value, the component is considered dirty, prompting a rerender. This
-is comparable to the similar behavior in `React.PureComponent`. In our
-explorations, we have found that our web components tend to have shallow state,
-so pure components are a natural fit. You can override this to provide a looser
-dirty check (like `React.Component`) or a tighter one (to optimize performance,
-or handle components with deep state objects).
+The default implementation of `shouldComponentUpdate` method performs a shallow check on the state properties: if any top-level state properties have changed identity or value, the component is considered dirty, prompting a rerender. This is comparable to the similar behavior in `React.PureComponent`. In our explorations, we have found that our web components tend to have shallow state, so pure components are a natural fit. You can override this to provide a looser dirty check (like `React.Component`) or a tighter one (to optimize performance, or handle components with deep state objects).
 
-If there are changes _and_ the component is in the DOM, the new state will be
-rendered.
+If there are changes _and_ the component is in the DOM, the new state will be rendered.
 
 
 ## Rendering
 
-This mixin stays intentionally independent of the way you want to render state
-to the DOM. Instead, the mixin invokes an internal component method whenever
-your component should render, and that method can invoke whatever DOM updating
-technique you like. This could be a virtual DOM engine, or you could just do it
-with plain DOM API calls.
+This mixin stays intentionally independent of the way you want to render state to the DOM. Instead, the mixin invokes an internal component method whenever your component should render, and that method can invoke whatever DOM updating technique you like. This could be a virtual DOM engine, or you could just do it with plain DOM API calls.
 
-Here’s a plain DOM API render implementation for the increment/decrement example
-above. We’ll start with a template:
+Here’s a plain DOM API render implementation for the increment/decrement example above. We’ll start with a template:
 
 
     <template id="template">
@@ -124,11 +102,7 @@ above. We’ll start with a template:
     </template>
 
 
-To the component code above, we’ll add an internal render method for
-ReactiveMixin to invoke. The mixin uses an identifier from the
-[symbols](symbols) module to identify the internal render method. This avoids
-name collisions, and discourages someone from trying to invoke the render method
-from the outside.
+To the component code above, we’ll add an internal render method for ReactiveMixin to invoke. The mixin uses an identifier from the [symbols](symbols) module to identify the internal render method. This avoids name collisions, and discourages someone from trying to invoke the render method from the outside.
 
 
     import ReactiveMixin from ‘elix/src/ReactiveMixin.js’;
@@ -158,13 +132,9 @@ from the outside.
     }
 
 
-The last line is the core bit that will update the DOM every time the state
-changes. The two buttons update state by setting the `value` property, which in
-turn calls `setState`.
+The last line is the core bit that will update the DOM every time the state changes. The two buttons update state by setting the `value` property, which in turn calls `setState`.
 
-This ReactiveMixin would also be a natural fit with template literal libraries
-like [lit-html](https://github.com/PolymerLabs/lit-html/) or
-[hyperHTML](https://github.com/WebReflection/hyperHTML).
+This ReactiveMixin would also be a natural fit with template literal libraries like [lit-html](https://github.com/PolymerLabs/lit-html/) or [hyperHTML](https://github.com/WebReflection/hyperHTML).
 
 
 ## Using with `ShadowTemplateMixin` and `RenderUpdatesMixin`.
@@ -238,17 +208,11 @@ The three mixins, `ReactiveMixin`, `ShadowTemplateMixin`, and `RenderUpdatesMixi
 
 ## Web component and FRP lifecycle methods
 
-Since components created with this mixin are still regular web components, they
-receive all the standard lifecycle methods. ReactiveMixin augments
-`connectedCallback` so that a component will be rendered when it’s first added
-to the DOM.
+Since components created with this mixin are still regular web components, they receive all the standard lifecycle methods. ReactiveMixin augments `connectedCallback` so that a component will be rendered when it’s first added to the DOM.
 
 The mixin provides two React-style lifecycle methods:
 
 * `componentDidMount` is invoked when your component has finished rendering for the first time.
-* `componentDidUpdate` is invoked whenever your component has completed a subsequent
-rerender.
+* `componentDidUpdate` is invoked whenever your component has completed a subsequent rerender.
 
-ReactiveMixin does not provide `componentWillUnmount`; use the standard
-`disconnectedCallback` instead. Similarly, use the standard
-`attributeChangedCallback` instead of `componentWillReceiveProps`.
+ReactiveMixin does not provide `componentWillUnmount`; use the standard `disconnectedCallback` instead. Similarly, use the standard `attributeChangedCallback` instead of `componentWillReceiveProps`.
