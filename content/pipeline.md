@@ -1,32 +1,24 @@
 # Elix component render pipeline
 
-Elix components use a functional-reactive programming (FRP) architecture. To achieve high quality, reliable behaviors across a large number of components, the project breaks down component behaviors in [mixins](mixins). These mixins cooperate with each other, generally handling a specific point in a rendering pipeline.
-
-
-## Elix component rendering pipeline
-
-Elix component user interfaces usually adopt the following conceptual pipeline of activity:
+Elix components use a functional-reactive programming (FRP) architecture. To achieve high quality, reliable behaviors across a large number of components, the project breaks down component behaviors in [mixins](mixins). These mixins cooperate with each other, generally handling a specific point in a rendering pipeline:
 
 > events → methods/properties → state → render
 
-1. User activity generates DOM **events**, such as a `keydown` or `touchstart` event. Use activity can also trigger application behavior that produces custom element lifecycle callbacks (e.g., `attributeChangedCallback`) that can be considered events in this pipeline.
-2. Event handlers respond by invoking/setting **methods/properties** on the component. In very simple cases, an event handler may directly call `setState` to update component state.
-3. Component methods/properties update component **state**. The method/property may call `setState` directly, or it might invoke another method/property that ultimately calls `setState`.
+1. User activity generates DOM **events**, such as a `keydown` or `touchstart` event. User activity can also trigger application behavior that produces custom element lifecycle callbacks (e.g., `attributeChangedCallback`). These can also be considered events in this pipeline.
+2. Event handlers respond by invoking **methods** or setting **properties** on the component. (In very simple cases, an event handler skip this step, and directly call `setState` to update component state.)
+3. Component methods/properties in turn update component **state**. The method/property may call `setState` directly, or it might invoke another method/property that ultimately calls `setState`.
 4. Changes in state cause a component to **render**. The component is asked for `updates` it would like to apply to the DOM. Alternatively, the component can implement an internal `render` method that updates the DOM directly.
 
 
 ## Core mixins that define the pipeline
 
-A core set of mixins define the pipeline described above.
+The pipeline described above is defined by a core set of component mixins:
 
-* [ReactiveMixin](ReactiveMixin). Manages a component's `state` property, renders the compnent when state changes.
+* [ReactiveMixin](ReactiveMixin). Manages a component's `state` property, and renders the compnent when state changes.
 * [RenderUpdatesMixin](RenderUpdatesMixin). Helps a component map `state` to a set of `updates` that should be applied to DOM attributes, classes, styles, and properties.
 * [ShadowTemplateMixin](ShadowTemplateMixin). Creates a component's shadow root and stamps a template into it.
 
-For convenience, this set of core mixins is provided in a single base class
-called [ElementBase](ElementBase). (ElementBase also includes
-`AttributeMarshallingMixin`, below.) When creating your own components, you
-don't have to use that base class; you can use the mixins above directly.
+For convenience, this set of core mixins is provided in a single base class called [ElementBase](ElementBase). (ElementBase also includes `AttributeMarshallingMixin`, below.) When creating your own components, you don't have to use that base class; you can use the mixins above directly.
 
 The remaining Elix mixins generally focus on the transition from one of these steps in the pipeline to the next.
 

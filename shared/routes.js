@@ -13,6 +13,7 @@ export default {
   '/documentation/elements': ContentPage,
   '/documentation/helpers': ContentPage,
   '/documentation/mixins': ContentPage,
+  '/documentation/pipeline': ContentPage,
   '/documentation/wrappers': ContentPage,
   '/documentation/:name': ComponentPage,
   '/error': ErrorPage,
