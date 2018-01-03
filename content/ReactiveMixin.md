@@ -76,7 +76,7 @@ ReactiveMixin provides a foundation very similar to React’s `Component` class 
 
 ReactiveMixin gives the component a property called `state`, a dictionary object with all state defined by the component and any of its other mixins. The `state` property itself is read-only and immutable. You can reference it during rendering, and to provide backing for public properties like the `value` gette r above.
 
-ReactiveMixin provides a `setState` method the component invokes to update its own state. The mixin sets the initial state in the constructor by passing the value of the `defaultState` property to `setState`. You can invoke `setState` in response to user interaction, as in the example above. *** show event handlers ***
+ReactiveMixin provides a `setState` method the component invokes to update its own state. The mixin sets the initial state in the constructor by passing the value of the `defaultState` property to `setState`. You can invoke `setState` in response to user interaction. (How you wire up event handlers is up to you; the Rendering section below explores some ways to handle events.)
 
 
 ## Detecting state changes
@@ -152,6 +152,17 @@ The Elix project itself generally renders its components with two mixins:
       ReactiveMixin(RenderUpdatesMixin(ShadowTemplateMixin(HTMLElement)));
 
     class IncrementDecrement extends Base {
+
+      componentDidMount() {
+        if (super.componentDidMount) { super.componentDidMount(); }
+        // Wire up event handlers once the shadow tree has been populated.
+        this.$.decrement.addEventListener('click', () => {
+          this.value--;
+        });
+        this.$.increment.addEventListener('click', () => {
+          this.value++;
+        });
+      }
 
       // This property becomes the initial value of this.state at constructor time.
       get defaultState() {

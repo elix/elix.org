@@ -1,13 +1,13 @@
 # RenderUpdatesMixin
 
-**Purpose:** Renders changes in a component's state by efficiently updating attributes, classes, styles, and properties on the component's host element and its shadow elements.
+**Purpose:** Renders changes in a component's state by efficiently updating attributes, child nodes, classes, styles, and properties on the component's host element and its shadow elements.
 
 This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 
 > events → methods → setState → **render** ➞ **update DOM**
 
 **Expects** the component to provide:
-* `updates` property that contains the changes the component would like to make to its own attributes, classes, styles, as well as to those of its shadow elements.
+* `updates` property that contains the changes the component would like to make to its own attributes, child nodes, classes, styles, as well as to those of its shadow elements.
 
 **Provides** the component with:
 * Internal `symbols.render` method that will be invoked when the component is rendering. This is designed to interoperate with [ReactiveMixin](ReactiveMixin). When the render method is called, RenderUpdatesMixin will asks the component for `updates`, then applies those to the DOM.
@@ -49,7 +49,7 @@ A key advantage of using `updates` over writing a render function yourself is th
 Your component's `updates` property should return a plain JavaScript object. The keys of that object indicate what changes you want to make to the component's host element.
 
 
-### Attributes
+### Updating attributes
 
 An `updates` object with an `attributes` key asks `UpdateMixin` to update the host element's attributes. E.g., the component can set its own `tabindex` attribute with:
 
@@ -60,6 +60,11 @@ An `updates` object with an `attributes` key asks `UpdateMixin` to update the ho
     }
 
 The values of the attributes will be cast to strings, so `tabindex: 0` and `tabindex: '0'` are equivalent. A `null` value asks that the indicated attribute be _removed_ from the element.
+
+
+### Updating child nodes
+
+An `updates` object with a `childNodes` key causes `UpdateMixin` to update the element's child nodes to a `NodeList` or array of `Node` objects. This key is generally only used in conjunction with `$` (below) to update the child nodes of a shadow element. (It would be rather unusual and surprising for a component to modify its own light DOM children.)
 
 
 ### Updating classes
@@ -90,8 +95,6 @@ An `updates` object with a `styles` key sets styles on the host element:
 For consistency, style rules should generally be identified with lowercase, hyphenated names (`background-color`), but Pascal-case names (`BackgroundColor`) are also supported.
 
 To unset a particular rule, pass in a value of the empty string, `''`.
-
-*** see mixins and subclasses
 
 
 ### Updating shadow elements with `$`
@@ -190,7 +193,7 @@ One key advantage of using an `updates` object to track what changes should be a
 
 For example, a base class might define `updates` to define some attributes and styles:
 
-    import * as updates from '@elix/elix/src/updates.js'
+    import * as updates from 'elix/src/updates.js'
 
     // In the base class
     get updates() {
