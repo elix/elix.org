@@ -66,7 +66,10 @@ export default class DocumentationSection extends Component {
     // "InheritsFrom" section
     //
     let inheritsFromJSX;
-    const inheritsHTMLElementOnly = apiHeader.augments && apiHeader.augments.includes('HTMLElement');
+    const inheritsHTMLElementOnly = apiHeader.customTags && 
+      apiHeader.customTags.length > 0 && 
+      apiHeader.customTags[0].tag === 'inherits' && 
+      apiHeader.customTags[0].value === 'HTMLElement';
     if (apiHeader.inheritance || inheritsHTMLElementOnly) {
       let inheritance;
       if (apiHeader.inheritance) {
