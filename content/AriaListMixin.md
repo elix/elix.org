@@ -8,7 +8,7 @@ This mixin generally works at the end of the render [pipeline](pipeline):
 > events → methods/properties → **state** ➞ **render**
 
 **Expects** the component to provide:
-* `state.selectedIndex` property indicating the index of the currently selected item.
+* `state.selectedIndex` property indicating the index of the currently selected item. This is usually provided by [SingleSelectionMixin](SingleSelectionMixin).
 * `items` property representing the items that can be selected. This is usually provided by [ContentItemsMixin](ContentItemsMixin).
 
 **Provides** the component with:
@@ -17,18 +17,23 @@ This mixin generally works at the end of the render [pipeline](pipeline):
 
 ## Usage
 
+    import AriaListMixin from 'elix/src/AriaListMixin.js';
+
+    class MyElement extends AriaListMixin(HTMLElement) {}
+
 Elix mixins and components support universal access for all users. The work required to properly expose the selection state of a component in ARIA is complex, but thankfully fairly generalizable. `AriaListMixin` provides a reasonable baseline implementation of ARIA support for list components. (Another important aspect of supporting universal access is to provide full keyboard support. See [KeyboardMixin](KeyboardMixin) and its related mixins.)
 
 
 ### Example
 
-    // A sample element that exposes single-selection via ARIA.
+`AriaListMixin` complements the model of selection formalized in the companion [SingleSelectionMixin](SingleSelectionMixin). A very simple element can expose its single-selection state via ARIA:
+
     class AccessibleList extends
-        AriaListMixin(SingleSelectionMixin(HTMLElement)) {
+        AriaListMixin(SingleSelectionMixin(ElementBase)) {
+      // Simplistic definition for the component's items.
       get items() {
         return this.children;
       }
-      // Not shown: when items change, invoke [symbols.itemAdded] for new items.
     }
     customElements.define('accessible-list', AccessibleList);
 
@@ -59,13 +64,11 @@ The `AriaListMixin` has selected appropriate default values for the attributes `
 
 `AriaListMixin` has updated the `aria-selected` attribute of the selected item, and reflected this at the list level with `aria-activedescendant`.
 
-In practice, some additional attributes must be set for ARIA to be useful. The author should specific a meaningful, context-dependent label for the element with an `aria-label` or `aria-labeledby` attribute. In this example, a `tabindex` of 0 is also specified, although a planned mixin for general keyboard support can take care of providing a default `tabindex` value.
+As shown above, some additional attributes must be manually set for ARIA to be useful. You should supply a meaningful, context-dependent label for the element with an `aria-label` or `aria-labeledby` attribute. You should also supply a `tabindex`, or use a mixin like [KeyboardMixin](KeyboardMixin) that defines a `tabindex` for you.
 
 As a demonstration, the following [ListBox](ListBox) should be navigable with a keyboard and a screen reader such as Apple VoiceOver (usually invoked by pressing ⌘F5).
 
 [A list box exposing selection state via AriaListMixin](/demos/listBox.html)
-
-`AriaListMixin` complements the model of selection formalized in the companion [SingleSelectionMixin](SingleSelectionMixin). If a component author prefers, they can skip the latter mixin, and provide their own implementation of the members [symbols.itemSelected](symbols#itemSelected), [symbols.itemAdded](symbols#itemAdded), and `selectedItem`.
 
 The mixin's primary work is setting ARIA attributes as follows.
 
@@ -88,7 +91,7 @@ The most general purpose of these roles is `listbox`, so unless otherwise specif
 
 A suitable ARIA role must also be applied at the item level. The default role applied to items is `option`, defined in the [documentation](https://www.w3.org/TR/wai-aria/roles#option) as a selectable item in a list element with role `listbox`.
 
-In situations where different roles are defined, a component can provide default values as [defaultState](ReactiveMixin#defaultState):
+In situations where different roles are defined, a component can provide default values as state, e.g. in [defaultState](ReactiveMixin#defaultState):
 
     class TabList extends AriaListMixin(HTMLElement) {
       get defaultState() {
@@ -148,7 +151,4 @@ ARIA defines an `aria-selected` attribute that should be set to `true` on the cu
   indicates that screen readers do exist which require this behavior.
 
 * When an item's selection state changes, `AriaListMixin` reflects
-  its new state in its `aria-selected` attribute. This is done in the
-  [symbols.itemSelected](symbols#itemSelected) method, which is automatically invokes by
-  `SingleSelectionMixin`, or the component author can invoke that method
-  manually.
+  its new state in its `aria-selected` attribute.

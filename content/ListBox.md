@@ -6,9 +6,10 @@ This component presents its assigned children as items in a single-selection lis
 
 `ListBox` uses `SingleSelectionMixin` to expose a single selection. The user can click an item to select it, or navigate the selection with the keyboard (per `KeyboardDirectionMixin`, `KeyboardPagedSelectionMixin`, and `KeyboardPrefixSelectionMixin`).
 
-By default, the selected item is shown with standard highlight colors (CSS `highlight` color for the background, `highlighttext` for the text). This will eventually be configurable with CSS, although Elix is still working out a general theming strategy.
+By default, a `ListBox` shows a generic visual style. The selected item is shown with standard highlight colors (CSS `highlight` color for the background, `highlighttext` for the text). You can create custom subclasses of ListBox that override the `updates` property to provide custom styling.
 
-The ListBox exposes an `orientation` property that can either by "vertical" (the default), or "horizontal". Moreover, the list reflects its `orientation` property value as an attribute to simplify conditional styling.
+The ListBox exposes an `orientation` property that can either by "vertical" (the default), or "horizontal". Internally, the orientation is tracked as `state.orientation`.
+
 
 [A horizontal list](/demos/horizontalList.html)
 
@@ -18,8 +19,6 @@ Lists typically obtain their items from their child elements using `SlotContentM
 <code>navigator.plugins</code>. (These tend to be internal components, rather than user-visible browser extensions. If you do not see a demo, your browser may have no plugins installed.)
 
 [A list with hard-coded items](/demos/browserPluginList.html)
-
-By default, a `ListBox` shows a generic visual style. Once the Elix project establishes a theming strategy, we will allow developers to style a `ListBox` instance with CSS.
 
 
 ## Usage

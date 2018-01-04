@@ -11,7 +11,8 @@ This mixin generally works in the middle of the Elix user interface [pipeline](p
 * `items` property representing the items that can be selected. This is usually provided by [ContentItemsMixin](ContentItemsMixin).
 
 **Provides** the component with:
-* `state.selectedIndex` property that tracks the index of the currently selected item.
+* `state.selectedIndex` state to track the index of the currently selected item.
+* `selectedIndex` and `selectedItem` properties to read or manipulate the selected index.
 * `selectFirst()`, `selectLast()`, `selectNext()`, and `selectPrevious()` methods to set and move the selection.
 
 
@@ -60,7 +61,7 @@ Here, the currently-selected item is tracked with `SingleSelectionMixin`.
 
 # The `items` collection
 
-`SingleSelectionMixin` manages a selection within an identified collection of HTML elements. A component identifies that collection by defining a read-only `items` property. A simplistic implementation of `items` return the component's children:
+`SingleSelectionMixin` manages a selection within an identified collection of HTML elements. A component identifies that collection by defining a read-only `items` property. A simplistic implementation of `items` could return the component's light DOM children:
 
     class SimpleList extends SingleSelectionMixin(HTMLElement) {
       get items() {
@@ -68,7 +69,7 @@ Here, the currently-selected item is tracked with `SingleSelectionMixin`.
       }
     }
 
-Note: The above definition for `items` is too simplistic, as it does not support the Gold Standard checklist item [Content Assignment](https://github.com/webcomponents/gold-standard/wiki/Content-Assignment), but it can suffice here for demonstration purposes. A more complete component could use [SlotContentMixin](SlotContentMixin) and [ContentItemsMixin](ContentItemsMixin) to meet the Gold Standard criteria.
+The above definition for `items` is simplistic, as it does not support the Gold Standard checklist item [Content Assignment](https://github.com/webcomponents/gold-standard/wiki/Content-Assignment). Neverthless, it can suffice here for demonstration purposes. A more complete component could use [SlotContentMixin](SlotContentMixin) and [ContentItemsMixin](ContentItemsMixin) to meet the Gold Standard criteria.
 
 The key point is that the component provides the collection of items, and they can come from anywhere. The component could, for example, indicate that the items being managed reside in the component's own Shadow DOM subtree:
 
@@ -76,7 +77,7 @@ The key point is that the component provides the collection of items, and they c
       constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        // Populate shadow subtree it with elements.
+        // Populate shadow tree with elements.
       }
       get items() {
         return this.shadowRoot.children;
@@ -85,77 +86,32 @@ The key point is that the component provides the collection of items, and they c
 
 For flexibility, SingleSelectionMixin can work with an `items` collection of type `NodeList` (as in the above examples) or `Array` (e.g., if the component wants to filter elements for use as items).
 
-The `items` property should normally be defined in terms of component state. This ensures that `SingleSelectionMixin` will be notified when the component's state changes.
+The `items` property is often derived from component state, ensuring that `SingleSelectionMixin` will be notified when the component's state changes.
 
 
 ## The selected item
 
-Components managing selection often want to reference the selection in two different ways: 1) by index and 2) by object reference. `SingleSelectionMixin` supports both approaches with complementary properties that can _both_ be get/set, and that are automatically kept in sync:
+The mixin tracks the currently selected item by its index in `state.selectedIndex`. This is the zero-based index of the currently-selected item within the `items` collection (above). If there is no selection, `selectedIndex` is -1.
 
-* `selectedIndex`. This is the zero-based index of the currently selected item
-  within the `items` collection. If there is no selection, `selectedIndex` is -1.
-  When this property changes as a result of internal component activity, the
-  mixin raises a `selected-index-changed` event.
-* `selectedItem`. This is a reference to the currently selected
-  HTMLElement in the `items` collection. If there is no selection,
-  `selectedItem` is null. When this property changes as a result of internal
-  component activity, the mixin raises a `selected-item-changed` event.
+To facilitate manipulation of a component's selection from outside, `SingleSelectionMixin` adds
+public properties to the component for reading and updating the selectedIndex state:
 
-Updating one of these properties also updates the other, as shown in the first `SimpleList` example at the beginning of this document. Setting either property will raise _both_ the `selected-index-changed` and `selected-item-changed` events.
+Applications working with selection sometimes want to reference select by index, and sometimes by object reference. The mixin supports both approaches with complementary properties that can both be get and set:
 
+* `selectedIndex`. This reflects the current value of `state.selectedIndex`.
+* `selectedItem`. This returns or sets the current item at `state.selectedIndex` within the `items` collection. If there is no selection, `selectedItem` is null.
 
-# Per-item selection state
-
-`SingleSelectionMixin` helps map a component's overall selection state (which item is selected?) to the selection states of individual items (is this item currently selected or not?). When the `selectedItem` property changes, the mixin invokes a method, `itemSelected` so that other mixins can update any per-item selection state. The `itemSelected` method will be invoked either once or twice:
-
-* If there had previously been a selection, the old item is passed to
-  `itemSelected` along with a value of `false` to indicate the item is no longer
-  selected.
-* If there is now a new selected item, the new item is passed to `itemSelected`
-  along with a value of `true` to indicate it is now selected.
-
-Example: A simple ARIA mixin could manage the `aria-selected` value for selected items.
-
-    import symbols from './symbols';
-
-    const SimpleAriaMixin = (base) => class SimpleAria extends base {
-
-      // Mark new items as unselected by default.
-      [symbols.itemAdded](item) {
-        item.setAttribute('aria-selected', false);
-      }
-
-      // Update the aria-selected attribute to reflect a change in item state.
-      [symbols.itemSelected](item, selected) {
-        item.setAttribute('aria-selected', selected);
-      }
-    }
-
-The above code is provided for reference only. A more complete implementation of the attributes required for full ARIA supports is provided by [AriaListMixin](AriaListMixin).
-
-
-### Updating the selection in response to `itemsChanged`
-
-When the component invokes `itemsChanged`, `SingleSelectionMixin` tracks any changes the mutations entail for the `selectedIndex` and `selectedItem` properties. In particular, there are situations in which the selected item might be moved within the `items` collection. Suppose a list has three items, and the selected item is moved:
-
-    list.selectedIndex = 0;
-    list.appendChild(list.items[0]);  // Move selected item to end of list.
-    list.selectedIndex                // Now this is 2, since item moved.
-
-The above example would raise the `selected-index-changed` event but _not_ the `selected-item-changed` event, because the `selectedIndex` property changed but the `selectedItem` property did not.
-
-Similarly, if the selected item is removed from the `items` collection, the `selectedIndex` and `selectedItem` properties will be reset to -1 and null, respectively. (Unless `selectionRequired` is true, see below.)
-
-When `SingleSelectionMixin` has finished updating the selection properties, it raises an `items-changed` event.
+When this property changes as a result of internal component activity, the
+mixin raises a `selected-index-changed` event.
 
 
 # Requiring a selection
 
-The `SingleSelectionMixin` defines a `selectionRequired` property. If true, the component will always have a selection as long as it has at least one item. By default, `selectionRequired` is false. This is appropriate, for example, in components like list boxes or combo boxes which initially may have no selection.
+The `SingleSelectionMixin` defines a `selectionRequired` property that wraps an internal state member `state.selectionRequired`. By default, `selectionRequired` is false. This is appropriate, for example, in components like list boxes or combo boxes which initially may have no selection.
 
 Some components do require a selection. An example is a carousel: as long as the carousel contains at least one item, the carousel should always show some item as selected. Such components can set `selectionRequired` to true.
 
-When `selectionRequired` is true, the following checks are performed when `itemsChanged` is invoked:
+When `selectionRequired` is true, the following checks are performed when a component's `validateState` method is called:
 
 * If items exist and no selection has been established, the first item is
   selected by default.
@@ -169,7 +125,7 @@ When `selectionRequired` is true, the following checks are performed when `items
 
 # Cursor operations
 
-The selection can be programmatically manipulated via cursor methods:
+The selection can be programmatically manipulated via public cursor methods:
 
 * `selectFirst`. Selects the first item.
 * `selectLast`. Selects the last item.
@@ -189,20 +145,44 @@ All cursor methods return a boolean value: true if they changed the selection, f
 
 ## Selection wrapping
 
-In some cases, such as carousels, cursor operations should wrap around from the last item to the first and vice versa. This optional behavior, useful in carousel-style components and slideshows, can be enabled by setting the mixin's `selectionWraps` property to true. The default value is false.
+In some cases, such as carousels, cursor operations should wrap around from the last item to the first and vice versa. This optional behavior, useful in carousel-style components and slideshows, can be enabled by setting the mixin's `selectionWraps` property to true. Internally, this maps to a state member `state.selectionWraps`. The default value is false.
 
 
 ## Cursor properties
 
 Two properties track whether the `selectNext` and `selectPrevious` methods are available:
 
-* `canSelectPrevious`. This is true if the `selectPrevious` method can be
-  called. When this property changes as a result of internal component activity,
-  the mixin raises a `can-select-previous-changed` event.
+* `canSelectPrevious`. This is true if the `selectPrevious` method can be called.
 * `canSelectNext`. This is true if the `selectNext` method can be called.
-  When this property changes as a result of internal component activity, the
-  mixin raises a `can-select-next-changed` event.
 
 These properties are useful for components that want to offer the user, e.g., Next/Previous buttons to move the selection. The properties above can be monitored for changes to know whether such Next/Previous buttons should be enabled or disabled.
 
 Both `selectNext` and `selectPrevious` support a special case: if there is no selection but items exist, those methods select the first or last item respectively. Accordingly, if there is no selection but items exist, the `canSelectNext` and `canSelectPrevious` properties will always be true.
+
+
+# Per-item selection state
+
+`SingleSelectionMixin` helps map a component's overall selection state (which item is selected?) to the selection states of individual items (is this item currently selected or not?). This is done in conjunction with the separate [ContentItemsMixin](ContentItemsMixin).
+
+`ContentItemsMixin` helps a component render updates to individual list items when the component's state changes. During rendering, `ContentItemsMixin` asks a component for any [itemUpdates](ContentItemsMixin#itemUpdates) that should be applied to each list item. That `itemUpdates` method includes a `calcs` parameter with relevant per-item state information.
+
+When `SingleSelectionMixin` is used with `ContentItemsMixin`, the `calcs` parameter includes a `selected` property that is true if the given item is currently the list's selected item, and false otherwise. A component can use this `calcs.selected` value in determining how the item should be rendered.
+
+Example: A simple ARIA mixin could manage the `aria-selected` value for selected items.
+
+    import symbols from 'elix/src/symbols';
+
+    const SimpleAriaMixin = (base) => class SimpleAria extends base {
+
+      // Update the aria-selected attribute to reflect a change in item state.
+      itemUpdates(item, calcs, original) {
+        return {
+          attributes: {
+            'aria-selected': calcs.selected
+          }
+        };
+      }
+
+    }
+
+The above code is provided for reference only. A more complete implementation of the attributes required for full ARIA supports is provided by [AriaListMixin](AriaListMixin).

@@ -23,7 +23,7 @@ For convenience, this set of core mixins is provided in a single base class call
 The remaining Elix mixins generally focus on the transition from one of these steps in the pipeline to the next.
 
 
-## Mixins that map events → methods/properties
+## Mixins that map events → methods/properties (or to → state)
 
 * [ArrowSelectionMixin](ArrowSelectionMixin). Adds left/right buttons that map to `goLeft`/`goRight` methods.
 * [AttributeMarshallingMixin](AttributeMarshallingMixin). Maps attributes to properties.

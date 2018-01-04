@@ -13,12 +13,19 @@ This mixin works at the beginning of the Elix user interface [pipeline](pipeline
 * `attributeChangedCallback` implementation that maps attribute changes to property changes.
 * `observedAttributes` implementation that, by default, indicates the component wants to receive attribute change notifications for all attributes corresponding to the component's custom properties.
 
-This mixin's function is so common that it is included in the Elix base class [ElementBase](./ElementBase).
+This mixin's function is so common that it is included in the Elix base class [ElementBase](ElementBase).
 
 
-## Example
+## Usage
 
-This sample component defines a custom property:
+    import AttributeMarshallingMixin from 'elix/src/AttributeMarshallingMixin.js';
+
+    class MyElement extends AttributeMarshallingMixin(HTMLElement) {}
+
+
+### Example
+
+This sample component defines a custom `fooBar` property, then exposes it as a "foo-bar" attribute:
 
     const fooBarSymbol = Symbol('fooBar');
 
