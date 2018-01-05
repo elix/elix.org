@@ -12,13 +12,12 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 * `symbols.goDown`, `symbols.goUp`, `symbols.goLeft`, `symbols.goRight` methods, e.g., from [DirectionSelectionMixin](DirectionSelectionMixin).
 
 **Provides** the component with:
-* Mappings between direction keyboard events to direction methods.
+* Mappings from direction keyboard events to direction methods.
 
 
 ## Usage
 
     import KeyboardDirectionMixin from 'elix/src/KeyboardDirectionMixin.js';
-
     class MyElement extends KeyboardDirectionMixin(HTMLElement) {}
 
 

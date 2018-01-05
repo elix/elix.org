@@ -2,7 +2,6 @@
 
 **Purpose:** map the Page Up and Page Down keys to selection operations.
 
-
 This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 
 > events → **methods** ➞ **setState** → render → update DOM
@@ -12,13 +11,12 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 * `state.selectedIndex` state member updatable via [setState](ReactiveMixin#setState).
 
 **Provides** the component with:
-* Mappings between page navigation keyboard events to selection operations.
+* Mappings from page navigation keyboard events to selection operations.
 
 
 ## Usage
 
     import KeyboardPagedSelectionMixin from 'elix/src/KeyboardPagedSelectionMixin.js';
-
     class MyElement extends KeyboardPagedSelectionMixin(HTMLElement) {}
 
 
