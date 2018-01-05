@@ -7,8 +7,8 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 > events → **methods** ➞ **setState** → render → update DOM
 
 **Expects** the component to provide:
-* `keydown` method, usually defined by [KeyboardMixin](KeyboardMixin).
 * `state.selectedIndex` state member updatable via [setState](ReactiveMixin#setState).
+* `symbols.keydown` method, usually defined by [KeyboardMixin](KeyboardMixin).
 
 **Provides** the component with:
 * Mappings from page navigation keyboard events to selection operations.

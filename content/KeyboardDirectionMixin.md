@@ -8,8 +8,8 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 > events → **methods** ➞ **methods** → setState → render → update DOM
 
 **Expects** the component to provide:
-* `keydown` method, usually defined by [KeyboardMixin](KeyboardMixin).
 * `symbols.goDown`, `symbols.goUp`, `symbols.goLeft`, `symbols.goRight` methods, e.g., from [DirectionSelectionMixin](DirectionSelectionMixin).
+* `symbols.keydown` method, usually defined by [KeyboardMixin](KeyboardMixin).
 
 **Provides** the component with:
 * Mappings from direction keyboard events to direction methods.

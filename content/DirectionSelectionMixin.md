@@ -17,7 +17,6 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 ## Usage
 
     import DirectionSelectionMixin from 'elix/src/DirectionSelectionMixin.js';
-
     class MyElement extends DirectionSelectionMixin(HTMLElement) {}
 
 

@@ -18,6 +18,9 @@ This mixin generally works in the middle of the Elix user interface [pipeline](p
 
 ## Usage
 
+    import SingleSelectionMixin from 'elix/src/SingleSelectionMixin.js';
+    class MyElement extends SingleSelectionMixin(HTMLElement) {}
+
 `SingleSelectionMixin` is designed to support components that let the user select a single thing at a time. This is generally done to let the user select a value (e.g., as the target of an action, or in configuring something), or as a navigation construct (where only one page/mode is visible at a time).
 
 Examples:

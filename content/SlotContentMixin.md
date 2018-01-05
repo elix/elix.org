@@ -18,7 +18,6 @@ This mixin works at the beginning of the Elix user interface [pipeline](pipeline
 ## Usage
 
     import SlotContentMixin from 'elix/src/SlotContentMixin.js';
-
     class MyElement extends SlotContentMixin(HTMLElement) {}
 
 

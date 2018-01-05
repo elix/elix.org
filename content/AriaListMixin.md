@@ -18,7 +18,6 @@ This mixin generally works at the end of the render [pipeline](pipeline):
 ## Usage
 
     import AriaListMixin from 'elix/src/AriaListMixin.js';
-
     class MyElement extends AriaListMixin(HTMLElement) {}
 
 Elix mixins and components support universal access for all users. The work required to properly expose the selection state of a component in ARIA is complex, but thankfully fairly generalizable. `AriaListMixin` provides a reasonable baseline implementation of ARIA support for list components. (Another important aspect of supporting universal access is to provide full keyboard support. See [KeyboardMixin](KeyboardMixin) and its related mixins.)

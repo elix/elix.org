@@ -19,7 +19,6 @@ This mixin's function is so common that it is included in the Elix base class [E
 ## Usage
 
     import AttributeMarshallingMixin from 'elix/src/AttributeMarshallingMixin.js';
-
     class MyElement extends AttributeMarshallingMixin(HTMLElement) {}
 
 

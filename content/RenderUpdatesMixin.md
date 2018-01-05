@@ -18,7 +18,6 @@ This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 ## Usage
 
     import RenderUpdatesMixin from 'elix/src/RenderUpdatesMixin.js';
-
     class MyElement extends RenderUpdatesMixin(HTMLElement) {}
 
 

@@ -8,8 +8,8 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 
 **Expects** the component to provide:
 * `items` property that returns the list's items. You can supply that with [ContentItemsMixin](ContentItemsMixin).
-* `keydown` method, usually defined by [KeyboardMixin](KeyboardMixin).
 * `state.selectedIndex` state member updatable via [setState](ReactiveMixin#setState).
+* `symbols.keydown` method, usually defined by [KeyboardMixin](KeyboardMixin).
 
 **Provides** the component with:
 * Mappings of keyboard events to selection operations.

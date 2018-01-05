@@ -19,7 +19,6 @@ All Elix [elements](elements) use `ShadowTemplateMixin` to populate their Shadow
 ## Usage
 
     import ShadowTemplateMixin from 'elix/src/ShadowTemplateMixin.js';
-
     class MyElement extends ShadowTemplateMixin(HTMLElement) {}
 
 ### Example
