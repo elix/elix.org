@@ -11,6 +11,7 @@ This mixin generally works in the middle of the Elix user interface [pipeline](p
 * `items` property representing the items that can be selected. This is usually provided by [ContentItemsMixin](ContentItemsMixin).
 
 **Provides** the component with:
+* `itemCalcs.selected` calculation that indicates whether a specific item is the selected item. See [ContentItemsMixin](ContentItemsMixin) for details.
 * `state.selectedIndex` state to track the index of the currently selected item.
 * `selectedIndex` and `selectedItem` properties to read or manipulate the selected index.
 * `selectFirst()`, `selectLast()`, `selectNext()`, and `selectPrevious()` methods to set and move the selection.
