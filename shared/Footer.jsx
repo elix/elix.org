@@ -7,7 +7,7 @@ import { h } from 'preact'; // jshint ignore:line
 export default (props) => (
   <footer>
     <p>
-      © 2016-2017 Component Kitchen Inc. and contributors to the Elix project.
+      © 2016-2018 Component Kitchen Inc. and contributors to the Elix project.
       ELIX and the Elix project logo are registered or unregistered trademarks
       of Component Kitchen Inc. in the United States and/or other countries.
       Other trademarks are the property of their respective owners. Any use of
