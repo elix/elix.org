@@ -45,22 +45,19 @@ export default class HomePage extends Component {
 
         <section class="homeSection1">
           <a name="components"></a>
-          <ComponentCard name="LabeledTabButton" request={props.request} color="0">
-            A generic tab button with a text label
-          </ComponentCard>
-          <ComponentCard name="LabeledTabs" request={props.request} color="1">
-            Classic tabs for Settings and other configuration
-          </ComponentCard>
-          <ComponentCard name="ListBox" request={props.request} color="2">
+          <ComponentCard name="ListBox" request={props.request} color="0">
             Single-selection list box
           </ComponentCard>
-          <ComponentCard name="Modes" request={props.request} color="3">
+          <ComponentCard name="Modes" request={props.request} color="1">
             Shows a single panel at a time
           </ComponentCard>
-          <ComponentCard name="Tabs" request={props.request} color="1">
+          <ComponentCard name="TabButton" request={props.request} color="2">
+            A generic tab button with a text label
+          </ComponentCard>
+          <ComponentCard name="Tabs" request={props.request} color="3">
             Basic tabs structure for navigation and configuration
           </ComponentCard>
-          <ComponentCard name="TabStrip" request={props.request} color="3">
+          <ComponentCard name="TabStrip" request={props.request} color="2">
             A strip of tab buttons
           </ComponentCard>
         </section>
