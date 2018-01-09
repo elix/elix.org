@@ -21,7 +21,10 @@ export default class ComponentPage extends Component {
     const navPath = '/build/docsNavigation.json';
     const navigationPromise = this.props.readSiteFile(navPath)
     .then(response => {
-    	return JSON.parse(response);
+      return JSON.parse(response);
+    })
+    .catch(() => {
+      return null;
     });
 
     // Get the JSON for the API documentation.
@@ -44,6 +47,9 @@ export default class ComponentPage extends Component {
         json[0].description = descriptionHtml;
       }
       return json;
+    })
+    .catch(() => {
+      return null;
     });
 
     // Get the Markdown for the component overview (if it exists).
