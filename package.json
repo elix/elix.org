@@ -28,6 +28,7 @@
     "preact": "7.2.1",
     "preact-render-to-string": "3.6.0",
     "route-parser": "0.0.5",
+    "uglifyjs-webpack-plugin": "1.1.6",
     "webpack": "2.3.2",
     "webpack-node-externals": "1.5.4"
   },
@@ -35,7 +36,7 @@
     "build": "webpack; node server/buildVersion.js; node server/copyStatic.js",
     "buildDocs": "node server/buildDocs.js; node server/buildDocsNavigation.js",
     "devbuild": "webpack; rm -f timestamp.txt; node server/copyStatic",
-    "postinstall": "node server/buildElix.js; webpack; node server/buildDocs.js; node server/buildDocsNavigation.js; node server/buildVersion.js; node server/copyStatic.js",
+    "postinstall": "cd node_modules/elix; webpack; cd ../../; webpack; node server/buildDocs.js; node server/buildDocsNavigation.js; node server/buildVersion.js; node server/copyStatic.js",
     "start": "node server/app.js",
     "watch": "webpack --watch"
   },
