@@ -15,10 +15,11 @@ The ListBox exposes an `orientation` property that can either by "vertical" (the
 
 The ListBox applies `SelectedItemTextValueMixin` (below) to expose a `value` property.
 
-Lists typically obtain their items from their child elements using `SlotContentMixin`. However, it is easy to create variations of `ListBox` for lists with hard-coded content. For example, the following demo shows a list of browser "plugins" registered with your browser via
-<code>navigator.plugins</code>. (These tend to be internal components, rather than user-visible browser extensions. If you do not see a demo, your browser may have no plugins installed.)
+Lists typically obtain their items from their child elements using `SlotContentMixin`. However, it is easy to create variations of `ListBox` for lists with hard-coded content. The custom list box below uses the same mixins as `ListBox`, but omits `SlotContentMixin`. Instead, it draws its content from a hard-coded set of items in its template.
 
-[A list with hard-coded items](/demos/browserPluginList.html)
+[A list with hard-coded items](/demos/countryListBox.html)
+
+You could create such components in cases where you want to ensure a particular set of items is always provided.
 
 
 ## Usage
