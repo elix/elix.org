@@ -424,8 +424,10 @@ footer {
 
 .demo.fullScreen {
   display: inline-flex;
-  height: 568px;
-  width: 320px;
+  height: 80vh;
+  max-height: 100%;
+  max-width: 100%;
+  width: 100vw;
 }
 
 .demo.padded {
@@ -477,4 +479,13 @@ footer {
     width: 215px;
   }
 
+  .demo.fullScreen {
+    height: 480px;
+    width: 640px;
+  }
+  
+  .demo.fullScreen.portrait {
+    height: 568px;
+    width: 320px;
+  }
 }
