@@ -423,7 +423,7 @@ footer {
 }
 
 .demo.fullScreen {
-  display: flex;
+  display: inline-flex;
   height: 568px;
   width: 320px;
 }
