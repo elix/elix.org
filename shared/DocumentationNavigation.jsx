@@ -25,9 +25,6 @@ export default class DocumentationNavigation extends Component {
           <DocumentationLink current={props.current} isHeader="true" href="/documentation/mixins">MIXINS</DocumentationLink>
           {linkList(mixins, props.current)}
 
-          <DocumentationLink current={props.current} isHeader="true" href="/documentation/wrappers">WRAPPERS</DocumentationLink>
-          {linkList(wrappers, props.current)}
-
           <DocumentationLink current={props.current} isHeader="true" href="/documentation/helpers">HELPERS</DocumentationLink>
           {linkList(helpers, props.current)}
 

@@ -11,9 +11,6 @@ This section is organized into several areas:
 * [Mixins](/documentation/mixins): aspects of component behavior that can be
   combined to create functional web components that meet the Gold Standard.
 
-* [Wrappers](/documentation/wrappers): a kind of mixin that adds visible
-  elements to a component's template.
-
 * [Helpers](/documentation/helpers): low-level functions used by the above, and
   also avaible for cases where you need to build your own solution.
 
