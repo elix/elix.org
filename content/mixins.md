@@ -17,24 +17,38 @@ A mixin is applied simply by invoking the mixin as a function, typically in the 
 
 
 <div class="pageNavigation">
-  <h2>Mixins</h2>
+  <h2>Elix mixins</h2>
   <ul>
+    <li><a href="AriaListMixin">AriaListMixin</a></li>
+    <li><a href="ArrowDirectionMixin">ArrowDirectionMixin</a></li>
     <li><a href="AttributeMarshallingMixin">AttributeMarshallingMixin</a></li>
     <li><a href="ClickSelectionMixin">ClickSelectionMixin</a></li>
     <li><a href="ContentItemsMixin">ContentItemsMixin</a></li>
-    <li><a href="SlotContentMixin">SlotContentMixin</a></li>
+    <li><a href="DialogModalityMixin">DialogModalityMixin</a></li>
     <li><a href="DirectionSelectionMixin">DirectionSelectionMixin</a></li>
+    <li><a href="FocusCaptureMixin">FocusCaptureMixin</a></li>
     <li><a href="FocusRingMixin">FocusRingMixin</a></li>
+    <li><a href="HoverMixin">HoverMixin</a></li>
     <li><a href="KeyboardDirectionMixin">KeyboardDirectionMixin</a></li>
     <li><a href="KeyboardMixin">KeyboardMixin</a></li>
     <li><a href="KeyboardPagedSelectionMixin">KeyboardPagedSelectionMixin</a></li>
     <li><a href="KeyboardPrefixSelectionMixin">KeyboardPrefixSelectionMixin</a></li>
+    <li><a href="LanguageDirectionMixin">LanguageDirectionMixin</a></li>
+    <li><a href="OpenCloseMixin">OpenCloseMixin</a></li>
+    <li><a href="OverlayMixin">OverlayMixin</a></li>
+    <li><a href="PageDotsMixin">PageDotsMixin</a></li>
+    <li><a href="PopupModalityMixin">PopupModalityMixin</a></li>
+    <li><a href="ReactiveMixin">ReactiveMixin</a></li>
+    <li><a href="RenderUpdatesMixin">RenderUpdatesMixin</a></li>
     <li><a href="SelectedItemTextValueMixin">SelectedItemTextValueMixin</a></li>
-    <li><a href="AriaListMixin">AriaListMixin</a></li>
     <li><a href="SelectionInViewMixin">SelectionInViewMixin</a></li>
-    <li><a href="ShadowReferencesMixin">ShadowReferencesMixin</a></li>
     <li><a href="ShadowTemplateMixin">ShadowTemplateMixin</a></li>
     <li><a href="SingleSelectionMixin">SingleSelectionMixin</a></li>
+    <li><a href="SlotContentMixin">SlotContentMixin</a></li>
+    <li><a href="SwipeDirectionMixin">SwipeDirectionMixin</a></li>
+    <li><a href="TouchSwipeMixin">TouchSwipeMixin</a></li>
+    <li><a href="TrackpadSwipeMixin">TrackpadSwipeMixin</a></li>
+    <li><a href="TransitionEffectMixin">TransitionEffectMixin</a></li>
   </ul>
 </div>
 
