@@ -8,6 +8,8 @@ The user can move between items with touch, the mouse, the keyboard, or a trackp
 
 `SlidingCarousel` uses a [SlidingViewport](SlidingViewport) to render the items. The left/right arrow buttons are provided by [ArrowDirectionMixin](ArrowDirectionMixin), and the small dots at the bottom of the carousel are provided by [PageDotsMixin](PageDotsMixin).
 
+`SlidingCarousel` incorporates [LanguageDirectionMixin](LanguageDirectionMixin) so that it can flip the order of items in right-to-left languages. See that page for a demonstration.
+
 
 ## Usage
 
