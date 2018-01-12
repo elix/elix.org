@@ -15,8 +15,8 @@ Since no solution is perfect for everyone, all of these elements are built from 
     <li><a href="Dialog">Dialog</a></li>
     <li><a href="Drawer">Drawer</a></li>
     <li><a href="ElementBase">ElementBase</a></li>
+    <li><a href="ListBox">ListBox</a></li>
     <li><a href="ModalBackdrop">ModalBackdrop</a></li>
-    <li><a href="Modes">Modes</a></li>
     <li><a href="Modes">Modes</a></li>
     <li><a href="PageDot">PageDot</a></li>
     <li><a href="Popup">Popup</a></li>
