@@ -6,7 +6,7 @@ A typical carousel with a sliding effect, left/right arrow buttons, and page dot
 
 The user can move between items with touch, the mouse, the keyboard, or a trackpad. For a carousel that supports the same types of navigation, but without arrows or dots, see [SlidingPages](SlidingPages).
 
-`SlidingCarousel` uses a [SlidingViewport](SlidingViewport) to render the items. The left/right arrow buttons are provided by [ArrowDirectionMixin](ArrowDirectionMixin), and the small dots at the bottom of the carousel are provided by [PageDotsMixin](PageDotsMixin).
+`SlidingCarousel` uses a [SlidingViewport](SlidingViewport) to render the items. The left/right arrow buttons are provided by [ArrowDirectionMixin](ArrowDirectionMixin), and the small dots at the bottom of the carousel are provided by [PageDotsMixin](PageDotsMixin). It's possible to wrap `SlidingViewport` with just arrows (if you don't want dots) or just page dots (if you don't want arrow buttons); see the demos of those mixins for examples.
 
 `SlidingCarousel` incorporates [LanguageDirectionMixin](LanguageDirectionMixin) so that it can flip the order of items in right-to-left languages. See that page for a demonstration.
 

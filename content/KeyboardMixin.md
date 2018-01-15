@@ -23,6 +23,9 @@ Keyboard support is an important aspect of supporting universal access, as cover
 
 Some related keyboard mixins that rely on `KeyboardMixin` to invoke `symbols.keydown` include [KeyboardDirectionMixin](KeyboardDirectionMixin), [KeyboardPagedSelectionMixin](KeyboardPagedSelectionMixin), and [KeyboardPrefixSelectionMixin](KeyboardPrefixSelectionMixin).
 
+See also [FocusVisibleMixin](FocusVisibleMixin), which can be used to ensure an element only shows a focus indication if the user accesses the element with the keyboard.
+
+
 ### Example
 
     class EnterElement extends KeyboardMixin(HTMLElement) {

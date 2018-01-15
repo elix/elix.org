@@ -27,7 +27,7 @@ A mixin is applied simply by invoking the mixin as a function, typically in the 
     <li><a href="DialogModalityMixin">DialogModalityMixin</a></li>
     <li><a href="DirectionSelectionMixin">DirectionSelectionMixin</a></li>
     <li><a href="FocusCaptureMixin">FocusCaptureMixin</a></li>
-    <li><a href="FocusRingMixin">FocusRingMixin</a></li>
+    <li><a href="FocusVisibleMixin">FocusVisibleMixin</a></li>
     <li><a href="HoverMixin">HoverMixin</a></li>
     <li><a href="KeyboardDirectionMixin">KeyboardDirectionMixin</a></li>
     <li><a href="KeyboardMixin">KeyboardMixin</a></li>

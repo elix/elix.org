@@ -30,10 +30,10 @@ The remaining Elix mixins generally focus on the transition from one of these st
 
 Some of these mixins directly update state.
 
-* [ArrowSelectionMixin](ArrowSelectionMixin). Adds left/right buttons that map to `goLeft`/`goRight` methods.
+* [ArrowDirectionMixin](ArrowDirectionMixin). Adds left/right buttons that map to `goLeft`/`goRight` methods.
 * [AttributeMarshallingMixin](AttributeMarshallingMixin). Maps attributes to properties.
 * [ClickSelectionMixin](ClickSelectionMixin). Maps clicks on items to setting `selectedIndex` property.
-* [FocusRingMixin](FocusRingMixin). Tracks whether to show a focus ring indicator, sets `state.focusRing`.
+* [FocusVisibleMixin](FocusVisibleMixin). Tracks whether to show a focus ring indicator, sets `state.focusRing`.
 * [HoverMixin](HoverMixin). Maps `mouseenter`/`mouseleave` events to `state.hover`.
 * [KeyboardMixin](KeyboardMixin). Maps `keydown` events to `keydown` method.
 * [PageDotsMixin](PageDotsMixin). Adds page dot buttons that map to setting `selectedIndex` property.
@@ -67,7 +67,7 @@ These mixins generally map from a low-level abstraction (e.g., a specific type o
 ## Mixin that render state (state → render)
 
 * [AriaListMixin](AriaListMixin). Renders `state.selectedIndex` as various ARIA attributes like `aria-activedescendant`.
-* [ArrowSelectionMixin](ArrowSelectionMixin). Renders left/right arrow buttons.
+* [ArrowDirectionMixin](ArrowDirectionMixin). Renders left/right arrow buttons.
 * [ContentItemsMixin](ContentItemsMixin). Defines an `items` property based on `state.content`, filtering out auxiliary invisible elements. During rendering, the component is given a chance to indicate what updates should be assigned to each specific item in `items`.
 * [DialogModalityMixin](DialogModalityMixin). Renders a default ARIA role.
 * [OverlayMixin](OverlayMixin). Renders an open state as changes to `display` and `z-index` to make an element appear on top.

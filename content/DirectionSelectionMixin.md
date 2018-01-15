@@ -11,6 +11,7 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 * `selectNext`, `selectPrevious`, `selectLast`, `selectFirst` methods.
 
 **Provides** the component with:
+* `symbols.canGoLeft`, `symbols.canGoRight` properties.
 * `symbols.goDown`, `symbols.goUp`, `symbols.goLeft`, `symbols.goRight` methods. 
 
 
@@ -18,6 +19,8 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 
     import DirectionSelectionMixin from 'elix/src/DirectionSelectionMixin.js';
     class MyElement extends DirectionSelectionMixin(HTMLElement) {}
+
+This mixin is designed to complement input mixins that map input events to directions, including [ArrowDirectionMixin](ArrowDirectionMixin), [KeyboardDirectionMixin](KeyboardDirectionMixin), and [TouchSwipeMixin](TouchSwipeMixin). Those mixins can focus exlusively on _direction_ instead of selection. You can use `DirectionSelectionMixin` to map those directions to selection operations. The level of abstraction provided by `DirectionSelectionMixin` allows the input mixins to be used that don't deal with selection, and want to interpret direction semantics in other ways.
 
 
 ## Mapping direction semantics to selection semantics
