@@ -1,6 +1,6 @@
 # DialogModalityMixin
 
-**Purpose:** blocks various user interactions to make an overlay behave like a modal dialog. This mixin is generally used in conjunction with a backdrop like [ModalBackdrop](ModalBackdrop).
+**Purpose:** blocks various user interactions to make an overlay behave like a modal dialog. This mixin is generally used in conjunction with [OverlayMixin](OverlayMixin) for basic overlay behavior, and a backdrop like [ModalBackdrop](ModalBackdrop) for additional modality.
 
 This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 

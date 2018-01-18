@@ -41,6 +41,7 @@ Some of these mixins directly update state.
 * [SlotContentMixin](SlotContentMixin). When the component's slot receives a `slotchange` event, this updates `state.content` with the new nodes assigned to the slot.
 * [TouchSwipeMixin](TouchSwipeMixin). Maps touch swipe gestures to `state.swipeFraction` and `swipeLeft`/`swipeRight` methods.
 * [TrackpadSwipeMixin](TrackpadSwipeMixin). Maps trackpad gestures to `state.swipeFraction` and `swipeLeft`/`swipeRight` methods.
+* [TransitionEffectMixin](TransitionEffectMixin). Manages state changes that depend upon completion of CSS transitions.
 
 
 ## Mixins that map methods to other methods
@@ -59,7 +60,7 @@ These mixins generally map from a low-level abstraction (e.g., a specific type o
 
 ## Mixins that update state (methods → state)
 
-* [OpenCloseTransitionMixin](OpenCloseTransitionMixin). Defines asynchronous `startOpen`/`startClose` methods that cycle the component through various opening/opened/closing/closed visual states tracked by `state.visualState`.
+* [OpenCloseMixin](OpenCloseMixin). Tracks the opened/closed state, providing open/close methods that set a `state.opened` member.
 * [SelectedItemTextValueMixin](SelectedItemTextValueMixin). Supplies a `value` property that gets/sets the item specified by a `selectedIndex` property.
 * [SingleSelectionMixin](SingleSelectionMixin). Maps selection methods like `selectPrevious`/`selectNext` to changes in `state.selectedIndex`.
 

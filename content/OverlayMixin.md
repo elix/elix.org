@@ -26,7 +26,7 @@ It also performs some additional work after updates have been rendered to the DO
 `OverlayMixin` provides the core overlay behavior for Elix elements. It is often used in combination with:
 * [OpenCloseMixin](OpenCloseMixin) to provide a component with open/close semantics.
 * [PopupModalityMixin](PopupModalityMixin) or [DialogModalityMixin](DialogModalityMixin) to intercept and respond to UI events.
-* [TransitionEffectMixin](TransitionEffectMixin) to handle open/close transition effects.
+* [TransitionEffectMixin](TransitionEffectMixin) to handle asynchronous open/close CSS transition effects.
 * [ModalBackdrop](ModalBackdrop) to absorb background clicks.
 
 
