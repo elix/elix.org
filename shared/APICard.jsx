@@ -83,7 +83,7 @@ function EventCard(props) {
 
 
 function MethodCard(props) {
-
+	
   // Build the heading's parameter list.
   const params = props.params || [];
   const headingParameters = params.map((param, index) =>
@@ -91,11 +91,12 @@ function MethodCard(props) {
     `${param.name}${ (index+1) < params.length ? ', ' : '' }`
   );
 
+	const prependStatic = props.scope && props.scope === 'static' ? 'static' : '';
   const heading = (
     <span>
       {props.name}
       ({headingParameters})
-      <span class="apiMemberType"> method</span>
+      <span class="apiMemberType"> {prependStatic} method</span>
     </span>
   );
 
@@ -168,11 +169,27 @@ function PropertyCard(props) {
       <span class="apiLabel">Default:</span> <code>{props.defaultvalue}</code>
     </p>
   );
-
-  const type = props.type && props.type.names && props.type.names[0];
-  const formattedType = type && (<p>
-    <span class="apiLabel">Type:</span> <code>{type}</code>
-  </p>);
+  
+  let formattedType;
+  
+  if (props.type && props.type.names) {
+  	if (props.type.names.length > 1) {
+  		const names = props.type.names;
+		  const acceptedValues = names.map((name, index) =>
+		    // The conditionalized code handles comma placements in the string.
+		    `${name}${ (index+1) < names.length ? ', ' : '' }`
+		  );
+  		formattedType = (<p>
+  		<span class="apiLabel">Accepted values:</span> <code>{(acceptedValues)}</code>
+  		</p>);
+  	}
+  	else if (props.type.names[0]) {
+  		const type = props.type.names[0];
+  		formattedType = type && (<p>
+    	<span class="apiLabel">Type:</span> <code>{type}</code>
+  		</p>);
+  	}
+  }
 
   return (
     <CardTemplate
