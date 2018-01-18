@@ -11,18 +11,21 @@ This mixin works in the middle of the Elix user interface [pipeline](pipeline):
 * `keydown` method for keyboard events, typically via [KeyboardMixin](KeyboardMixin).
 
 **Provides** the component with:
-* Disables scrolling on the background document. **This is a global side-effect of opening the component.**
+* Disables scrolling on the background document. *This is a global side-effect of opening the component.*
 * A default ARIA `role` of `dialog`.
 * Closes the element if user presses the Esc key.
+
 
 ## Usage
 
     import DialogModalityMixin from 'elix/src/DialogModalityMixin.js';
     class MyElement extends DialogModalityMixin(HTMLElement) {}
 
-For modeless overlays, see [PopupModalityMixin](PopupModalityMixin) instead.
+In general, use modal overlays with `DialogModalityMixin` only when it's critical that you gain the user's attention, or when you need them to provide a response in order to continue.
+
+For all other overlay situations, consider making the overlay a popup with [PopupModalityMixin](PopupModalityMixin) instead.
 
 
 ### Example
 
-[This overlay uses `DialogModalityMixin` for dialog behavior](/demos/dialog.html)
+[This dialog's behavior comes from `DialogModalityMixin` and `ModalBackdrop`](/demos/dialog.html)

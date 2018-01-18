@@ -431,7 +431,14 @@ footer {
 }
 
 .demo.padded {
-  padding: 20px;
+  padding: 1em;
+}
+
+.demo.padded > :first-child {
+  margin-top: 0;
+}
+.demo.padded > :last-child {
+  margin-bottom: 0;
 }
 
 
