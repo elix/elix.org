@@ -24,7 +24,7 @@ This mixin does most of its work at the beginning of the Elix user interface [pi
       get [symbols.template]() {
         return `
           ... Elements outside page dots go here ...
-          ${this.wrapWithPageDots(`
+          ${PageDotsMixin.wrap(`
             ... Elements inside page dots go here ...
           `)}
         `;

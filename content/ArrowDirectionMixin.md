@@ -12,7 +12,7 @@ This mixin does most of its work at the beginning of the Elix user interface [pi
 * `symbols.template` property for [ShadowTemplateMixin](ShadowTemplateMixin). The property getter must invoke the mixin's `wrapWithArrowDirection` (below).
 
 **Provides** the component with:
-* `wrapWithArrowDirection` method that wraps a string template with the elements for left and right arrow buttons.
+* `wrap` method that wraps a string template with the elements for left and right arrow buttons.
 
 
 ## Usage
@@ -24,7 +24,7 @@ This mixin does most of its work at the beginning of the Elix user interface [pi
       get [symbols.template]() {
         return `
           ... Elements outside arrows go here ...
-          ${this.wrapWithArrowDirection(`
+          ${ArrowDirectionMixin.wrap(`
             ... Elements inside arrows go here ...
           `)}
         `;
