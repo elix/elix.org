@@ -173,14 +173,14 @@ function PropertyCard(props) {
   let formattedType;
   
   if (props.type && props.type.names && props.type.names.length > 0) {
-		const names = props.type.names;
-	  const acceptedValues = names.map((name, index) =>
-	    // The conditionalized code handles comma placements in the string.
-	    `${name}${ (index+1) < names.length ? ', ' : '' }`
-	  );
-		formattedType = (<p>
-		<span class="apiLabel">Type:</span> <code>{(acceptedValues)}</code>
-		</p>);
+    const names = props.type.names;
+    const types = names.map((name, index) => 
+      // The conditionalized code handles comma placements in the string.
+      `${name}${ (index+1) < names.length ? ', ' : '' }`
+    );
+    formattedType = (<p>
+    <span class="apiLabel">Type:</span> <code>{(types)}</code>
+    </p>);
   }
 
   return (
