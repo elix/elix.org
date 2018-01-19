@@ -434,10 +434,10 @@ footer {
   padding: 1em;
 }
 
-.demo.padded > :first-child {
+.demo.padded > p:first-of-type {
   margin-top: 0;
 }
-.demo.padded > :last-child {
+.demo.padded > p:last-of-type {
   margin-bottom: 0;
 }
 
