@@ -91,7 +91,7 @@ function MethodCard(props) {
     `${param.name}${ (index+1) < params.length ? ', ' : '' }`
   );
 
-	const prependStatic = props.scope && props.scope === 'static' ? 'static' : '';
+  const prependStatic = props.scope && props.scope === 'static' ? 'static' : '';
   const heading = (
     <span>
       {props.name}
