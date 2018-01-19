@@ -24,11 +24,13 @@ You could create such components in cases where you want to ensure a particular 
 
 ## Usage
 
+    // JavaScript
     import ListBox from 'elix/src/ListBox.js';
-
     const listBox = new ListBox(); // or
     const listBox = document.createElement('elix-list-box');
 
+    <!-- HTML -->
+    <script type="module" src="elix/src/ListBox.js"></script>
     <elix-list-box>
       <!-- List items go here -->
     </elix-list-box>
