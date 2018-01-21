@@ -10,7 +10,6 @@ Since no solution is perfect for everyone, all of these elements are built from 
   <h2>Elements</h2>
   <ul>
     <li><a href="AlertDialog">AlertDialog</a></li>
-    <li><a href="ArrowDirectionButton">ArrowDirectionButton</a></li>
     <li><a href="AutosizeTextarea">AutosizeTextarea</a></li>
     <li><a href="Dialog">Dialog</a></li>
     <li><a href="Drawer">Drawer</a></li>
