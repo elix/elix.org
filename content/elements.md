@@ -17,12 +17,10 @@ Since no solution is perfect for everyone, all of these elements are built from 
     <li><a href="ListBox">ListBox</a></li>
     <li><a href="ModalBackdrop">ModalBackdrop</a></li>
     <li><a href="Modes">Modes</a></li>
-    <li><a href="PageDot">PageDot</a></li>
     <li><a href="Popup">Popup</a></li>
     <li><a href="SlidingCarousel">SlidingCarousel</a></li>
     <li><a href="SlidingPages">SlidingPages</a></li>
     <li><a href="SlidingViewport">SlidingViewport</a></li>
-    <li><a href="Symbol">Symbol</a></li>
     <li><a href="TabButton">TabButton</a></li>
     <li><a href="Tabs">Tabs</a></li>
     <li><a href="TabStrip">TabStrip</a></li>
