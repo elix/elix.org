@@ -1,6 +1,6 @@
 # Drawer
 
-A drawer is a modal container generally used to provide navigation in situations where: a) screen real estate is constrained and b) the navigation UI is not critical to completing the user’s primary goal (and, hence, not critical to the application’s business goal).
+A drawer is a modal panel that slides in from the side of the page. A drawer is generally used to provide navigation in situations where: a) screen real estate is constrained and b) the navigation UI is not critical to completing the user’s primary goal (and, hence, not critical to the application’s business goal).
 
 [The button above opens a typical drawer](/demos/drawer.html)
 
