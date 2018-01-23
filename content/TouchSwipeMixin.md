@@ -52,5 +52,5 @@ If the user ends a swipe at high speed, the gesture is interpreted as a flick. I
 
 You can use `TouchSwipeMixin` with [SwipeDirectionMixin](SwipeDirectionMixin) to map these `swipeLeft` and `swipeRight` calls to directional navigations. You can additionally map directional navigation operations to selection calls using [DirectionSelectionMixin](DirectionSelectionMixin). Elix's carousel components like [SlidingPages](SlidingPages) use this chain of mixins to turn flick gestures into changes in the carousel's selection:
 
-* `swipeLeft` → `symbols.goRight` → `selectNext`
-* `swipeRight` → `symbols.goLeft` → `selectPrevious`
+* `symbols.swipeLeft` → `symbols.goRight` → `selectNext`
+* `symbols.swipeRight` → `symbols.goLeft` → `selectPrevious`
