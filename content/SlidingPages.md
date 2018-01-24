@@ -15,6 +15,9 @@ A typical carousel with a sliding effect. The user can move between items with t
     const slidingPages = new SlidingPages(); // or
     const slidingPages = document.createElement('elix-sliding-pages');
 
+In HTML:
+
+    <script type="module" src="node_modules/elix/src/SlidingPages.js"></script>
     <elix-sliding-pages>
       <!-- Carousel items such as img elements go here. -->
     </elix-sliding-pages>

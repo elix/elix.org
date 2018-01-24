@@ -8,13 +8,13 @@ Dialog uses [ModalBackdrop](ModalBackdrop) to add a backdrop behind the main ove
 
 ## Usage
 
-    // JavaScript
     import Dialog from 'elix/src/Dialog.js';
     const dialog = new Dialog(); // or
     const dialog = document.createElement('elix-dialog');
 
-    <!-- HTML -->
-    <script type="module" src="elix/src/Dialog.js"></script>
+In HTML:
+
+    <script type="module" src="node_modules/elix/src/Dialog.js"></script>
     <elix-dialog>
       <!-- Dialog contents go here -->
     </elix-dialog>

@@ -17,6 +17,9 @@ The user can move between items with touch, the mouse, the keyboard, or a trackp
     const slidingCarousel = new SlidingCarousel(); // or
     const slidingCarousel = document.createElement('elix-sliding-carousel');
 
+In HTML:
+
+    <script type="module" src="node_modules/elix/src/SlidingCarousel.js"></script>
     <elix-sliding-carousel>
       <!-- Carousel items such as img elements go here. -->
     </elix-sliding-carousel>

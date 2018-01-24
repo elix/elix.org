@@ -9,3 +9,17 @@ A drawer is a modal panel that slides in from the side of the page. A drawer is 
 `Drawer` is very similar to [Dialog](Dialog) in construction, and provides the same level of [keyboard support](Dialog#keyboard-support).
 
 The user may dismiss the drawer by pressing Esc, or by swiping to the side with touch or the trackpad. You may also provide a UI element inside the drawer — e.g., a close box — that dismisses the drawer.
+
+
+## Usage
+
+    import Drawer from 'elix/src/Drawer.js';
+    const drawer = new Drawer(); // or
+    const drawer = document.createElement('elix-drawer');
+
+In HTML:
+
+    <script type="module" src="node_modules/elix/src/Drawer.js"></script>
+    <elix-drawer>
+      <!-- Drawer contents go here -->
+    </elix-drawer>
