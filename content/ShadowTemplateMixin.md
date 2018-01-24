@@ -11,7 +11,7 @@ This mixin forms a core part of the Elix user interface [pipeline](pipeline):
 
 **Provides** the component with:
 * Internal `symbols.render()` method that creates and populates the shadow root the first time the component is rendered.
-* `$` property that can be used to access elements in the shadow tree that have `id` attributes.
+* `$` property that can be used to access elements in the shadow tree that have `id` attributes. See [the `$` property](#$).
 
 All Elix [elements](elements) use `ShadowTemplateMixin` to populate their Shadow DOM subtree with template elements.
 
@@ -69,12 +69,3 @@ For better performance, `ShadowTemplateMixin` caches a component's processed tem
 The mixin reads the `[symbols.template]` property once, in the `constructor`. After processing the template (upgrading a string template to a `<template>`, and preparing the template for use with ShadyCSS), the processed template is cached.
 
 Subsequent component instantiations will use the cached template directly.
-
-
-## Accessing shadow elements with `this.$`
-
-`ShadowTemplateMixin` defines a component property called `this.$` that holds references to shadow elements with IDs. E.g., if component's template contains an element `<button id="foo">`, then this mixin will create a member `this.$.foo` that points to that button in the component instance's shadow tree. This behavior is inspired by Polymer's [automatic node finding](https://www.polymer-project.org/1.0/docs/devguide/local-dom.html#node-finding) feature.
-
-Such references simplify a component's access to its own elements. In exchange, this mixin trades off a one-time cost of querying all elements in the shadow tree instead of paying an ongoing cost to query for an element each time the component wants to inspect or manipulate it.
-
-These `$` references are calculated when the component is instantiated, and _not_ updated if you subsequently modify the shadow tree yourself (to replace one item with another, to add new items with `id` attributes, etc.).
