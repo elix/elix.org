@@ -2,7 +2,7 @@
 
 **Purpose:** lets a component and multiple mixins all handle keyboard events with a single `keydown` event listener.
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline):
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > **events** ➞ **methods** → setState → render → update DOM
 

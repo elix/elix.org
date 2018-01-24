@@ -2,7 +2,7 @@
 
 **Purpose:** map the Page Up and Page Down keys to selection operations.
 
-This mixin works in the middle of the Elix user interface [pipeline](pipeline):
+This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → **methods** ➞ **setState** → render → update DOM
 

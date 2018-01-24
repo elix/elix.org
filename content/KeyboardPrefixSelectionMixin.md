@@ -2,7 +2,7 @@
 
 **Purpose:** handles list box-style prefix typing, in which the user can type a string to select the first item that begins with that string.
 
-This mixin works in the middle of the Elix user interface [pipeline](pipeline):
+This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → **methods** ➞ **setState** → render → update DOM
 

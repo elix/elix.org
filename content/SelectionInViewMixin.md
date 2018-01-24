@@ -2,7 +2,7 @@
 
 **Purpose:** ensures the selected item is scrolled into view.
 
-This mixin works at the very end of the Elix user interface [pipeline](pipeline):
+This mixin works at the very end of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → methods → setState → updates → DOM
 

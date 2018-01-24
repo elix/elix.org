@@ -2,7 +2,7 @@
 
 **Purpose:** helps an element determine whether it's in the context of right-to-left text..
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline):
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > **events** ➞ **setState** → render → update DOM
 

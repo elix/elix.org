@@ -2,7 +2,7 @@
 
 **Purpose:** maps trackpad events (or horizontal mouse wheel events) to swipe gestures. This allows, for example, users of laptops with trackpads to manipulate a view or selection with a trackpad swipe. (The exact user interface gesture depends on the OS and its configuration. A common OS configuration requires the user to drag on the trackpad with two fingers to perform a swipe.)
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline). In response to touch events, the mixin may call methods on the component or call `setState` directly.
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline). In response to touch events, the mixin may call methods on the component or call `setState` directly.
 
 > **events** ➞ **methods** → setState → render → update DOM
 

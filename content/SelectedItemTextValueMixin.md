@@ -2,7 +2,7 @@
 
 **Purpose:** defines a `value` property that reflects the text content of a selected item.
 
-This mixin is independent of the Elix render [pipeline](pipeline).
+This mixin is independent of the Elix [Elix render pipeline](/documentation#elix-render-pipeline).
 
 **Expects** the component to provide:
 * `state.selectedIndex` property indicating the index of the currently selected item. This is usually provided by [SingleSelectionMixin](SingleSelectionMixin).

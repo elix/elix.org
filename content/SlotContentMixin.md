@@ -3,7 +3,7 @@
 **Purpose:** allows a component to track its light DOM content as state. This helps a component satisfy the Gold Standard checklist item for monitoring [Content Changes](https://github.com/webcomponents/gold-standard/wiki/Content-Changes)
 (Will the component respond to runtime changes in its content, including distributed content?).
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline):
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > **events** ➞ **setState** → render → update DOM
 

@@ -2,7 +2,7 @@
 
 **Purpose:** adds left and right arrow buttons to a carousel-like component like [SlidingCarousel](SlidingCarousel).
 
-This mixin does most of its work at the beginning of the Elix user interface [pipeline](pipeline), although it also participates indirectly in rendering by adding elements to a component's template.
+This mixin does most of its work at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline), although it also participates indirectly in rendering by adding elements to a component's template.
 
 > **events** ➞ **methods** → setState → render → update DOM
 

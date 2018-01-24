@@ -3,7 +3,7 @@
 **Purpose:** map arrow and Home/End keys to semantic direction methods. This allows a developer to quickly support directional navigation in a component, and to avoid common pitfalls. For example, a component listening to presses of the Left or Right keys should take care to _not_ handle those keys if a meta key (Command key on Macs, Windows key on Windows) or alt key (Option key on Macs, Alt key on Windows) are pressed, as that would interfere with browser navigation shortcuts.
 
 
-This mixin works in the middle of the Elix user interface [pipeline](pipeline):
+This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → **methods** ➞ **methods** → setState → render → update DOM
 

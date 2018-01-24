@@ -2,7 +2,7 @@
 
 **Purpose:** maps touch events to swipe gestures.
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline). In response to touch events, the mixin may call methods on the component or call `setState` directly.
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline). In response to touch events, the mixin may call methods on the component or call `setState` directly.
 
 > **events** ➞ **methods** → setState → render → update DOM
 

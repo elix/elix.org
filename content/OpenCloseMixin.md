@@ -2,7 +2,7 @@
 
 **Purpose:** tracks the opened/closed state of an element with open/close semantics, such as a [Dialog](Dialog), [Drawer](Drawer), [Popup](Popup), or [Toast](Toast). It allows for the possibility that the open/close operations are asynchronous.
 
-This mixin works in the middle of the Elix user interface [pipeline](pipeline):
+This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → **methods/properties** ➞ **state** → render
 

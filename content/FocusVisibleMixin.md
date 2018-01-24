@@ -3,7 +3,7 @@
 **Purpose:** Tracks a component's focus state so that it can render a focus indication (e.g., a glowing outline) if and only if the user has used the keyboard to interact with the component. This is modeled after the proposed
 [focus-visible](https://github.com/WICG/focus-visible) feature for CSS.
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline):
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > **events** ➞ **methods** → setState → render → update DOM
 

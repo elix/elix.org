@@ -1,6 +1,8 @@
 # Mixins
 
-Elix elements use functional mixins as a standard way to share aspects of behavior and public APIs. Such mixins take the form of a plain JavaScript function that accepts a class argument and returns an extended class adding the mixin's functionality:
+Elix elements use functional mixins as a standard way to share aspects of behavior and public APIs. These mixins cooperate to form a [rendering pipeline](/documentation#elix-render-pipeline) for all [Elix elements](elements).
+
+Such mixins take the form of a plain JavaScript function that accepts a class argument and returns an extended class adding the mixin's functionality:
 
     const GreetMixin = (base) => class Greet extends base {
       // Mixin defines properties and methods here.

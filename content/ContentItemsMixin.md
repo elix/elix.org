@@ -2,7 +2,7 @@
 
 **Purpose:** lets a list-like component obtain its list items from its DOM content. It expects the component to identify its HTML "contents", and then impose some restrictions on those contents to determine which of those HTML elements are actually interesting to use as the items in the list. This mixin also allows a component to render updates to its list items.
 
-The rendering aspect of this mixin works at the end of the Elix user interface [pipeline](pipeline):
+The rendering aspect of this mixin works at the end of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → methods → setState → **render** ➞ **update DOM**
 

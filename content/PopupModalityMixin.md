@@ -2,7 +2,7 @@
 
 **Purpose:** makes an overlay behave like a popup by dismissing it when certain user interactions occur. This mixin is generally used in conjunction with [OverlayMixin](OverlayMixin) for basic overlay behavior.
 
-This mixin works in the middle of the Elix user interface [pipeline](pipeline):
+This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → **methods** ➞ **methods** → setState → render → update DOM
 

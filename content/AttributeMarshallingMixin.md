@@ -2,7 +2,7 @@
 
 **Purpose:** maps element attributes to component properties and vice versa.
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline):
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > **events** ➞ **methods** → setState → render → update DOM
 

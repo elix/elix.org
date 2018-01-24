@@ -2,7 +2,7 @@
 
 **Purpose:** Create a component's shadow root, and clone a template into it when it is first rendered.
 
-This mixin forms a core part of the Elix user interface [pipeline](pipeline):
+This mixin forms a core part of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → methods → setState → **render** ➞ **update DOM**
 

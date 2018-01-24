@@ -3,7 +3,7 @@
 **Purpose:** map a click (actually, a mousedown) to an item selection. This simple mixin is useful in list-like elements like [ListBox](ListBox), where a click on a list item implicitly selects it.
 
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline):
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > **events** ➞ **setState** → render → update DOM
 

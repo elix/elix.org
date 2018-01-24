@@ -2,7 +2,7 @@
 
 **Purpose:** make an opened element appear on top of other page elements, then hide or remove it when closed.
 
-This mixin primarily works in the render phase of the Elix user interface [pipeline](pipeline):
+This mixin primarily works in the render phase of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → methods → setState → **render ➞ update DOM**
 

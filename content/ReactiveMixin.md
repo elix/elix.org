@@ -2,7 +2,7 @@
 
 **Purpose:** Give a component class a functional-reactive programming (FRP) architecture that can track internal state and render that state to the DOM.
 
-This mixin forms a core part of the Elix user interface [pipeline](pipeline):
+This mixin forms a core part of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > events → methods → **setState** ➞ **render** → update DOM
 

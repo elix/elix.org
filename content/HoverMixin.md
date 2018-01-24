@@ -2,7 +2,7 @@
 
 **Purpose:** tracks whether the user has moved the mouse over an element so it can decide whether to render hover effects..
 
-This mixin works at the beginning of the Elix user interface [pipeline](pipeline):
+This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > **events** ➞ **methods** → setState → render → update DOM
 

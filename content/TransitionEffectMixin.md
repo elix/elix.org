@@ -2,7 +2,7 @@
 
 **Purpose:** manages state changes that depend upon completion of CSS transitions.
 
-This mixin primarily works at the beginning of the Elix user interface [pipeline](pipeline):
+This mixin primarily works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
 > **events** ➞ **methods** → setState → render → update DOM
 
