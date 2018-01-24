@@ -1,9 +1,13 @@
 import { Component, h } from 'preact'; // jshint ignore:line
 import marked from 'marked';
+import highlight from 'highlight.js';
 
 
 marked.setOptions({
-  gfm: true   // Use GitHub-flavored markdown.
+  gfm: true,   // Use GitHub-flavored markdown.
+  hightlight: code => {
+    return highlight.highlightAuto(code).value;
+  }
 });
 
 
