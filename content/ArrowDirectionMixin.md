@@ -31,6 +31,8 @@ This mixin does most of its work at the beginning of the [Elix render pipeline](
       }
     }
 
+`ArrowDirectionMixin` is a [mixin that contributes to a component's template](mixins#mixins-that-contribute-to-a-component-s-template), as shown above.
+
 As currently implemented, `ArrowDirectionMixin` only displays the arrow buttons if mouse movement is detected. This behavior is intended to avoid showing arrows when the user is viewing a carousel-like component on a mobile device with no mouse. In such cases, it is expected that the component will provided touch gestures (e.g., with [TouchSwipeMixin](TouchSwipeMixin)), so the arrows are unnecessary and may prove distracting or reduce the screen real estate available for touch gestures.
 
 See also [PageDotsMixin](PageDotsMixin).

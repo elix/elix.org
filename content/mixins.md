@@ -111,7 +111,7 @@ Here, `SampleMixin` is the visible name of the function that can be applied to a
 Elix mixins use string names for properties and methods which are properly part of a component's public API. Properties and methods which are only meant as an internal means for communication between a component and its mixins are identified with `Symbol` keys.
 
     // This symbol must be exported so other mixins can see it.
-    export const internalMethodSymbol = Symbol('internalMethod');
+    export const internalMethodKey = Symbol('internalMethod');
 
     export const SampleMixin = (base) => class Sample extends base {
 
@@ -121,7 +121,7 @@ Elix mixins use string names for properties and methods which are properly part 
       }
 
       // Method only invoked by the component or other mixins.
-      [internalMethodSymbol]() {
+      [internalMethodKey]() {
         ...
       }
 
@@ -293,18 +293,17 @@ This is a combination of the above two rules. The getter will generally want to 
 A common case of the above rule is a mixin that will store the value of property for the benefit of other mixins and classes. Such a mixin is said to
 "back" the property.
 
-In this situation, the recommendation is to have the setter record the new value of the property *before* invoking `super`. This ensures that, if the base class' property setter immediately inspects the property's value via the getter, the latest value will be returned. All other work of the mixin should be done
-*after* invoking `super`, as usual.
+In this situation, the recommendation is to have the setter record the new value of the property *before* invoking `super`. This ensures that, if the base class' property setter immediately inspects the property's value via the getter, the latest value will be returned. All other work of the mixin should be done *after* invoking `super`, as usual.
 
-    let propertySymbol = Symbol('property');
+    let propertyKey = Symbol('property');
 
     const SampleMixin = (base) => class Sample extends base {
       get property() {
-        return this[propertySymbol];
+        return this[propertyKey];
       }
       set property(value) {
         // Save latest value before invoking super.
-        this[propertySymbol] = value;
+        this[propertyKey] = value;
         // At this point, getter invocations will get the right value.
         // Now invoke super.
         if ('property' in base.prototype) { super.property = value; }
@@ -313,9 +312,31 @@ In this situation, the recommendation is to have the setter record the new value
     };
 
 
-# Wrapper mixins
+# Mixins that contribute to a component's template
 
-Elix includes functional mixins called [wrappers](wrappers) that add elements to a base class' template. See that area for details.
+Elix includes functional mixins that both contribute elements to a component's template and extend the component's prototype chain with callbacks and methods that manipulate those elements. These mixins include [ArrowDirectionMixin](ArrowDirectionMixin), [FocusCaptureMixin](FocusCaptureMixin), and [PageDotsMixin](PageDotsMixin).
+
+Like all mixins, such mixins accept a class and returns a new class. They also provide a static `wrap` function you invoke inside a component's `symbols.template` property. This `wrap` method takes a base template, wraps it with some additional elements, and then returns the result.
+
+
+## Example: Adding page dots to a carousel
+
+As an example, suppose we want to add [PageDotsMixin](PageDotsMixin) to a [SlidingViewport](SlidingViewport) to create a carousel with page dots. Our component can use [ShadowTemplateMixin](ShadowTemplateMixin) to populate its shadow tree. That mixin wants the component to define a property called [symbols.template](symbols#template). Inside that property, we can use the `PageDotsMixin.wrap` function to wrap an instance of `SlidingViewport`:
+
+    class SimpleElement extends
+        PageDotsMixin(ShadowTemplateMixin(HTMLElement))) {
+
+      get [symbols.template]() {
+        return PageDotsMixin.wrap(`
+          <elix-sliding-viewport id="viewport">
+            <slot></slot>
+          </elix-sliding-viewport>
+        `)};
+      }
+
+    }
+
+Note that `PageDotsMixin` is used in two places here: in the prototype chain in the `class` declaration, and in `PageDotsMixin.wrap` in the `symbols.template` property. The latter adds elements to the component's template; the former wires up event handlers that let those elements work.
 
 
 # Performance

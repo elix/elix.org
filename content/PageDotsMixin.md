@@ -31,6 +31,8 @@ This mixin does most of its work at the beginning of the [Elix render pipeline](
       }
     }
 
+`PageDotsMixin` is a [mixin that contributes to a component's template](mixins#mixins-that-contribute-to-a-component-s-template), as shown above.
+
 See also [ArrowDirectionMixin](ArrowDirectionMixin).
 
 
