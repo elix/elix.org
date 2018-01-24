@@ -10,6 +10,7 @@ It also performs some additional work after updates have been rendered to the DO
 
 **Expects** the component to provide:
 * `closed` property indicating whether the overlay is closed. You can use [OpenCloseMixin](OpenCloseMixin) to provide this property.
+* `toggle` method that is invoked to open or close the overlay. The mixin actually only requires this method if you will rely on it to automatically add an overlay to the DOM. (See below.) You can use `OpenCloseMixin` to define this method.
 * optional `closeFinished` property indicating whether the overlay has finished rendering its closed state. If defined, the overlay will not be rendered as closed until `closeFinished` is true. This is designed to let `OverlayMixin` interoperate cleanly with [TransitionEffectMixin](TransitionEffectMixin).
 
 **Provides** the component with:
