@@ -3,10 +3,14 @@ import DocumentationPage from './DocumentationPage';
 import DocumentationSection from './DocumentationSection';
 import expandDemos from './expandDemos';
 import marked from 'marked';
+import highlight from 'highlight.js';
 
 
 marked.setOptions({
-  gfm: true   // Use GitHub-flavored markdown.
+  gfm: true,   // Use GitHub-flavored markdown.
+  highlight: code => {
+    return highlight.highlightAuto(code).value;
+  }
 });
 
 /**
