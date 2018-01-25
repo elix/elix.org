@@ -31,7 +31,15 @@ Using `OpenCloseMixin` allows makes it easy to take advantage of related Elix mi
 
 ### Example
 
-[Overlays like dialogs can use `OpenCloseMixin` for a consistent API](/demos/dialog.html)
+An [overlay](OverlayMixin) is one type of component that can be opened and closed. When open, they appear on top of other elements:
+
+[A `Dialog` opens on top of other elements](/demos/dialog.html)
+
+A component might also choose to interpret the semantics of opening and closing as expanding or collapsing in place, as in [ExpandablePanel](ExpandablePanel):
+
+[An `ExpandablePanel` opens in place](/demos/expandablePanel.html)
+
+Use of `OpenCloseMixin` in these situations allows for a consistent open/close API.
 
 
 ## Asynchronous open/close effects

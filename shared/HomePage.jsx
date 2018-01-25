@@ -60,40 +60,43 @@ export default class HomePage extends Component {
           <ComponentCard name="ElementBase" request={props.request} color="1">
             General-purpose component base class
           </ComponentCard>
-          <ComponentCard name="ListBox" request={props.request} color="2">
+          <ComponentCard name="ExpandablePanel" request={props.request} color="2">
+            Expands/collapses in place with an animated transition
+          </ComponentCard>
+          <ComponentCard name="ListBox" request={props.request} color="3">
             Single-selection list box
           </ComponentCard>
-          <ComponentCard name="ModalBackdrop" request={props.request} color="3">
+          <ComponentCard name="ModalBackdrop" request={props.request} color="0">
             Semi-transparent backdrop for a modal overlay
           </ComponentCard>
           <ComponentCard name="Modes" request={props.request} color="0">
             Shows a single panel at a time
           </ComponentCard>
-          <ComponentCard name="Popup" request={props.request} color="0">
+          <ComponentCard name="Popup" request={props.request} color="1">
             Lightweight form of modeless overlay
           </ComponentCard>
-          <ComponentCard name="SlidingCarousel" request={props.request} color="1">
+          <ComponentCard name="SlidingCarousel" request={props.request} color="2">
             Carousel with a sliding effect and navigation controls
           </ComponentCard>
-          <ComponentCard name="SlidingPages" request={props.request} color="2">
+          <ComponentCard name="SlidingPages" request={props.request} color="3">
             Primitive carousel supporting multiple input modes but no UI of its own
           </ComponentCard>
-          <ComponentCard name="SlidingViewport" request={props.request} color="3">
+          <ComponentCard name="SlidingViewport" request={props.request} color="1">
             Slides between selected items on a horizontal axis
           </ComponentCard>
-          <ComponentCard name="TabButton" request={props.request} color="1">
+          <ComponentCard name="TabButton" request={props.request} color="2">
             Generic tab button with a text label
           </ComponentCard>
-          <ComponentCard name="Tabs" request={props.request} color="2">
+          <ComponentCard name="Tabs" request={props.request} color="3">
             Basic tabs structure for navigation and configuration
           </ComponentCard>
-          <ComponentCard name="TabStrip" request={props.request} color="3">
+          <ComponentCard name="TabStrip" request={props.request} color="0">
             Strip of tab buttons
           </ComponentCard>
           <ComponentCard name="Toast" request={props.request} color="0">
             Lightweight popup intended to display a short, non-critical message
           </ComponentCard>
-          <ComponentCard name="WrappedStandardElement" request={props.request} color="0">
+          <ComponentCard name="WrappedStandardElement" request={props.request} color="1">
             Wraps a standard HTML element so its behavior can be extended
           </ComponentCard>
         </section>
