@@ -17,8 +17,7 @@ This mixin does most of its work at the beginning of the [Elix render pipeline](
 
 ## Usage
 
-    import PageDotsMixin from 'elix/src/PageDotsMixin.js';
-    import symbols from 'elix/src/symbols.js';
+    import { PageDotsMixin, symbols } from 'elix';
 
     class MyElement extends PageDotsMixin(HTMLElement) {
       get [symbols.template]() {

@@ -174,8 +174,6 @@ When `SingleSelectionMixin` is used with `ContentItemsMixin`, the `calcs` parame
 
 Example: A simple ARIA mixin could manage the `aria-selected` value for selected items.
 
-    import symbols from 'elix/src/symbols';
-
     const SimpleAriaMixin = (base) => class SimpleAria extends base {
 
       // Update the aria-selected attribute to reflect a change in item state.

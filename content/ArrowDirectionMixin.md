@@ -17,8 +17,7 @@ This mixin does most of its work at the beginning of the [Elix render pipeline](
 
 ## Usage
 
-    import ArrowDirectionMixin from 'elix/src/ArrowDirectionMixin.js';
-    import symbols from 'elix/src/symbols.js';
+    import { ArrowDirectionMixin, symbols } from 'elix';
 
     class MyElement extends ArrowDirectionMixin(HTMLElement) {
       get [symbols.template]() {

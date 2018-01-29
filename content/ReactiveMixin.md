@@ -105,8 +105,7 @@ Here’s a plain DOM API render implementation for the increment/decrement examp
 To the component code above, we’ll add an internal render method for ReactiveMixin to invoke. The mixin uses an identifier from the [symbols](symbols) module to identify the internal render method. This avoids name collisions, and discourages someone from trying to invoke the render method from the outside.
 
 
-    import ReactiveMixin from ‘elix/src/ReactiveMixin.js’;
-    import symbols from ‘elix/src/symbols.js’;
+    import { ReactiveMixin, symbols } from ‘elix’;
 
     class IncrementDecrement extends ReactiveMixin(HTMLElement) {
     
@@ -143,13 +142,11 @@ The Elix project itself generally renders its components with two mixins:
 [ShadowTemplateMixin](ShadowTemplateMixin) , which handles the task of populating the component's shadow root when it is first connected to the document, and [RenderUpdatesMixin](RenderUpdatesMixin), which handles subsequent updates to the component's host element and shadow elements in response to changes in component state. With those two mixins, the above `symbols.render` definition for our increment/decrement sample can be replaced with the following:
 
 
-    import ReactiveMixin from 'elix/src/ReactiveMixin.js';
-    import RenderUpdatesMixin from 'elix/src/RenderUpdatesMixin.js';
-    import ShadowTemplateMixin from 'elix/src/ShadowTemplateMixin.js';
-    import symbols from ‘elix/src/symbols.js’;
+    import { ReactiveMixin, RenderUpdatesMixin, ShadowTemplateMixin, symbols }
+        from ‘elix/src/symbols.js’;
 
     const Base =
-      ReactiveMixin(RenderUpdatesMixin(ShadowTemplateMixin(HTMLElement)));
+        ReactiveMixin(RenderUpdatesMixin(ShadowTemplateMixin(HTMLElement)));
 
     class IncrementDecrement extends Base {
 
