@@ -17,8 +17,7 @@ function buildDocsNavigation() {
 	let docsNavigation = {
 		elements: [],
 		helpers: [],
-		mixins: [],
-		wrappers: []
+		mixins: []
 	};
 	
 	clean()
@@ -33,7 +32,7 @@ function buildDocsNavigation() {
 		
 		navObjects.forEach(navObject => {
 			if (navObject.endsWith('Wrapper')) {
-				docsNavigation.wrappers.push(navObject);
+				docsNavigation.helpers.push(navObject);
 			}
 			else if (navObject.endsWith('Mixin')) {
 				docsNavigation.mixins.push(navObject);

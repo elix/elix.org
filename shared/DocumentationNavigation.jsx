@@ -11,7 +11,6 @@ export default class DocumentationNavigation extends Component {
   	const elements = props.navigation.elements;
   	const mixins = props.navigation.mixins;
   	const helpers = props.navigation.helpers;
-  	const wrappers = props.navigation.wrappers;
 
     return (
       <nav>
