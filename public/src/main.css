@@ -67,9 +67,6 @@ code {
  */
 
 .navigationContainer {
-  background: linear-gradient(to right, black 60%, rgba(255,255,255,0) 90%);
-  background-clip: text;
-  -webkit-background-clip: text;
   display: none; /* For now, not visible on mobile */
   font-size: 13px;
   overflow: hidden;
@@ -77,23 +74,8 @@ code {
   position: relative;
 }
 
-.navigationContainer:hover {
-  background: white;
-  background-clip: initial;
-  -webkit-background-clip: initial;
-  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  z-index: 1;
-}
-
 .navigationContainer ul {
   padding: 0;
-  text-fill-color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-.navigationContainer:hover ul {
-  text-fill-color: initial;
-  -webkit-text-fill-color: initial;
 }
 
 .sideNavigation li {
