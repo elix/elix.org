@@ -12,44 +12,20 @@ export default class DocumentationSection extends Component {
       return (<div></div>);
     }
     
-    const json = props.documentation;
-    const apiHeader = json[0];
-    const name = apiHeader.name;
-
-    //
-    // "Mixes" section
-    //
-    const mixins = apiHeader.mixes;
-    const mixesJSX = mixins && mixins.length > 0 ?
-      (
-        <p>
-          This element uses {delimitedLinkList(mixins)}.
-        </p>
-      ) :
-      null;
-    
-    //
-    // Mixin "used by" section
-    //
-    const mixinUsedBy = apiHeader.mixinUsedBy;
-    const mixinUsedByJSX = mixinUsedBy ?
-      (
-        <p>
-          {name} is used by {delimitedLinkList(mixinUsedBy)}.
-        </p>
-      ) :
-      null;
+    const objectDocs = props.documentation;
+    const objectDoclet = objectDocs[0];
+    const name = objectDoclet.name;
     
     //
     // "InheritsFrom" section
     //
     let inheritsFromJSX;
-    const inheritsHTMLElementOnly = apiHeader.customTags && 
-      apiHeader.customTags.length > 0 && 
-      apiHeader.customTags[0].tag === 'inherits' && 
-      apiHeader.customTags[0].value === 'HTMLElement';
-    if (apiHeader.inheritance || inheritsHTMLElementOnly) {
-      let inheritance = apiHeader.inheritance || [];
+    const inheritsHTMLElementOnly = objectDoclet.customTags && 
+      objectDoclet.customTags.length > 0 && 
+      objectDoclet.customTags[0].tag === 'inherits' && 
+      objectDoclet.customTags[0].value === 'HTMLElement';
+    if (objectDoclet.inheritance || inheritsHTMLElementOnly) {
+      let inheritance = objectDoclet.inheritance || [];
       const inheritanceJSX = inheritance.map((baseClassName, index) => (
         <span>
           {' → '}
@@ -66,11 +42,35 @@ export default class DocumentationSection extends Component {
     //
     // "InheritedBy" section
     //
-    const inheritedBy = apiHeader.classInheritedBy;
+    const inheritedBy = objectDoclet.classInheritedBy;
     const classInheritedByJSX = inheritedBy ?
       (
         <p>
-          {name} is extended by {delimitedLinkList(inheritedBy)}.
+          Extended by {delimitedLinkList(inheritedBy)}.
+        </p>
+      ) :
+      null;
+
+    //
+    // "Mixes" section
+    //
+    const mixins = objectDoclet.mixes;
+    const mixesJSX = mixins && mixins.length > 0 ?
+      (
+        <p>
+          Built with mixins {delimitedLinkList(mixins)}.
+        </p>
+      ) :
+      null;
+    
+    //
+    // Mixin "used by" section
+    //
+    const mixinUsedBy = objectDoclet.mixinUsedBy;
+    const mixinUsedByJSX = mixinUsedBy ?
+      (
+        <p>
+          Used by classes {delimitedLinkList(mixinUsedBy)}.
         </p>
       ) :
       null;
@@ -78,11 +78,24 @@ export default class DocumentationSection extends Component {
     //
     // Element "used by" section
     //
-    const elementUsedBy = apiHeader.elementUsedBy;
+    const elementUsedBy = objectDoclet.elementUsedBy;
     const elementUsedByJSX = elementUsedBy ?
-      elementUsedByJSX = (
+      (
         <p>
-          {name} is used as a subelement in {delimitedLinkList(elementUsedBy)}.
+          Included as a subelement in {delimitedLinkList(elementUsedBy)}.
+        </p>
+      ) :
+      null;
+
+    //
+    // Element tags section
+    //
+    const elementTags = objectDoclet.elementTags;
+    const subelements = elementTags && Object.values(elementTags)
+    const elementTagsJSX = subelements && subelements.length > 0 ?
+      (
+        <p>
+          Includes subelement{subelements.length > 1 && 's'} {delimitedLinkList(subelements)}.
         </p>
       ) :
       null;
@@ -90,7 +103,7 @@ export default class DocumentationSection extends Component {
     //
     // API members
     //
-    const apiElements = json.map(memberApi => {
+    const apiElements = objectDocs.map(memberApi => {
       // Only show members that are not anonymous and have a description.
       return memberApi.memberof !== '<anonymous>' && memberApi.description ?
         (<APICard api={memberApi}></APICard>) :
@@ -112,6 +125,7 @@ export default class DocumentationSection extends Component {
             {mixesJSX}
             {mixinUsedByJSX}
             {elementUsedByJSX}
+            {elementTagsJSX}
           </div>
           {apiElements}
         </section>
