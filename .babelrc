@@ -1,6 +1,0 @@
-{
-  "plugins": [
-    ["transform-react-jsx", { "pragma":"h" }]
-  ],
-  "sourceMaps": true
-}

@@ -3,6 +3,8 @@ const path = require('path');
 
 module.exports = {
 
+  mode: 'development',
+
   devtool: 'source-map',
 
   entry: {
@@ -12,11 +14,30 @@ module.exports = {
   // externals: [nodeExternals()],
 
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader'
+				loader: 'babel-loader',
+        query: {
+          plugins: [
+            ['transform-react-jsx', {
+              'pragma':'h'
+            }]
+          ],
+          presets: [
+            ['env', {
+              targets: {
+                browsers: [
+                  'last 2 Chrome versions',
+                  'last 2 Safari versions',
+                  'last 2 Firefox versions',
+                  'last 2 Edge versions'
+                ]
+              }
+            }]
+          ]
+        }
 			}
     ]
   },
