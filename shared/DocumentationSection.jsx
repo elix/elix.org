@@ -14,53 +14,31 @@ export default class DocumentationSection extends Component {
     
     const json = props.documentation;
     const apiHeader = json[0];
-    
-    const apiElements = json.map(memberApi => {
-      // Only show members that are not anonymous and have a description.
-      return memberApi.memberof !== '<anonymous>' && memberApi.description ?
-        (<APICard api={memberApi}></APICard>) :
-        null ;
-    });
+    const name = apiHeader.name;
 
     //
     // "Mixes" section
     //
-    let mixesJSX;
     const mixins = apiHeader.mixes;
-    if (mixins) {
-      const mixinsJSX = mixins.map((mixin, index) => (
-        <span>
-          { mixins.length > 2 && index > 0 && ', ' }
-          { mixins.length > 1 && index === mixins.length -1 && ' and '}
-          <a href={mixin}>{mixin}</a>
-        </span>
-      ));
-      mixesJSX = (
+    const mixesJSX = mixins && mixins.length > 0 ?
+      (
         <p>
-          This element uses {mixinsJSX}.
+          This element uses {delimitedLinkList(mixins)}.
         </p>
-      );
-    }
+      ) :
+      null;
     
     //
-    // "UsedBy" section
+    // Mixin "used by" section
     //
-    let mixinUsedByJSX;
-    const usedBy = apiHeader.mixinUsedBy;
-    if (usedBy) {
-      const usedByJSX = usedBy.map((item, index) => (
-        <span>
-          { usedBy.length > 2 && index > 0 && ', ' }
-          { usedBy.length > 1 && index === usedBy.length -1 && ' and '}
-          <a href={item}>{item}</a>
-        </span>
-      ));
-      mixinUsedByJSX = (
+    const mixinUsedBy = apiHeader.mixinUsedBy;
+    const mixinUsedByJSX = mixinUsedBy ?
+      (
         <p>
-          {apiHeader.name} is used by {usedByJSX}.
+          {name} is used by {delimitedLinkList(mixinUsedBy)}.
         </p>
-      );
-    }
+      ) :
+      null;
     
     //
     // "InheritsFrom" section
@@ -71,22 +49,16 @@ export default class DocumentationSection extends Component {
       apiHeader.customTags[0].tag === 'inherits' && 
       apiHeader.customTags[0].value === 'HTMLElement';
     if (apiHeader.inheritance || inheritsHTMLElementOnly) {
-      let inheritance;
-      if (apiHeader.inheritance) {
-        inheritance = [apiHeader.name].concat(apiHeader.inheritance);
-      }
-      else {
-        inheritance = [apiHeader.name];
-      }
-      const inheritanceJSX = inheritance.map((item, index) => (
+      let inheritance = apiHeader.inheritance || [];
+      const inheritanceJSX = inheritance.map((baseClassName, index) => (
         <span>
-          { index > 0 && ' → '}
-          <a href={item}>{item}</a>
+          {' → '}
+          <a href={baseClassName}>{baseClassName}</a>
         </span>
       ));
       inheritsFromJSX = (
         <p>
-          Ancestry: {inheritanceJSX} <span> → HTMLElement</span>
+          Ancestry: {name}{inheritanceJSX} → HTMLElement
         </p>
       );
     }
@@ -94,23 +66,37 @@ export default class DocumentationSection extends Component {
     //
     // "InheritedBy" section
     //
-    let classInheritedByJSX;
     const inheritedBy = apiHeader.classInheritedBy;
-    if (inheritedBy) {
-      const inheritedJSX = inheritedBy.map((item, index) => (
-        <span>
-          { inheritedBy.length > 2 && index > 0 && ', ' }
-          { inheritedBy.length > 1 && index === inheritedBy.length -1 && ' and '}
-          <a href={item}>{item}</a>
-        </span>
-      ));
-      classInheritedByJSX = (
+    const classInheritedByJSX = inheritedBy ?
+      (
         <p>
-          {apiHeader.name} is extended by {inheritedJSX}.
+          {name} is extended by {delimitedLinkList(inheritedBy)}.
         </p>
-      );
-    }
+      ) :
+      null;
 
+    //
+    // Element "used by" section
+    //
+    const elementUsedBy = apiHeader.elementUsedBy;
+    const elementUsedByJSX = elementUsedBy ?
+      elementUsedByJSX = (
+        <p>
+          {name} is used as a subelement in {delimitedLinkList(elementUsedBy)}.
+        </p>
+      ) :
+      null;
+    
+    //
+    // API members
+    //
+    const apiElements = json.map(memberApi => {
+      // Only show members that are not anonymous and have a description.
+      return memberApi.memberof !== '<anonymous>' && memberApi.description ?
+        (<APICard api={memberApi}></APICard>) :
+        null ;
+    });
+  
     return (apiElements.length > 0 
           || inheritsFromJSX 
           || classInheritedByJSX 
@@ -125,6 +111,7 @@ export default class DocumentationSection extends Component {
             {classInheritedByJSX}
             {mixesJSX}
             {mixinUsedByJSX}
+            {elementUsedByJSX}
           </div>
           {apiElements}
         </section>
@@ -132,4 +119,15 @@ export default class DocumentationSection extends Component {
       null;
   }
 
+}
+
+
+function delimitedLinkList(items) {
+  return items.map((item, index) => (
+    <span>
+      { items.length > 2 && index > 0 && ', ' }
+      { items.length > 1 && index === items.length -1 && ' and '}
+      <a href={item}>{item}</a>
+    </span>
+  ));
 }

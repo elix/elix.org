@@ -1,8 +1,9 @@
 /*jslint node: true */
 'use strict';
 
-const bd = require('../node_modules/elix/tasks/buildDocsHelper.js');
+const buildDocs = require('../node_modules/elix/tasks/buildDocs.js');
 
-bd.setInputPath('./node_modules/elix/');
-bd.setOutputPath('./build/docs/');
-bd.buildDocs();
+buildDocs({
+  inputPath: './node_modules/elix/src',
+  outputPath: './build/docs'
+});
