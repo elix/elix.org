@@ -46,7 +46,7 @@ export default class DocumentationSection extends Component {
     const classInheritedByJSX = inheritedBy ?
       (
         <p>
-          Extended by {delimitedLinkList(inheritedBy)}.
+          Extended by {plural(inheritedBy, 'class')} {delimitedLinkList(inheritedBy)}.
         </p>
       ) :
       null;
@@ -58,7 +58,7 @@ export default class DocumentationSection extends Component {
     const mixesJSX = mixins && mixins.length > 0 ?
       (
         <p>
-          Built with mixins {delimitedLinkList(mixins)}.
+          Built with {plural(mixins, 'mixin')} {delimitedLinkList(mixins)}.
         </p>
       ) :
       null;
@@ -70,7 +70,7 @@ export default class DocumentationSection extends Component {
     const mixinUsedByJSX = mixinUsedBy ?
       (
         <p>
-          Used by classes {delimitedLinkList(mixinUsedBy)}.
+          Used by {plural(mixinUsedBy, 'class')} {delimitedLinkList(mixinUsedBy)}.
         </p>
       ) :
       null;
@@ -95,7 +95,7 @@ export default class DocumentationSection extends Component {
     const elementTagsJSX = subelements && subelements.length > 0 ?
       (
         <p>
-          Includes subelement{subelements.length > 1 && 's'} {delimitedLinkList(subelements)}.
+          Includes {plural(subelements, 'subelement')} {delimitedLinkList(subelements)}.
         </p>
       ) :
       null;
@@ -137,11 +137,20 @@ export default class DocumentationSection extends Component {
 
 
 function delimitedLinkList(items) {
+  const count = items.length;
   return items.map((item, index) => (
     <span>
-      { items.length > 2 && index > 0 && ', ' }
-      { items.length > 1 && index === items.length -1 && ' and '}
+      { count > 2 && index > 0 && ', ' }
+      { count > 1 && index === count - 1 && ' and '}
       <a href={item}>{item}</a>
     </span>
   ));
+}
+
+
+function plural(items, singular) {
+  const pluralEnding = singular.endsWith('s') ? 'es' : 's';
+  return items.length > 1 ?
+    `${singular}${pluralEnding}` :
+    singular;
 }
