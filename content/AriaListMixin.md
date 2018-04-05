@@ -28,7 +28,7 @@ Elix mixins and components support universal access for all users. The work requ
 `AriaListMixin` complements the model of selection formalized in the companion [SingleSelectionMixin](SingleSelectionMixin). A very simple element can expose its single-selection state via ARIA:
 
     class AccessibleList extends
-        AriaListMixin(SingleSelectionMixin(ElementBase)) {
+        AriaListMixin(SingleSelectionMixin(ReactiveElement)) {
       // Simplistic definition for the component's items.
       get items() {
         return this.children;

@@ -1,6 +1,6 @@
 # PageDotsMixin
 
-**Purpose:** adds page dots to a carousel-like component like [SlidingCarousel](SlidingCarousel), adding one dot for each item in the carousel.
+**Purpose:** adds page dots to a carousel-like component like [Carousel](Carousel), adding one dot for each item in the carousel.
 
 This mixin does most of its work at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline), although it also participates indirectly in rendering by adding elements to a component's template.
 

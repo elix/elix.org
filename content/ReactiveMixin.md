@@ -211,7 +211,7 @@ The `symbols.template` property defines the template that `ShadowTemplateMixin` 
 
     this.shadowRoot.querySelector('#value').textContent = this.state.value;
 
-The three mixins, `ReactiveMixin`, `ShadowTemplateMixin`, and `RenderUpdatesMixin` are used together in Elix so often that, for convenience, they are used to create an Elix component base class called [ElementBase](ElementBase). There is nothing special about the `ElementBase` base class, and it can easily be recreated by using the mixins directly.
+The three mixins, `ReactiveMixin`, `ShadowTemplateMixin`, and `RenderUpdatesMixin` are used together in Elix so often that, for convenience, they are used to create an Elix component base class called [ReactiveElement](ReactiveElement). There is nothing special about the `ReactiveElement` base class, and it can easily be recreated by using the mixins directly.
 
 
 ## Web component and FRP lifecycle methods

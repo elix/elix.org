@@ -13,7 +13,7 @@ This mixin works at the beginning of the [Elix render pipeline](/documentation#e
 * `attributeChangedCallback` implementation that maps attribute changes to property changes.
 * `observedAttributes` implementation that, by default, indicates the component wants to receive attribute change notifications for all attributes corresponding to the component's custom properties.
 
-This mixin's function is so common that it is included in the Elix base class [ElementBase](ElementBase).
+This mixin's function is so common that it is included in the Elix base class [ReactiveElement](ReactiveElement).
 
 
 ## Usage

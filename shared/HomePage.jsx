@@ -57,25 +57,25 @@ export default class HomePage extends Component {
           <ComponentCard name="Drawer" request={props.request} color="3">
             Modal panel that slides in from the side of the page
           </ComponentCard>
-          <ComponentCard name="ElementBase" request={props.request} color="1">
-            General-purpose component base class
-          </ComponentCard>
-          <ComponentCard name="ExpandablePanel" request={props.request} color="2">
+          <ComponentCard name="ExpandablePanel" request={props.request} color="1">
             Expands/collapses in place with an animated transition
           </ComponentCard>
-          <ComponentCard name="ListBox" request={props.request} color="3">
+          <ComponentCard name="ListBox" request={props.request} color="2">
             Single-selection list box
           </ComponentCard>
-          <ComponentCard name="ModalBackdrop" request={props.request} color="0">
+          <ComponentCard name="ModalBackdrop" request={props.request} color="3">
             Semi-transparent backdrop for a modal overlay
           </ComponentCard>
           <ComponentCard name="Modes" request={props.request} color="0">
             Shows a single panel at a time
           </ComponentCard>
-          <ComponentCard name="Popup" request={props.request} color="1">
+          <ComponentCard name="Popup" request={props.request} color="0">
             Lightweight form of modeless overlay
           </ComponentCard>
-          <ComponentCard name="SlidingCarousel" request={props.request} color="2">
+          <ComponentCard name="ReactiveElement" request={props.request} color="1">
+            General-purpose component base class
+          </ComponentCard>
+          <ComponentCard name="Carousel" request={props.request} color="2">
             Carousel with a sliding effect and navigation controls
           </ComponentCard>
           <ComponentCard name="SlidingPages" request={props.request} color="3">

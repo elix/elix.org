@@ -13,12 +13,12 @@ Since no solution is perfect for everyone, all of these elements are built from 
     <li><a href="AutosizeTextarea">AutosizeTextarea</a></li>
     <li><a href="Dialog">Dialog</a></li>
     <li><a href="Drawer">Drawer</a></li>
-    <li><a href="ElementBase">ElementBase</a></li>
+    <li><a href="ReactiveElement">ReactiveElement</a></li>
     <li><a href="ListBox">ListBox</a></li>
     <li><a href="ModalBackdrop">ModalBackdrop</a></li>
     <li><a href="Modes">Modes</a></li>
     <li><a href="Popup">Popup</a></li>
-    <li><a href="SlidingCarousel">SlidingCarousel</a></li>
+    <li><a href="Carousel">Carousel</a></li>
     <li><a href="SlidingPages">SlidingPages</a></li>
     <li><a href="SlidingViewport">SlidingViewport</a></li>
     <li><a href="TabButton">TabButton</a></li>

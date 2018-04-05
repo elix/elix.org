@@ -28,7 +28,7 @@ Examples:
 
 * List boxes such as [ListBox](ListBox).
 * Dropdown lists and combo boxes
-* Carousels such as [SlidingCarousel](SlidingCarousel).
+* Carousels such as [Carousel](Carousel).
 * Slideshows
 * Tab UIs (including top-level navigation toolbars that behave like tabs) such as [Tabs](Tabs).
 

@@ -71,7 +71,12 @@ app.get('*', (request, response, next) => {
 
 // Images for demos
 app.use(
-  '/documentation/images', 
+  [
+    '/documentation/images',
+    // Demos living in folders beneath /demos may try to load folders from
+    // ../images, and hence try to load from a top-level /images folder.
+    '/images'
+  ],
   express.static(path.join(__dirname, '../node_modules/elix/demos/images'), 
   {
     setHeaders: function(res, path, stat) {

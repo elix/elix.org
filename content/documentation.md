@@ -38,7 +38,7 @@ The pipeline described above is defined by a core set of component mixins:
 * [RenderUpdatesMixin](/documentation/RenderUpdatesMixin). Helps a component map `state` to a set of `updates` that should be applied to DOM attributes, classes, styles, and properties.
 * [ShadowTemplateMixin](/documentation/ShadowTemplateMixin). Creates a component's shadow root and stamps a template into it.
 
-For convenience, this set of core mixins is provided in a single base class called [ElementBase](/documentation/ElementBase). (ElementBase also includes `AttributeMarshallingMixin`, below.) When creating your own components, you don't have to use that base class; you can use the mixins above directly.
+For convenience, this set of core mixins is provided in a single base class called [ReactiveElement](/documentation/ReactiveElement). (ReactiveElement also includes `AttributeMarshallingMixin`, below.) When creating your own components, you don't have to use that base class; you can use the mixins above directly.
 
 The remaining Elix mixins generally focus on the transition from one of these steps in the pipeline to the next.
 
