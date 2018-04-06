@@ -41,7 +41,7 @@ For each panel, `Tabs` will create a [TabButton](TabButton) instance, and that p
 
 ## Positioning and aligning tab buttons
 
-`Tabs` exposes [tabPosition](#tabPosition) and [tabAlign](#tabAlign) properties that let you control, respectively, how the strip of tabs is positioned with respect to the panels and how they are visually aligned within the strip of tabs.
+`Tabs` exposes [proxyListPosition](#proxyListPosition) and [tabAlign](#tabAlign) properties that let you control, respectively, how the strip of tabs is positioned with respect to the panels and how they are visually aligned within the strip of tabs.
 
 [You can customize tab position and alignment](/demos/tabPositions.html)
 
@@ -113,3 +113,5 @@ This uses Google's [Material Design icons](https://material.io/icons/) for butto
 ## Customizing the stage
 
 By default, `Tabs` uses [Modes](Modes) as the main stage showing the selected tab panel. `Modes` provides an immediate transition between panels, but you can override the `stageTag` property to specify another type of stage, such as [CrossfadeStage](CrossfadeStage):
+
+[`CrossfadeStage` provides a crossfade effect when switching tabs](/demos/serene.html)

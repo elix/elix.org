@@ -28,7 +28,7 @@ You can create your own components to fill any of these roles. Generally speakin
 
 ## Supplying items to an `Explorer`
 
-Elements you place inside an `Explorer` become the list items navigated by the stage element. E.g., for a carousel:
+Elements you place inside an `Explorer` become the list items navigated by the stage element. E.g., you could create the first `Carousel` demo above like this:
 
 ```html
     <elix-carousel>
@@ -40,9 +40,16 @@ Elements you place inside an `Explorer` become the list items navigated by the s
     </elix-carousel>
 ```
 
-Alternatively, you can allow `Explorer` to generate default proxies. For each item in the main list, `Explorer` will create an instance of the element specified by `proxyTag`. Additionally, certain subclasses of `Explorer` can set the content of the proxy element to reflect data in the corresponding list item. E.g., [Tabs](Tabs) will use the `aria-label` or `alt` attribute of the list item.
+For each item in the main list, `Explorer` will create an instance of the element specified by `proxyTag`. E.g., the `Carousel` above will instantiate a [PageDot](PageDot) for each item (image).
 
-You can also create proxy elements yourself and slot them into the `proxy` slot:
+Certain subclasses of `Explorer` will automatically set the content of the proxy element to reflect data in the corresponding list item. E.g., [Tabs](Tabs) will use the `aria-label` or `alt` attribute of the list item.
+
+If you want to programmatically manipulate the appearance or content of a proxy element, you can override the Explorer's [proxyUpdates](#proxyUpdates) method.
+
+
+## Supplying proxies for the items
+
+You can also create proxy elements yourself and slot them into the `proxy` slot. Instead of using the default `PageDot` proxies in a `Carousel`, you can supply your own proxies:
 
 ```html
     <elix-carousel>
@@ -60,8 +67,6 @@ You can also create proxy elements yourself and slot them into the `proxy` slot:
 ```
 
 [`Carousel` with custom proxies](/demos/carouselWithProxies.html)
-
-If you want to programmatically manipulate the appearance or content of a proxy element, you can override the Explorer's [proxyUpdates](#proxyUpdates) method.
 
 
 ## Layout
