@@ -110,14 +110,6 @@ You can also provide your custom elements as the tab buttons. For example, the d
 This uses Google's [Material Design icons](https://material.io/icons/) for button icons, but you can use whatever techniques are appropriate for your app's visual design.
 
 
-## Creating your own tabbed components
+## Customizing the stage
 
-`Tabs` is constructed from lower-lever parts which you can recombine to create more specialized tab UIs.
-
-At its core, the `Tabs` component manages a set of tab buttons, and assumes a standard tabbed UI design in which clicking a tab immediately makes the corresponding tab panel visible. Internally, `Tabs` relies on instances of other Elix elements:
-
-* [Modes](Modes) ensures that only a single panel is shown at a time.
-* [TabStrip](TabStrip) presents and aligns a set of tabs, and allows a single tab to be selected at a time.
-* [TabButton](TabButton) provides the default tab button appearance.
-
-You can use these parts to create novel tabbed UI elements of your own. You might, for example, use `TabStrip` and `TabButton` to present the tabs, but combine these with a different container for panels to provide a more sophisticated visual transition.
+By default, `Tabs` uses [Modes](Modes) as the main stage showing the selected tab panel. `Modes` provides an immediate transition between panels, but you can override the `stageTag` property to specify another type of stage, such as [CrossfadeStage](CrossfadeStage):

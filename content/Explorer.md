@@ -19,11 +19,11 @@ These components present different user interfaces, but they all possess a list 
 
 You can customize `Explorer` or its subclasses by specifying which tags should be used to create various subelements:
 
-* [stageTag](#stageTag): The element used for the main stage.
-* [proxyListTag](#proxyListTag): The element used for the list of proxies.
-* [proxyTag](#proxyTag): The element used to instantiate default proxy elements if none are supplied.
+* [stageTag](#stageTag): The element used for the main stage. [Modes](Modes), [SlidingStage](SlidingStage), [CrossfadeStage](CrossfadeStage) can all serve as a stage showing a single item at a time. They show different transition effects: an immediate transition, a horizontal sliding effect, and a crossfade effect, respectively.
+* [proxyListTag](#proxyListTag): The element used for the list of proxies. The various [CenteredStrip](CenteredStrip) components can be used as the proxy list, as can [ListBox](ListBox).
+* [proxyTag](#proxyTag): The element used to instantiate default proxy elements if none are supplied. [Carousel](Carousel) uses [PageDot](PageDot) as a proxy tag, [CarouselWithThumbnails](CarouselWithThumbnails) uses [Thumbnail](Thumbnail).
 
-For example, both [Modes](Modes), [SlidingStage](SlidingStage), [CrossfadeStage](CrossfadeStage) can all serve as a stage showing a single item at a time. The only difference is that, when the selection changes, they show different transition effects: an immediate transition, a horizontal sliding effect, and a crossfade effect, respectively.
+You can create your own components to fill any of these roles. Generally speaking, any component that supports [SingleSelectionMixin](SingleSelectionMixin) should suffice as the stage or proxy list.
 
 
 ## Supplying items to an `Explorer`
