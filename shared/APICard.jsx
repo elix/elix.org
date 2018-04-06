@@ -15,9 +15,8 @@ export default class APICard extends Component {
       'event': EventCard,
       'member': PropertyCard
     };
-    const api = props.api;
-    const cardFunction = cardForKind[api.kind];
-    return cardFunction && cardFunction(api);
+    const cardFunction = cardForKind[props.api.kind];
+    return cardFunction && cardFunction(props);
   }
 
 }
@@ -26,34 +25,56 @@ export default class APICard extends Component {
 // Template shared by all API card types.
 function CardTemplate(props) {
 
-  const memberof = props.memberof;
-  const originalmemberof = props.originalmemberof;
-  const inheritedfrom = props.inheritedfrom;
+  const {
+    children,
+    api,
+    heading,
+    objectName
+  } = props;
+  const {
+    description,
+    inheritedfrom,
+    memberof,
+    name,
+    originalmemberof
+  } = api;
   
   let definedBy = null;
-  
-  if (originalmemberof 
-      && originalmemberof !== memberof 
-      && inheritedfrom 
-      && inheritedfrom !== originalmemberof 
-      && inheritedfrom !== memberof) {
-    definedBy = (
-      <p>
-        Defined by <a href={originalmemberof}>{originalmemberof}</a> inherited from <a href={inheritedfrom}>{inheritedfrom}</a>
-      </p>);
-  }
-  else if (originalmemberof && inheritedfrom !== memberof) {
-    definedBy = (<p>Inherited from <a href={originalmemberof}>{originalmemberof}</a></p>);
-  }
-  else if (originalmemberof) {
-    definedBy = (<p>Defined by <a href={originalmemberof}>{originalmemberof}</a></p>);
+  if (originalmemberof && originalmemberof !== objectName) {
+    if (originalmemberof !== memberof 
+        && inheritedfrom 
+        && inheritedfrom !== originalmemberof 
+        && inheritedfrom !== memberof) {
+      definedBy = (
+        <p>
+          Defined by{' '}
+          <a href={originalmemberof}>{originalmemberof}</a>
+          {' '}inherited from{' '}
+          <a href={inheritedfrom}>{inheritedfrom}</a>
+        </p>
+      );
+    } else if (inheritedfrom !== memberof) {
+      definedBy = (
+        <p>
+          Inherited from{' '}
+          <a href={originalmemberof}>{originalmemberof}</a>
+        </p>
+      );
+    } else {
+      definedBy = (
+        <p>
+          Defined by{' '}
+          <a href={originalmemberof}>{originalmemberof}</a>
+        </p>
+      );
+    }
   }
 
   return (
     <div class="apiCard">
-      <a name={props.name}><h3>{props.heading}</h3></a>
-      <Markdown class="apiDescription" markdown={props.description}/>
-      {props.children}
+      <a name={name}><h3>{heading}</h3></a>
+      <Markdown class="apiDescription" markdown={description}/>
+      {children}
       {definedBy}
     </div>
   );
@@ -63,65 +84,51 @@ function CardTemplate(props) {
 function EventCard(props) {
   const heading = (
     <span>
-      {props.name}
+      {props.api.name}
       <span class="apiMemberType"> event</span>
     </span>
   );
-
   return (
-    <CardTemplate
-      description={props.description}
-      heading={heading}
-      name={props.name}
-      memberof={props.memberof}
-      originalmemberof={props.originalmemberof}
-      inheritedfrom={props.inheritedfrom}
-      >
-    </CardTemplate>
+    <CardTemplate {...props} heading={heading}/>
   );
 }
 
 
 function MethodCard(props) {
+
+  const api = props.api;
 	
   // Build the heading's parameter list.
-  const params = props.params || [];
+  const params = api.params || [];
   const headingParameters = params.map((param, index) =>
     // The conditionalized code handles comma placements in the string.
     `${param.name}${ (index+1) < params.length ? ', ' : '' }`
   );
 
-  const prependStatic = props.scope && props.scope === 'static' ? 'static' : '';
+  const prependStatic = api.scope && api.scope === 'static' ? 'static' : '';
   const heading = (
     <span>
-      {props.name}
+      {api.name}
       ({headingParameters})
       <span class="apiMemberType"> {prependStatic} method</span>
     </span>
   );
 
   // "Returns" section
-  const returnType = props.returns && props.returns.length > 0 &&
-    props.returns[0].type.names[0];
+  const returnType = api.returns && api.returns.length > 0 &&
+    api.returns[0].type.names[0];
   const returns = returnType && (
     <p>
       <span class="apiLabel">Returns: </span>
       <code>{returnType}</code>
-      &nbsp;{props.returns[0].description}
+      &nbsp;{api.returns[0].description}
     </p>
   );
 
   return (
-    <CardTemplate
-      description={props.description}
-      heading={heading}
-      name={props.name}
-      memberof={props.memberof}
-      originalmemberof={props.originalmemberof}
-      inheritedfrom={props.inheritedfrom}
-      >
+    <CardTemplate {...props} heading={heading}>
       {returns}
-      <MethodParameterList parameters={props.params}/>
+      <MethodParameterList params={api.params}/>
     </CardTemplate>
   );
 }
@@ -129,7 +136,7 @@ function MethodCard(props) {
 
 function MethodParameterList(props) {
 
-  const params = props.parameters;
+  const params = props.params;
   if (!params || params.length === 0) {
     return '';
   }
@@ -157,23 +164,24 @@ function MethodParameterList(props) {
 
 function PropertyCard(props) {
 
+  const api = props.api;
   const heading = (
     <span>
-      {props.name}
+      {api.name}
       <span class="apiMemberType"> property</span>
     </span>
   );
 
-  const defaultValue = props.defaultvalue && (
+  const defaultValue = api.defaultvalue && (
     <p>
-      <span class="apiLabel">Default:</span> <code>{props.defaultvalue}</code>
+      <span class="apiLabel">Default:</span> <code>{api.defaultvalue}</code>
     </p>
   );
   
   let formattedType;
   
-  if (props.type && props.type.names && props.type.names.length > 0) {
-    const names = props.type.names;
+  if (api.type && api.type.names && api.type.names.length > 0) {
+    const names = api.type.names;
     const types = names.map((name, index) => 
       // The conditionalized code handles comma placements in the string.
       `${name}${ (index+1) < names.length ? ', ' : '' }`
@@ -184,14 +192,7 @@ function PropertyCard(props) {
   }
 
   return (
-    <CardTemplate
-      description={props.description}
-      heading={heading}
-      name={props.name}
-      memberof={props.memberof}
-      originalmemberof={props.originalmemberof}
-      inheritedfrom={props.inheritedfrom}
-      >
+    <CardTemplate {...props} heading={heading}>
       {formattedType}
       {defaultValue}
     </CardTemplate>
@@ -206,33 +207,27 @@ function PropertyCard(props) {
 //
 function ConstantCard(props) {
 
+  const api = props.api;
   const heading = (
     <span>
-      {props.name}
+      {api.name}
       <span class="apiMemberType"> constant</span>
     </span>
   );
 
-  const defaultValue = props.defaultvalue && (
+  const defaultValue = api.defaultvalue && (
     <p>
-      <span class="apiLabel">Default:</span> <code>{props.defaultvalue}</code>
+      <span class="apiLabel">Default:</span> <code>{api.defaultvalue}</code>
     </p>
   );
 
-  const type = props.type && props.type.names && props.type.names[0];
+  const type = api.type && api.type.names && api.type.names[0];
   const formattedType = type && (<p>
     <span class="apiLabel">Type:</span> <code>{type}</code>
   </p>);
 
   return (
-    <CardTemplate
-      description={props.description}
-      heading={heading}
-      name={props.name}
-      memberof={props.memberof}
-      originalmemberof={props.originalmemberof}
-      inheritedfrom={props.inheritedfrom}
-      >
+    <CardTemplate {...props} heading={heading}>
       {formattedType}
       {defaultValue}
     </CardTemplate>

@@ -106,7 +106,7 @@ export default class DocumentationSection extends Component {
     const apiElements = objectDocs.map(memberApi => {
       // Only show members that are not anonymous and have a description.
       return memberApi.memberof !== '<anonymous>' && memberApi.description ?
-        (<APICard api={memberApi}></APICard>) :
+        (<APICard objectName={name} api={memberApi}/>) :
         null ;
     });
   
