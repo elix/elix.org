@@ -38,8 +38,9 @@
   "scripts": {
     "build": "webpack; node server/buildVersion.js; node server/copyStatic.js",
     "buildDocs": "node server/buildDocs.js; node server/buildDocsNavigation.js",
+    "buildElix": "cd node_modules/elix; webpack; cd ../../",
     "devbuild": "webpack; rm -f timestamp.txt; node server/copyStatic",
-    "postinstall": "cd node_modules/elix; webpack; cd ../../; webpack; node server/buildDocs.js; node server/buildDocsNavigation.js; node server/buildVersion.js; node server/copyStatic.js",
+    "postinstall": "node server/buildVersion.js; npm run buildElix; npm run buildDocs; npm run build",
     "start": "node server/app.js",
     "watch": "webpack --watch"
   },
