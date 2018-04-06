@@ -2,7 +2,7 @@
 
 A typical carousel with a sliding effect, left/right arrow buttons, and page dots.
 
-[Sliding carousel](/demos/carousel.html)
+[A Carousel](/demos/carousel.html)
 
 The user can move between items with touch, the mouse, the keyboard, or a trackpad.
 
