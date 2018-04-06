@@ -1,31 +1,69 @@
 # Explorer
 
-`Explorer` serves as a base class for implementing user interface patterns that couple two elements: 1) a "list" element that presents multiple items at a time for selection, and 2) a "stage" element for focusing attention on a single selected item at a time.
+`Explorer` serves as a base class for implementing item selection user interface patterns that couple two synchronized elements that both support selection. The main "stage" element focuses the user's attention on a single item drawn from a list. A secondary "proxy list" element presents a set of smaller proxy elements, one for each item in the main list. The `Explorer` keeps the stage and proxy list elements in sync: if the user changes the selection in one element, the selection in the other element is updated to match.
 
-Some components that extend `Explorer` include the following:
+`Explorer` serves as the basis for a variety of common user interface elements:
 
-[`Carousel` uses a set of dots as its list, and a `SlidingStage` as its stage](/demos/carousel.html)
+[`Carousel` uses a set of dots as proxies, and a `SlidingStage` as its stage](/demos/carousel.html)
 
-[`Tabs` uses `TabButton` elements in its list and `Modes` as its stage](/demos/tabs.html)
+[`Tabs` uses `TabButton` elements as proxies and `Modes` as its stage](/demos/tabs.html)
 
 [A `Tabs` variation for navigation using `SlidingStage` as the stage](/demos/toolbarTabs.html)
 
-[`ListExplorer` uses a `ListBox` for the list and `Modes` for the stage](/demos/listExplorer.html)
+[`ListExplorer` uses a `ListBox` for the proxy list and `Modes` for the stage](/demos/listExplorer.html)
 
-These components present different user interfaces, but they all possess a list synchronized with a stage. The specific form of the list or stage can vary while remaining true to the pattern. For example, both [Modes](Modes), [SlidingStage](SlidingStage), [CrossfadeStage](CrossfadeStage) can all serve as a stage showing a single item at a time — the only difference is the type of visual transition they display when the selection changes. `Modes` shows an immediate transition, `SlidingStage` shows a horizontal sliding effect, and `CrossfadeStage` shows a crossfade effect.
+These components present different user interfaces, but they all possess a list synchronized with a stage. The specific form of the stage or proxy list may vary while remaining true to the pattern.
 
-You can create variations of this pattern by customizing `Explorer` through properties that determine the type of element used for the list (the `listTag` property) or stage (`stageTag`).
 
-`Explorer` takes care of synchronizing the list and stage elements: if the selection changes in either element, the selection of the other element will be updated to match. The items in the list element are said to be _proxies_ for the items shown on the stage. (See more on proxies, below.)
+## Customizing `Explorer` using element tags
 
-`Explorer` also manages the visual positioning of the list in relation the stage (top/left/bottom/right).
+You can customize `Explorer` or its subclasses by specifying which tags should be used to create various subelements:
+
+* [stageTag](#stageTag): The element used for the main stage.
+* [proxyListTag](#proxyListTag): The element used for the list of proxies.
+* [proxyTag](#proxyTag): The element used to instantiate default proxy elements if none are supplied.
+
+For example, both [Modes](Modes), [SlidingStage](SlidingStage), [CrossfadeStage](CrossfadeStage) can all serve as a stage showing a single item at a time. The only difference is that, when the selection changes, they show different transition effects: an immediate transition, a horizontal sliding effect, and a crossfade effect, respectively.
+
 
 ## Supplying items to an `Explorer`
 
-You can use an `Explorer` in one of two ways:
+Elements you place inside an `Explorer` become the list items navigated by the stage element. E.g., for a carousel:
 
-1. Provide two lists of DOM items.
+```html
+    <elix-carousel>
+      <img src="image1.jpg">
+      <img src="image2.jpg">
+      <img src="image3.jpg">
+      <img src="image4.jpg">
+      <img src="image5.jpg">
+    </elix-carousel>
+```
 
-2. Provide a single list of items. These will be slotted into the stage element. `Explorer` will generate an equivalently long set of _proxy_ elements
+Alternatively, you can allow `Explorer` to generate default proxies. For each item in the main list, `Explorer` will create an instance of the element specified by `proxyTag`. Additionally, certain subclasses of `Explorer` can set the content of the proxy element to reflect data in the corresponding list item. E.g., [Tabs](Tabs) will use the `aria-label` or `alt` attribute of the list item.
 
-[proxyUpdates](#proxyUpdates) method
+You can also create proxy elements yourself and slot them into the `proxy` slot:
+
+```html
+    <elix-carousel>
+      <div slot="proxy">1</div>
+      <div slot="proxy">2</div>
+      <div slot="proxy">3</div>
+      <div slot="proxy">4</div>
+      <div slot="proxy">5</div>
+      <img src="image1.jpg">
+      <img src="image2.jpg">
+      <img src="image3.jpg">
+      <img src="image4.jpg">
+      <img src="image5.jpg">
+    </elix-carousel>
+```
+
+[`Carousel` with custom proxies](/demos/carouselWithProxies.html)
+
+If you want to programmatically manipulate the appearance or content of a proxy element, you can override the Explorer's [proxyUpdates](#proxyUpdates) method.
+
+
+## Layout
+
+`Explorer` manages the top/left/bottom/right visual positioning of the list in relation the stage. You can specify a position through the [proxyListPosition](#proxyListPosition) property, and control whether the proxy list overlaps the stage with the [proxyListOverlap](#proxyListOverlap) property.

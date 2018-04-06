@@ -91,11 +91,12 @@ export default class DocumentationSection extends Component {
     // Element tags section
     //
     const elementTags = objectDoclet.elementTags;
-    const subelements = elementTags && Object.values(elementTags)
-    const elementTagsJSX = subelements && subelements.length > 0 ?
+    const subelements = elementTags ? Object.values(elementTags) : [];
+    const customElements = subelements.filter(tag => !tag.startsWith('HTML'));
+    const elementTagsJSX = customElements && customElements.length > 0 ?
       (
         <p>
-          Includes {plural(subelements, 'subelement')} {delimitedLinkList(subelements)}.
+          Includes {plural(customElements, 'subelement')} {delimitedLinkList(customElements)}.
         </p>
       ) :
       null;
