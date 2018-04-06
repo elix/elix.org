@@ -12,37 +12,41 @@ function createLogger(loggerName) {
       }
     ],
     serializers: {
-      req: reqSerializer,
-      res: resSerializer,
-      err: bunyan.stdSerializers.err
+      request: reqSerializer,
+      response: resSerializer,
+      error: bunyan.stdSerializers.err
     }
   });
 }
 
-function reqSerializer(req) {
-  if (!req || !req.connection) {
-    return req;
+function reqSerializer(request) {
+  if (!request || !request.connection) {
+    return request;
   }
 
+  // More detail for debugging...
+  // return {
+  //   req_id: request.req_id,
+  //   method: request.method,
+  //   url: request.url,
+  //   headers: request.headers,
+  //   remoteAddress: request.connection.remoteAddress,
+  //   remotePort: request.connection.remotePort
+  // };
   return {
-    req_id: req.req_id,
-    method: req.method,
-    url: req.url,
-    headers: req.headers,
-    remoteAddress: req.connection.remoteAddress,
-    remotePort: req.connection.remotePort
+    url: request.url
   };
 }
 
-function resSerializer(res) {
-  if (!res || !res.statusCode) {
-    return res;
+function resSerializer(response) {
+  if (!response || !response.statusCode) {
+    return response;
   }
 
   return {
-    req_id: res.req.req_id,
-    statusCode: res.statusCode,
-    header: res._header
+    req_id: response.req.req_id,
+    statusCode: response.statusCode,
+    header: response._header
   };
 }
 

@@ -13,8 +13,8 @@ const logger = require('./logger.js').logger('elix.org');
 const renderReactRoute = require('./renderReactRoute');
 
 // Log all requests
-function logRequest(req, res, next) {
-  logger.info({req: req}, 'REQUEST');
+function logRequest(request, response, next) {
+  logger.info({ request });
   next();
 }
 
