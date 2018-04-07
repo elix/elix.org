@@ -79,6 +79,37 @@ ReactiveMixin gives the component a property called `state`, a dictionary object
 ReactiveMixin provides a `setState` method the component invokes to update its own state. The mixin sets the initial state in the constructor by passing the value of the `defaultState` property to `setState`. You can invoke `setState` in response to user interaction. (How you wire up event handlers is up to you; the Rendering section below explores some ways to handle events.)
 
 
+## Refining state
+
+While state members should generally be independent of each other, sometimes two or more state members have some interrelationship. If such state members are managed by multiple mixins, it is necessary to provide some means for the mixins to verify that a new state is consistent with their expectations.
+
+For example, a component may use [ContentItemsMixin](ContentItemsMixin) to manage a set of `items`, and [SingleSelectionMixin](SingleSelectionMixin) to track a `selectedIndex` into that `items` array. If items are removed from the array, the `selectedIndex` may become invalid and require updating so that it still falls within the bounds of the `items` array.
+
+To coordinate management of interdependent state members across mixins, `ReactiveMixin` supports the concept of state _refinement_. When `setState` is invoked to establish a new state, the `refineState` method is invoked to give all mixins/classes involved in the component's construction a change to inspect the new state. If required, a mixin/class can make _destructive_ updates to the supplied state and return `false`, indicating that changes were made.
+
+The conventional pattern for an implementation of `refineState` is:
+
+    class MyElement extends ReactiveMixin(HTMLElement) {
+      refineState(state) {
+        // See if base class needs to refine state.
+        let result = super.refineState ? super.refineState(state) : true;
+        // Perform our own check of internal state consistency.
+        if (state.foo === 'some value') {
+          // Destructively update a related state member to enforce consistency.
+          Object.assign(state, {
+            bar: 'some related value'
+          });
+          result = false;
+        }
+        return result;
+      }
+    }
+
+Once all implementations of `refineState` on the prototype chain have had a chance to perform necessary adjustments, the final result of `refineState` is read. If `false`, at least one mixin/class modified the state. In that case, `refineState` will be invoked again, giving all mixins/classes a change to confirm that the new state is now acceptable. This raises the possibility of infinite loops, but it is the experience of the Elix project that this system of refining state functions well as the scale of typical Elix components.
+
+The `refineState` method will be invoked repeatedly until it finally returns `true`.
+
+
 ## Detecting state changes
 
 When you call `setState`, ReactiveMixin updates your component’s state. It then invokes a `shouldComponentUpdate` method to determine whether the component should be rerendered.
