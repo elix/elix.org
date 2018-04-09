@@ -34,7 +34,14 @@ This mixin does most of its work at the beginning of the [Elix render pipeline](
 
 As currently implemented, `ArrowDirectionMixin` only displays the arrow buttons if mouse movement is detected. This behavior is intended to avoid showing arrows when the user is viewing a carousel-like component on a mobile device with no mouse. In such cases, it is expected that the component will provided touch gestures (e.g., with [TouchSwipeMixin](TouchSwipeMixin)), so the arrows are unnecessary and may prove distracting or reduce the screen real estate available for touch gestures.
 
-See also [PageDotsMixin](PageDotsMixin).
+
+## Customizing
+
+In addition to custom styling via the [updates](updates) property, `ArrowDirectionMixin` supports the following customizations:
+
+* [arrowButtonTag](#arrowButtonTag) property: specifies the element tag used for the left and right arrow buttons.
+* `arrowButtonLeft` slot: sets the content of the left arrow button.
+* `arrowButtonRight` slot: sets the content of the right arrow button.
 
 
 ### Example

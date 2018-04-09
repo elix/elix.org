@@ -4,7 +4,7 @@ A typical carousel with a sliding effect. The user can move between items with t
 
 [You can navigate sliding pages with touch/mouse/keyboard/trackpad](/demos/slidingPages.html)
 
-`SlidingPages` wraps a [SlidingViewport](SlidingViewport) and adds various input mixins, such as [TouchSwipeMixin](TouchSwipeMixin).
+`SlidingPages` wraps a [SlidingStage](SlidingStage) and adds various input mixins, such as [TouchSwipeMixin](TouchSwipeMixin).
 
 `SlidingPages` provides no visible UI elements for navigation the items. For a variation of `SlidingPages` that includes left/right arrow buttons and page dots, see [Carousel](Carousel).
 

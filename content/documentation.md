@@ -102,6 +102,11 @@ In rare cases, a mixin may need to perform work _after_ a component has been ren
 * [SelectionInViewMixin](/documentation/SelectionInViewMixin). When `state.selectedIndex` changes, ensure that the selected item is scrolled into view.
 
 
+### Mixins that perform work at more than one stage
+
+* [SlotItemsMixin](/documentation/SlotItemsMixin). Combines [SlotContentMixin](SlotContentMixin), which handles the `slotchange` event, and [ContentItemsMixin](ContentItemsMixin), which renders state.
+
+
 ## Other resources
 
 More information and background about the Elix project can be found at the 

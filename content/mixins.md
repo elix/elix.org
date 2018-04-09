@@ -38,7 +38,6 @@ A mixin is applied simply by invoking the mixin as a function, typically in the 
     <li><a href="LanguageDirectionMixin">LanguageDirectionMixin</a></li>
     <li><a href="OpenCloseMixin">OpenCloseMixin</a></li>
     <li><a href="OverlayMixin">OverlayMixin</a></li>
-    <li><a href="PageDotsMixin">PageDotsMixin</a></li>
     <li><a href="PopupModalityMixin">PopupModalityMixin</a></li>
     <li><a href="ReactiveMixin">ReactiveMixin</a></li>
     <li><a href="RenderUpdatesMixin">RenderUpdatesMixin</a></li>
@@ -47,6 +46,7 @@ A mixin is applied simply by invoking the mixin as a function, typically in the 
     <li><a href="ShadowTemplateMixin">ShadowTemplateMixin</a></li>
     <li><a href="SingleSelectionMixin">SingleSelectionMixin</a></li>
     <li><a href="SlotContentMixin">SlotContentMixin</a></li>
+    <li><a href="SlotItemsMixin">SlotItemsMixin</a></li>
     <li><a href="SwipeDirectionMixin">SwipeDirectionMixin</a></li>
     <li><a href="TouchSwipeMixin">TouchSwipeMixin</a></li>
     <li><a href="TrackpadSwipeMixin">TrackpadSwipeMixin</a></li>
@@ -321,7 +321,7 @@ Like all mixins, such mixins accept a class and returns a new class. They also p
 
 ## Example: Adding page dots to a carousel
 
-As an example, suppose we want to add [PageDotsMixin](PageDotsMixin) to a [SlidingViewport](SlidingViewport) to create a carousel with page dots. Our component can use [ShadowTemplateMixin](ShadowTemplateMixin) to populate its shadow tree. That mixin wants the component to define a property called [symbols.template](symbols#template). Inside that property, we can use the `PageDotsMixin.wrap` function to wrap an instance of `SlidingViewport`:
+As an example, suppose we want to add [PageDotsMixin](PageDotsMixin) to a [SlidingStage](SlidingStage) to create a carousel with page dots. Our component can use [ShadowTemplateMixin](ShadowTemplateMixin) to populate its shadow tree. That mixin wants the component to define a property called [symbols.template](symbols#template). Inside that property, we can use the `PageDotsMixin.wrap` function to wrap an instance of `SlidingStage`:
 
     class SimpleElement extends
         PageDotsMixin(ShadowTemplateMixin(HTMLElement))) {

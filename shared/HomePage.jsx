@@ -51,52 +51,64 @@ export default class HomePage extends Component {
           <ComponentCard name="AutosizeTextarea" request={props.request} color="1">
             Text area that grows to accommodate its content
           </ComponentCard>
-          <ComponentCard name="Dialog" request={props.request} color="2">
-            Basic modal overlay
-          </ComponentCard>
-          <ComponentCard name="Drawer" request={props.request} color="3">
-            Modal panel that slides in from the side of the page
-          </ComponentCard>
-          <ComponentCard name="ExpandablePanel" request={props.request} color="1">
-            Expands/collapses in place with an animated transition
-          </ComponentCard>
-          <ComponentCard name="ListBox" request={props.request} color="2">
-            Single-selection list box
-          </ComponentCard>
-          <ComponentCard name="ModalBackdrop" request={props.request} color="3">
-            Semi-transparent backdrop for a modal overlay
-          </ComponentCard>
-          <ComponentCard name="Modes" request={props.request} color="0">
-            Shows a single panel at a time
-          </ComponentCard>
-          <ComponentCard name="Popup" request={props.request} color="0">
-            Lightweight form of modeless overlay
-          </ComponentCard>
-          <ComponentCard name="ReactiveElement" request={props.request} color="1">
-            General-purpose component base class
-          </ComponentCard>
           <ComponentCard name="Carousel" request={props.request} color="2">
             Carousel with a sliding effect and navigation controls
           </ComponentCard>
-          <ComponentCard name="SlidingPages" request={props.request} color="3">
+          <ComponentCard name="CenteredStrip" request={props.request} color="3">
+            Horizontal strip of items with selected item centered
+          </ComponentCard>
+          <ComponentCard name="CenteredStripHighlight" request={props.request} color="1">
+            Centered strip showing selected item with a highlight color
+          </ComponentCard>
+          <ComponentCard name="CenteredStripOpacity" request={props.request} color="2">
+            Centered strip showing unselected items with partial opacity
+          </ComponentCard>
+          <ComponentCard name="Dialog" request={props.request} color="3">
+            Basic modal overlay
+          </ComponentCard>
+          <ComponentCard name="Drawer" request={props.request} color="0">
+            Modal panel that slides in from the side of the page
+          </ComponentCard>
+          <ComponentCard name="ExpandablePanel" request={props.request} color="0">
+            Expands/collapses in place with an animated transition
+          </ComponentCard>
+          <ComponentCard name="ListBox" request={props.request} color="1">
+            Single-selection list box
+          </ComponentCard>
+          <ComponentCard name="ModalBackdrop" request={props.request} color="2">
+            Semi-transparent backdrop for a modal overlay
+          </ComponentCard>
+          <ComponentCard name="Modes" request={props.request} color="3">
+            Shows a single panel at a time
+          </ComponentCard>
+          <ComponentCard name="Overlay" request={props.request} color="1">
+            An element that appears over other page elements
+          </ComponentCard>
+          <ComponentCard name="Popup" request={props.request} color="2">
+            Lightweight form of modeless overlay
+          </ComponentCard>
+          <ComponentCard name="ReactiveElement" request={props.request} color="3">
+            General-purpose component base class
+          </ComponentCard>
+          <ComponentCard name="SlidingPages" request={props.request} color="0">
             Primitive carousel supporting multiple input modes but no UI of its own
           </ComponentCard>
-          <ComponentCard name="SlidingViewport" request={props.request} color="1">
+          <ComponentCard name="SlidingStage" request={props.request} color="0">
             Slides between selected items on a horizontal axis
           </ComponentCard>
-          <ComponentCard name="TabButton" request={props.request} color="2">
+          <ComponentCard name="TabButton" request={props.request} color="1">
             Generic tab button with a text label
           </ComponentCard>
-          <ComponentCard name="Tabs" request={props.request} color="3">
+          <ComponentCard name="Tabs" request={props.request} color="2">
             Basic tabs structure for navigation and configuration
           </ComponentCard>
-          <ComponentCard name="TabStrip" request={props.request} color="0">
+          <ComponentCard name="TabStrip" request={props.request} color="3">
             Strip of tab buttons
           </ComponentCard>
-          <ComponentCard name="Toast" request={props.request} color="0">
+          <ComponentCard name="Toast" request={props.request} color="1">
             Lightweight popup intended to display a short, non-critical message
           </ComponentCard>
-          <ComponentCard name="WrappedStandardElement" request={props.request} color="1">
+          <ComponentCard name="WrappedStandardElement" request={props.request} color="2">
             Wraps a standard HTML element so its behavior can be extended
           </ComponentCard>
         </section>

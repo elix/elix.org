@@ -98,12 +98,12 @@ The `items` property is often derived from component state, ensuring that `Singl
 The mixin tracks the currently selected item by its index in `state.selectedIndex`. This is the zero-based index of the currently-selected item within the `items` collection (above). If there is no selection, `selectedIndex` is -1.
 
 To facilitate manipulation of a component's selection from outside, `SingleSelectionMixin` adds
-public properties to the component for reading and updating the selectedIndex state:
-
-Applications working with selection sometimes want to reference select by index, and sometimes by object reference. The mixin supports both approaches with complementary properties that can both be get and set:
+public properties to the component for reading and updating the selectedIndex state. Applications working with selection sometimes want to reference select by index, and sometimes by object reference. The mixin supports both approaches with complementary properties that can both be get and set:
 
 * `selectedIndex`. This reflects the current value of `state.selectedIndex`.
 * `selectedItem`. This returns or sets the current item at `state.selectedIndex` within the `items` collection. If there is no selection, `selectedItem` is null.
+
+If items are present, `SingleSelectionMixin` clamps the `selectedIndex` value so that it falls within the bounds of the `items` array. Example: suppose there are 5 items, and `selectedIndex` is 4 (the last item). If the last item is removed, `selectedIndex` will be updated to 3 (the new last item) so that the index remains valid. Clamping is disabled if the `items` array is not defined or contains no item. This supports more flexible timing in cases where `selectedIndex` will end up beinga applied before the items have become available.
 
 When this property changes as a result of internal component activity, the
 mixin raises a `selected-index-changed` event.

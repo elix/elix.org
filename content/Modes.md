@@ -13,4 +13,4 @@ You can use `Modes` for any portion of a UI with a modal state that can display 
 
 The [Tabs](Tabs) component combines a `Modes` instance with a [TabStrip](TabStrip). The tab strip lets the user know how many panels there are, and lets them easily navigate between the modal panels.
 
-See also [SlidingViewport](SlidingViewport) and its related components. Those handle similar situations, but express the modes as pages on a horizontally-sliding surface.
+See also [SlidingStage](SlidingStage) and its related components. Those handle similar situations, but express the modes as pages on a horizontally-sliding surface.

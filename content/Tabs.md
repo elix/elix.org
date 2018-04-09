@@ -1,6 +1,8 @@
 # Tabs
 
-`Tabs` is a set of tabbed panels that can be navigated by selecting corresponding tab buttons. `Tabs` takes care of the relative positioning of the tab buttons and the tab panels, and ensures that the selection state of the buttons and panels remains in sync. A typical example of `Tabs` being used for navigation, using custom tab buttons:
+`Tabs` is a set of tabbed panels that can be navigated by selecting corresponding tab buttons. `Tabs` builds on `Explorer`, which takes care of the relative positioning of the tab buttons and the tab panels, and ensures that the selection state of the buttons and panels remains in sync. `Tabs` itself mostly adds the use of [TabButton](TabBUtton) elements as default proxies for the tab panels (the elements the user can click to select a panel), and [TabStrip](TabStrip) to contain the list of tab buttons. `Tabs` also adds accessibility support specific to tabbed interfaces.
+
+A typical example of `Tabs` being used for navigation, using custom tab buttons:
 
 [Tabs used for navigation](/demos/toolbarTabs.html)
 
@@ -115,3 +117,5 @@ This uses Google's [Material Design icons](https://material.io/icons/) for butto
 By default, `Tabs` uses [Modes](Modes) as the main stage showing the selected tab panel. `Modes` provides an immediate transition between panels, but you can override the `stageTag` property to specify another type of stage, such as [CrossfadeStage](CrossfadeStage):
 
 [`CrossfadeStage` provides a crossfade effect when switching tabs](/demos/serene.html)
+
+The tabbed navigation example at the top of the page shows a [SlidingPages](SlidingPages) element as the stage, which adds a horizontal sliding effect and support for touch/trackpad swipe gestures.

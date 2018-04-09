@@ -1,6 +1,6 @@
 # OverlayMixin
 
-**Purpose:** make an opened element appear on top of other page elements, then hide or remove it when closed.
+**Purpose:** make an opened element appear on top of other page elements, then hide or remove it when closed. This mixin is used to define the core overlay behavior for an [Overlay](Overlay); you can also use this mixin directly.
 
 This mixin primarily works in the render phase of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
@@ -24,11 +24,12 @@ It also performs some additional work after updates have been rendered to the DO
     import OverlayMixin from 'elix/src/OverlayMixin.js';
     class MyElement extends OverlayMixin(HTMLElement) {}
 
-`OverlayMixin` provides the core overlay behavior for Elix elements. It is often used in combination with:
+`OverlayMixin` provides the core overlay behavior for Elix elements.
 * [OpenCloseMixin](OpenCloseMixin) to provide a component with open/close semantics.
 * [PopupModalityMixin](PopupModalityMixin) or [DialogModalityMixin](DialogModalityMixin) to intercept and respond to UI events.
 * [TransitionEffectMixin](TransitionEffectMixin) to handle asynchronous open/close CSS transition effects.
-* [ModalBackdrop](ModalBackdrop) to absorb background clicks.
+
+For a typical overlay element, consider using the [Overlay](Overlay) base class, which defines template elements for a frame around the overlay content and an optional backdrop behind the overlay.
 
 
 ### Example
