@@ -122,11 +122,11 @@ export default class DocumentationSection extends Component {
           <h1>API</h1>
           <div style="margin-bottom: 40px">
             {inheritsFromJSX}
-            {classInheritedByJSX}
             {mixesJSX}
+            {elementTagsJSX}
+            {classInheritedByJSX}
             {mixinUsedByJSX}
             {elementUsedByJSX}
-            {elementTagsJSX}
           </div>
           {apiElements}
         </section>
