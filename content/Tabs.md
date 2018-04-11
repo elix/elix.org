@@ -38,7 +38,7 @@ By default, you only need to provide `Tabs` with child items that it will use as
 
 For each panel, `Tabs` will create a [TabButton](TabButton) instance, and that panel's `aria-label` as the content of the tab button.
 
-[Tabs element with default tab buttons](/demos/tabs.html)
+[`Tabs` element with default tab buttons](/demos/tabs.html)
 
 
 ## Positioning and aligning tab buttons
