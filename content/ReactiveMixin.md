@@ -2,9 +2,9 @@
 
 **Purpose:** Give a component class a functional-reactive programming (FRP) architecture that can track internal state and render that state to the DOM.
 
-This mixin forms a core part of the [Elix render pipeline](/documentation#elix-render-pipeline):
+This mixin forms a core part of the [Elix render pipeline](/documentation#elix-render-pipeline), managing a component's `state` and rendering the component when state changes.
 
-> events → methods → **setState** ➞ **render** → update DOM
+> events → methods → **setState** → updates → **render DOM** → post-render
 
 **Expects** the component to provide:
 * Internal `symbols.render` method that actually updates the DOM. You can use [ShadowTemplateMixin](ShadowTemplateMixin) and [RenderUpdatesMixin](RenderUpdatesMixin) for that purpose.

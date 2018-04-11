@@ -4,7 +4,7 @@
 
 This mixin works at the very end of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → methods → setState → updates → DOM
+> events → methods → setState → updates → render DOM → **post-render**
 
 **Expects** the component to provide:
 * `items` property that returns the list's items. You can supply that with [ContentItemsMixin](ContentItemsMixin).

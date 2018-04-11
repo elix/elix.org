@@ -2,9 +2,9 @@
 
 **Purpose:** blocks various user interactions to make an overlay behave like a modal dialog. This mixin is generally used in conjunction with [OverlayMixin](OverlayMixin) for basic overlay behavior, and a backdrop like [ModalBackdrop](ModalBackdrop) for additional modality.
 
-This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
+This mixin primarily works in the updates phase of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → **methods** ➞ **methods** → setState → render → update DOM
+> events → methods → setState → **updates** → render DOM → post-render
 
 **Expects** the component to provide:
 * `close` method and `closed` property, typically via [OpenCloseMixin](OpenCloseMixin).

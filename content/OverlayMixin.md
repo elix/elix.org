@@ -2,9 +2,9 @@
 
 **Purpose:** make an opened element appear on top of other page elements, then hide or remove it when closed. This mixin is used to define the core overlay behavior for an [Overlay](Overlay); you can also use this mixin directly.
 
-This mixin primarily works in the render phase of the [Elix render pipeline](/documentation#elix-render-pipeline):
+This mixin primarily works in the updates phase of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → methods → setState → **render ➞ update DOM**
+> events → methods → setState → **updates** → render DOM → post-render
 
 It also performs some additional work after updates have been rendered to the DOM.
 

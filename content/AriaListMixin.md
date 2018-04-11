@@ -3,9 +3,9 @@
 **Purpose:** Help list-like components expose their selection state to screen readers and other assistive technologies via [ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA) accessibility attributes. This allows components to satisfy the Gold Standard criteria [Declared Semantics](https://github.com/webcomponents/gold-standard/wiki/Declared-Semantics)
 (Does the component expose its semantics by wrapping/extending a native element, or using ARIA roles, states, and properties?).
 
-This mixin generally works at the end of the [Elix render pipeline](/documentation#elix-render-pipeline):
+This mixin primarily works in the updates phase of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → methods/properties → **state** ➞ **render**
+> events → methods → setState → **updates** → render DOM → post-render
 
 **Expects** the component to provide:
 * `state.selectedIndex` property indicating the index of the currently selected item. This is usually provided by [SingleSelectionMixin](SingleSelectionMixin).

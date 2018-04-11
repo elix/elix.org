@@ -2,9 +2,10 @@
 
 **Purpose:** lets a list-like component obtain its list items from its DOM content. It expects the component to identify its HTML "contents", and then impose some restrictions on those contents to determine which of those HTML elements are actually interesting to use as the items in the list. This mixin also allows a component to render updates to its list items.
 
-The rendering aspect of this mixin works at the end of the [Elix render pipeline](/documentation#elix-render-pipeline):
+This mixin primarily works in the updates and render phase of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → methods → setState → **render** ➞ **update DOM**
+> events → methods → setState → **updates** ➞ **render DOM** → post-render
+
 
 **Expects** the component to provide:
 * `state.content` member containing a flattened array of `Node` elements. You can use [SlotContentMixin](SlotContentMixin) for this purpose.

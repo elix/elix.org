@@ -4,7 +4,7 @@
 
 This mixin primarily works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> **events** ➞ **methods** → setState → render → update DOM
+> **events** ➞ **methods** → setState → updates → render DOM → post-render
 
 The mixin also performs work after the DOM has been updated.
 

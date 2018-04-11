@@ -4,7 +4,7 @@
 
 This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → **methods/properties** ➞ **state** → render
+> events → **methods** ➞ **setState** → updates → render DOM → post-render
 
 **Expects** the component to provide:
 * `setState` method, usually supplied by [ReactiveMixin](ReactiveMixin).

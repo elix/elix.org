@@ -4,7 +4,7 @@
 
 This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline). In response to touch events, the mixin may call methods on the component or call `setState` directly.
 
-> **events** ➞ **methods** → setState → render → update DOM
+> **events** ➞ **methods** → setState → updates → render DOM → post-render
 
 **Expects** the component to provide:
 * `setState` method compatible with `ReactiveMixin`'s [setState](ReactiveMixin#setState).

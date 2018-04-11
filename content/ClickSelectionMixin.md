@@ -5,7 +5,7 @@
 
 This mixin works at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> **events** ➞ **setState** → render → update DOM
+> **events** ➞ **setState** → updates → render DOM → post-render
 
 **Expects** the component to provide:
 * `state.selectedIndex` property indicating the index of the currently selected item. This is usually provided by [SingleSelectionMixin](SingleSelectionMixin).

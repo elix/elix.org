@@ -4,7 +4,7 @@
 
 This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → **methods** ➞ **methods** → setState → render → update DOM
+> events → **methods** ➞ **methods** → setState → updates → render DOM → post-render
 
 **Expects** the component to provide:
 * `close` method and `closed` property, typically via [OpenCloseMixin](OpenCloseMixin).

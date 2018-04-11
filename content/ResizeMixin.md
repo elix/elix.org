@@ -2,9 +2,9 @@
 
 **Purpose:** Allow components that want to perform layout based on their size to re-render when their size changes.
 
-This mixin generally works at the tail end of the [Elix render pipeline](/documentation#elix-render-pipeline):
+This mixin does its work at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline).
 
-> events → methods/properties → state → render → **post-render**
+> **events** ➞ **methods** → setState → updates → render DOM → post-render
 
 **Expects** the component to provide:
 * `setState` method compatible with `ReactiveMixin`'s [setState](ReactiveMixin#setState).

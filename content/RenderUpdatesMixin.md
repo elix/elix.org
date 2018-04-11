@@ -4,7 +4,8 @@
 
 This mixin forms a core part of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → methods → setState → **render** ➞ **update DOM**
+> events → methods → setState → **updates** ➞ **render** → post-render
+
 
 **Expects** the component to provide:
 * `updates` property that contains the changes the component would like to make to its own attributes, child nodes, classes, styles, as well as to those of its shadow elements.

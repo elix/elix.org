@@ -4,7 +4,7 @@
 
 This mixin does most of its work at the beginning of the [Elix render pipeline](/documentation#elix-render-pipeline), although it also participates indirectly in rendering by adding elements to a component's template.
 
-> **events** ➞ **methods** → setState → render → update DOM
+> **events** ➞ **methods** → setState → updates → render DOM → post-render
 
 **Expects** the component to provide:
 * `symbols.canGoLeft` and `symbols.canGoRight` properties, typically via [DirectionSelectionMixin](DirectionSelectionMixin). These properties determine when the arrow buttons are enabled or disabled. If the component does not define these properties, the arrow buttons are always enabled.

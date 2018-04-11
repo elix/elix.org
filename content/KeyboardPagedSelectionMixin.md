@@ -4,7 +4,7 @@
 
 This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → **methods** ➞ **setState** → render → update DOM
+> events → **methods** ➞ **setState** → updates → render DOM → post-render
 
 **Expects** the component to provide:
 * `state.selectedIndex` state member updatable via [setState](ReactiveMixin#setState).

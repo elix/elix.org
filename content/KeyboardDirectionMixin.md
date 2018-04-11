@@ -5,7 +5,7 @@
 
 This mixin works in the middle of the [Elix render pipeline](/documentation#elix-render-pipeline):
 
-> events → **methods** ➞ **methods** → setState → render → update DOM
+> events → **methods** ➞ **methods** → setState → updates → render DOM → post-render
 
 **Expects** the component to provide:
 * `symbols.goDown`, `symbols.goUp`, `symbols.goLeft`, `symbols.goRight` methods, e.g., from [DirectionSelectionMixin](DirectionSelectionMixin).
