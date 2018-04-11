@@ -53,7 +53,6 @@ Some of these mixins directly update state.
 * [FocusVisibleMixin](/documentation/FocusVisibleMixin). Tracks whether to show a focus ring indicator, sets `state.focusRing`.
 * [HoverMixin](/documentation/HoverMixin). Maps `mouseenter`/`mouseleave` events to `state.hover`.
 * [KeyboardMixin](/documentation/KeyboardMixin). Maps `keydown` events to `keydown` method.
-* [PageDotsMixin](/documentation/PageDotsMixin). Adds page dot buttons that map to setting `selectedIndex` property.
 * [PopupModalityMixin](/documentation/PopupModalityMixin). Maps `blur` and various window/document events to `close` method.
 * [SlotContentMixin](/documentation/SlotContentMixin). When the component's slot receives a `slotchange` event, this updates `state.content` with the new nodes assigned to the slot.
 * [TouchSwipeMixin](/documentation/TouchSwipeMixin). Maps touch swipe gestures to `state.swipeFraction` and `swipeLeft`/`swipeRight` methods.
@@ -89,7 +88,6 @@ These mixins generally map from a low-level abstraction (e.g., a specific type o
 * [ContentItemsMixin](/documentation/ContentItemsMixin). Defines an `items` property based on `state.content`, filtering out auxiliary invisible elements. During rendering, the component is given a chance to indicate what updates should be assigned to each specific item in `items`.
 * [DialogModalityMixin](/documentation/DialogModalityMixin). Renders a default ARIA role.
 * [OverlayMixin](/documentation/OverlayMixin). Renders an open state as changes to `display` and `z-index` to make an element appear on top.
-* [PageDotsMixin](/documentation/PageDotsMixin). Renders a set of dots corresponding to items in a carousel.
 * RenderUpdatesMixin
 
 

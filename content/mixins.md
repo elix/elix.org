@@ -314,29 +314,29 @@ In this situation, the recommendation is to have the setter record the new value
 
 # Mixins that contribute to a component's template
 
-Elix includes functional mixins that both contribute elements to a component's template and extend the component's prototype chain with callbacks and methods that manipulate those elements. These mixins include [ArrowDirectionMixin](ArrowDirectionMixin), [FocusCaptureMixin](FocusCaptureMixin), and [PageDotsMixin](PageDotsMixin).
+Elix includes functional mixins that both contribute elements to a component's template and extend the component's prototype chain with callbacks and methods that manipulate those elements. These mixins include [ArrowDirectionMixin](ArrowDirectionMixin), [FocusCaptureMixin](FocusCaptureMixin), and [PageNumbersMixin](PageNumbersMixin).
 
 Like all mixins, such mixins accept a class and returns a new class. They also provide a static `wrap` function you invoke inside a component's `symbols.template` property. This `wrap` method takes a base template, wraps it with some additional elements, and then returns the result.
 
 
 ## Example: Adding page dots to a carousel
 
-As an example, suppose we want to add [PageDotsMixin](PageDotsMixin) to a [SlidingStage](SlidingStage) to create a carousel with page dots. Our component can use [ShadowTemplateMixin](ShadowTemplateMixin) to populate its shadow tree. That mixin wants the component to define a property called [symbols.template](symbols#template). Inside that property, we can use the `PageDotsMixin.wrap` function to wrap an instance of `SlidingStage`:
+As an example, suppose we want to add [ArrowDirectionMixin](ArrowDirectionMixin) to a [SlidingStage](SlidingStage) to create a carousel with left/right arrow buttons. Our component can use [ShadowTemplateMixin](ShadowTemplateMixin) to populate its shadow tree. That mixin wants the component to define a property called [symbols.template](symbols#template). Inside that property, we can use a function identified with the symbol `[ArrowDirectionMixin.inject]` to wrap an instance of `SlidingStage`:
 
     class SimpleElement extends
-        PageDotsMixin(ShadowTemplateMixin(HTMLElement))) {
+        ArrowDirectionMixin(ShadowTemplateMixin(HTMLElement))) {
 
       get [symbols.template]() {
-        return PageDotsMixin.wrap(`
-          <elix-sliding-viewport id="viewport">
+        return this[ArrowDirectionMixin.inject](`
+          <elix-sliding-stage>
             <slot></slot>
-          </elix-sliding-viewport>
+          </elix-sliding-stage>
         `)};
       }
 
     }
 
-Note that `PageDotsMixin` is used in two places here: in the prototype chain in the `class` declaration, and in `PageDotsMixin.wrap` in the `symbols.template` property. The latter adds elements to the component's template; the former wires up event handlers that let those elements work.
+Note that `ArrowDirectionMixin` is used in two places here: in the prototype chain in the `class` declaration, and in `this[ArrowDirectionMixin.inject]` in the `symbols.template` property. The latter adds elements to the component's template; the former wires up event handlers that let those elements work.
 
 
 # Performance
