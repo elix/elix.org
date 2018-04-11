@@ -32,6 +32,10 @@ export default class AppShell extends Component {
         document.write('<script src="/demos/node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"><\\/script>');
       }`;
 
+    // Note: Load CSS before components. Some demos (e.g., CenteredStrip) change
+    // their size based on the loaded CSS, and that can mess with the layout of
+    // the component. As of 11 April 2018, Safari doesn't support
+    // ResizeObserver, so those demos can look wrong in Safari.
     return (
       <html lang="en">
         <head>
@@ -39,9 +43,9 @@ export default class AppShell extends Component {
           <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
           <title>{titleBar}</title>
           <script dangerouslySetInnerHTML={{__html: polyfillLoader}} charSet="UTF-8"/>
+          <link rel="stylesheet" href={`${staticPath}/main.css`}/>
           <script src="/build/demos.min.js"></script>
           <link rel="shortcut icon" href={`${staticPath}/images/favicon.png`}/>
-          <link rel="stylesheet" href={`${staticPath}/main.css`}/>
         </head>
         <body>
           <div id="root">
